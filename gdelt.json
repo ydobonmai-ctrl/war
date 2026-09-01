@@ -1,0 +1,8 @@
+Content-type: text/html; charset=utf-8
+Server: GDELT API Server 2.0
+Access-Control-Allow-Origin: *
+Timing-Allow-Origin: *
+X-XSS-Protection: 1; mode=block
+Cache-Control: public, max-age=900
+
+Invalid format.

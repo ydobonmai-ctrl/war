@@ -1,0 +1,29 @@
+{
+  "version": 2,
+  "routes": [
+    {
+      "src": "/",
+      "dest": "/index.html"
+    },
+    {
+      "src": "/dashboard",
+      "dest": "/dashboard.html"
+    },
+    {
+      "src": "/events",
+      "dest": "/events.html"
+    },
+    {
+      "src": "/map",
+      "dest": "/map.html"
+    },
+    {
+      "src": "/report",
+      "dest": "/report.html"
+    },
+    {
+      "src": "/settings",
+      "dest": "/settings.html"
+    }
+  ]
+}

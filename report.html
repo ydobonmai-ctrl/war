@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>브리핑 생성 — War Impact Desk</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .report-preview {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      font-size: 12.5px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      white-space: pre-wrap;
+      word-break: break-word;
+      min-height: 300px;
+      font-family: var(--font-sans);
+    }
+
+    .report-preview b,
+    .report-preview strong {
+      color: var(--text-primary);
+    }
+
+    .report-section {
+      margin-bottom: 18px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .report-section:last-of-type {
+      border-bottom: none;
+    }
+
+    .report-section-title {
+      font-weight: 800;
+      color: var(--text-primary);
+      font-size: 13px;
+      padding-bottom: 6px;
+      margin-bottom: 10px;
+      font-family: var(--font-sans);
+    }
+
+    /* Light Theme Override for Entire Page (report.html) */
+    body {
+      --bg-base: #f8fafc;
+      --bg-surface: #ffffff;
+      --bg-card: #ffffff;
+      --bg-elevated: #f1f5f9;
+      --bg-hover: #e2e8f0;
+      --border: #e2e8f0;
+      --border-md: #cbd5e1;
+
+      --text-primary: #0f172a;
+      --text-secondary: #334155;
+      --text-muted: #64748b;
+
+      background: var(--bg-base);
+      color: var(--text-primary);
+    }
+
+    .form-input,
+    .form-select {
+      background: var(--bg-surface);
+      color: var(--text-primary);
+    }
+
+    .btn-secondary {
+      background: var(--bg-surface);
+      border-color: var(--border-md);
+      color: var(--text-primary);
+    }
+
+    .btn-secondary:hover {
+      background: var(--bg-hover);
+    }
+
+    .tab {
+      color: var(--text-muted);
+    }
+
+    .tab.active,
+    .tab:hover {
+      color: var(--text-primary);
+    }
+
+    .tabs {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+    }
+
+    .generating-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(11, 13, 17, 0.8);
+      backdrop-filter: blur(4px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius-lg);
+      z-index: 10;
+      gap: 16px;
+    }
+
+    .spinner {
+      width: 36px;
+      height: 36px;
+      border: 3px solid var(--bg-elevated);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .preview-wrap {
+      position: relative;
+    }
+
+    .action-checklist {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .action-li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 14px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      font-size: 13px;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .action-li:hover {
+      border-color: var(--border-md);
+    }
+
+    .action-li.done {
+      opacity: 0.5;
+      text-decoration: line-through;
+    }
+
+    .checkbox {
+      width: 18px;
+      height: 18px;
+      border: 1.5px solid var(--border-md);
+      border-radius: 4px;
+      flex-shrink: 0;
+      margin-top: 1px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+
+    .action-li.done .checkbox {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: white;
+    }
+
+    .config-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .tab-panels {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app-layout">
+    <aside class="sidebar">
+      <div class="sidebar-logo" onclick="location.href='index.html'" style="cursor:pointer;">
+        <div class="logo-mark">
+          <div class="logo-icon">⚡</div>
+          <div>
+            <div class="logo-text">War Impact Desk</div>
+            <div class="logo-sub">Risk Intelligence</div>
+          </div>
+        </div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-section-label">주요 기능</div>
+        <a href="dashboard.html" class="nav-item"><span class="nav-icon">📊</span> 대시보드</a>
+        <a href="events.html" class="nav-item"><span class="nav-icon">🌐</span> 이벤트 모니터</a>
+        <a href="map.html" class="nav-item"><span class="nav-icon">🗺</span> 세계 리스크 지도</a>
+        <a href="report.html" class="nav-item active"><span class="nav-icon">📋</span> 브리핑 생성</a>
+        <a href="settings.html" class="nav-item"><span class="nav-icon">⚙️</span> 설정</a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-chip">
+          <div class="user-avatar">K</div>
+          <div>
+            <div class="user-name" id="sidebar-ind">반도체</div>
+            <div class="user-role">전략기획팀</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="main-content">
+      <div class="topbar">
+        <div class="topbar-title">AI 브리핑 생성</div>
+        <div class="topbar-actions">
+          <button class="btn btn-secondary btn-sm" onclick="copyReport()">📋 복사</button>
+          <button class="btn btn-primary btn-sm" onclick="generateReport()">⚡ 재생성</button>
+        </div>
+      </div>
+
+      <div class="page-body">
+        <div style="display:grid;grid-template-columns:300px 1fr;gap:24px;align-items:start;">
+
+          <!-- LEFT: Config -->
+          <div class="config-panel fade-in">
+            <div class="card card-sm">
+              <div class="section-title" style="margin-bottom:14px;">브리핑 설정</div>
+              <div style="display:flex;flex-direction:column;gap:12px;">
+                <div class="form-group">
+                  <label class="form-label">산업 기준</label>
+                  <select class="form-select" id="sel-industry">
+                    <option value="all">전체 산업</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">브리핑 유형</label>
+                  <select class="form-select" id="sel-type">
+                    <option value="exec">경영진 브리핑 (1페이지)</option>
+                    <option value="detail">실무팀 상세 리포트</option>
+                    <option value="action">액션 아이템 리스트</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">위험도 필터</label>
+                  <select class="form-select" id="sel-risk">
+                    <option value="all">전체</option>
+                    <option value="high">고위험만</option>
+                    <option value="high_medium">고위험 + 중간</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">이벤트 수 제한</label>
+                  <select class="form-select" id="sel-count">
+                    <option value="3">상위 3건</option>
+                    <option value="5" selected>상위 5건</option>
+                    <option value="10">전체 (10건)</option>
+                  </select>
+                </div>
+                <button class="btn btn-primary" onclick="generateReport()" style="margin-top:4px;">
+                  ⚡ AI 브리핑 생성
+                </button>
+              </div>
+            </div>
+
+            <!-- Event multi-select -->
+            <div class="card card-sm">
+              <div class="section-title" style="margin-bottom:12px;">포함할 이벤트 선택</div>
+              <div id="event-checkboxes"
+                style="display:flex;flex-direction:column;gap:6px;max-height:320px;overflow-y:auto;"></div>
+            </div>
+          </div>
+
+          <!-- RIGHT: Report Preview -->
+          <div class="fade-in">
+            <!-- Tabs -->
+            <div class="tabs" style="margin-bottom:16px;">
+              <div class="tab active" onclick="switchTab('preview',this)">📄 AI 브리핑</div>
+              <div class="tab" onclick="switchTab('actions',this)">✅ 액션 체크리스트</div>
+            </div>
+
+            <!-- TAB: Preview -->
+            <div id="tab-preview" class="tab-content active preview-wrap">
+              <div id="report-output" class="report-preview"></div>
+              <div id="gen-overlay" class="generating-overlay" style="display:none;">
+                <div class="spinner"></div>
+                <div style="font-size:13px;color:var(--text-secondary);">AI 분석 중...</div>
+              </div>
+            </div>
+
+            <!-- TAB: Actions -->
+            <div id="tab-actions" class="tab-content">
+              <div class="section-header" style="margin-bottom:12px;">
+                <div>
+                  <div class="section-title">통합 액션 체크리스트</div>
+                  <div class="section-sub" id="action-progress-label">0 / 0 완료</div>
+                </div>
+                <button class="btn btn-ghost btn-sm" onclick="resetChecklist()">초기화</button>
+              </div>
+              <div class="action-checklist" id="action-list"></div>
+            </div>
+
+            <!-- Copy success -->
+            <div id="copy-toast"
+              style="display:none;position:fixed;bottom:24px;right:24px;background:var(--bg-elevated);border:1px solid var(--border-md);border-radius:var(--radius-md);padding:10px 18px;font-size:13px;color:var(--text-primary);box-shadow:var(--shadow-elevated);z-index:999;">
+              ✅ 클립보드에 복사되었습니다
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script>
+    let checkedActions = {};
+    let selectedEventIds = new Set();
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Populate industry dropdown
+      const sel = document.getElementById('sel-industry');
+      INDUSTRIES.forEach(i => { const o = document.createElement('option'); o.value = i.id; o.textContent = i.label; sel.appendChild(o); });
+      const prefs = loadPreferences();
+      sel.value = prefs.industry || 'semiconductor';
+      document.getElementById('sidebar-ind').textContent = INDUSTRIES.find(i => i.id === prefs.industry)?.label || '반도체';
+
+      // Check URL param
+      const params = new URLSearchParams(location.search);
+      const paramId = params.get('id');
+
+      // Populate event checkboxes
+      renderEventCheckboxes(paramId);
+
+      generateReport();
+    });
+
+    function renderEventCheckboxes(preselected) {
+      const wrap = document.getElementById('event-checkboxes');
+      wrap.innerHTML = '';
+      const sorted = [...EVENTS].sort((a, b) => b.risk_score - a.risk_score);
+      sorted.forEach((e, idx) => {
+        const isChecked = preselected ? e.id === preselected : idx < 5;
+        if (isChecked) selectedEventIds.add(e.id);
+        const item = document.createElement('label');
+        item.style.cssText = 'display:flex;align-items:flex-start;gap:8px;cursor:pointer;padding:6px 4px;border-radius:6px;transition:var(--transition);';
+        item.innerHTML = `
+        <input type="checkbox" ${isChecked ? 'checked' : ''} value="${e.id}" style="margin-top:2px;accent-color:var(--accent);" onchange="toggleEvent('${e.id}',this.checked)">
+        <div>
+          <div style="font-size:12px;font-weight:500;line-height:1.35;">${e.title.slice(0, 45)}...</div>
+          <div style="font-size:10px;color:var(--text-muted);">점수: ${e.risk_score}</div>
+        </div>
+      `;
+        wrap.appendChild(item);
+      });
+    }
+
+    function toggleEvent(id, checked) {
+      if (checked) selectedEventIds.add(id); else selectedEventIds.delete(id);
+    }
+
+    function switchTab(name, el) {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+      el.classList.add('active');
+      document.getElementById('tab-' + name).classList.add('active');
+    }
+
+    function getSelectedEvents() {
+      const ind = document.getElementById('sel-industry').value;
+      const risk = document.getElementById('sel-risk').value;
+      const count = parseInt(document.getElementById('sel-count').value);
+
+      let events = EVENTS.filter(e => selectedEventIds.has(e.id));
+      if (ind !== 'all') events = events.filter(e => e.impact_industries.includes(ind));
+      if (risk === 'high') events = events.filter(e => e.risk_level === 'high');
+      if (risk === 'high_medium') events = events.filter(e => e.risk_level !== 'low');
+      events = events.sort((a, b) => b.risk_score - a.risk_score).slice(0, count);
+      return events;
+    }
+
+    function generateReport() {
+      const overlay = document.getElementById('gen-overlay');
+      overlay.style.display = 'flex';
+
+      setTimeout(() => {
+        const type = document.getElementById('sel-type').value;
+        const ind = document.getElementById('sel-industry').value;
+        const events = getSelectedEvents();
+        const indLabel = INDUSTRIES.find(i => i.id === ind)?.label || '전체';
+        const now = new Date();
+        const dateStr = now.toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' });
+
+        let output = '';
+
+        if (type === 'exec') {
+          output = buildExecReport(events, indLabel, dateStr);
+        } else if (type === 'detail') {
+          output = buildDetailReport(events, indLabel, dateStr);
+        } else {
+          output = buildActionReport(events, indLabel, dateStr);
+        }
+
+        document.getElementById('report-output').innerHTML = output;
+        buildActionChecklist(events);
+        overlay.style.display = 'none';
+      }, 900);
+    }
+
+    function buildExecReport(events, ind, date) {
+      const highCount = events.filter(e => e.risk_level === 'high').length;
+      const medCount = events.filter(e => e.risk_level === 'medium').length;
+      const avgScore = events.length ? Math.round(events.reduce((s, e) => s + e.risk_score, 0) / events.length) : 0;
+      const topEvent = events[0];
+      const cats = [...new Set(events.map(e => CATEGORIES[e.category]?.label))].filter(Boolean);
+      const riskLabel = avgScore >= 75 ? '고위험 (HIGH)' : avgScore >= 50 ? '중간 위험 (MEDIUM)' : '낮음 (LOW)';
+      const riskColor = avgScore >= 75 ? '#dc2626' : avgScore >= 50 ? '#d97706' : '#16a34a';
+      const escalated = events.filter(e => (e.risk_score - e.prev_score) >= 10).map(e => e.title).slice(0, 3);
+
+      return `<div class="report-section">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;">
+          <div>
+            <div style="font-size:17px;font-weight:900;color:var(--text-primary);letter-spacing:-0.5px;">지정학 리스크 경영진 AI 브리핑</div>
+            <div style="font-size:11px;color:var(--text-muted);margin-top:3px;">${ind} 산업 기준 · ${date} · War Impact Desk AI 분석</div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:22px;font-weight:900;color:${riskColor};">${avgScore}<span style="font-size:12px;font-weight:500;color:#64748b;">/100</span></div>
+            <div style="font-size:10px;font-weight:700;color:${riskColor};">종합 리스크 지수 · ${riskLabel}</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:4px;">
+          <span style="background:rgba(220,38,38,0.15);color:var(--risk-high);font-size:10px;font-weight:700;padding:3px 8px;border-radius:99px;">🔴 고위험 ${highCount}건</span>
+          <span style="background:rgba(217,119,6,0.15);color:var(--risk-medium);font-size:10px;font-weight:700;padding:3px 8px;border-radius:99px;">🟡 중간위험 ${medCount}건</span>
+          <span style="background:rgba(79,110,247,0.15);color:var(--accent);font-size:10px;font-weight:700;padding:3px 8px;border-radius:99px;">📊 모니터링 ${events.length}건</span>
+          ${escalated.length ? `<span style="background:rgba(194,65,12,0.15);color:#f97316;font-size:10px;font-weight:700;padding:3px 8px;border-radius:99px;">⚠️ 위험 상승 ${escalated.length}건</span>` : ''}
+        </div>
+      </div>
+
+      <div class="report-section">
+        <div class="report-section-title">📌 핵심 요약 (Executive Summary)</div>
+        <div style="font-size:13.5px;color:var(--text-secondary);line-height:1.75; word-break: keep-all;">
+          <p style="margin-bottom:10px;">현재 <strong>${ind}</strong> 산업은 복합적인 지정학 리스크 국면에 처해 있습니다. 총 <strong>${events.length}건</strong>의 이슈가 모니터링되고 있으며, 이 중 <strong style="color:var(--risk-high);">${highCount}건</strong>은 공급망·조달·매출에 즉각적인 영향을 미칠 수 있는 고위험 등급으로 분류됩니다.</p>
+          <p style="margin-bottom:0;">주요 리스크 영역은 <strong>${cats.join(' / ')}</strong>으로 요약되며, 단기 대응과 중장기 공급망 다각화 전략 수립이 병행되어야 합니다.</p>
+          ${topEvent ? `<table style="width:100%;border-collapse:collapse;margin:16px 0 0 0;font-size:12.5px;color:var(--text-secondary);border:1px solid var(--border-md);border-radius:6px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.02);">
+            <tbody>
+              <tr style="background:rgba(220,38,38,0.04);border-bottom:1px solid rgba(220,38,38,0.15);height:28px;">
+                <th style="padding:4px 14px;text-align:left;font-weight:700;color:var(--risk-high);width:1px;white-space:nowrap;vertical-align:middle;line-height:1.2;">
+                  <span style="display:flex;align-items:center;gap:6px;"><span style="font-size:12.5px;">🚨</span> 최고 위험 이슈</span>
+                </th>
+                <td style="padding:4px 14px;font-weight:800;color:var(--text-primary);vertical-align:middle;line-height:1.2;">
+                  <div style="display:flex;align-items:center;gap:6px;flex-wrap:nowrap;">
+                    <span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">「${topEvent.title}」</span>
+                    <span style="display:inline-flex;align-items:center;padding:2px 6px;border-radius:4px;background:var(--risk-high);color:#fff;font-size:10px;font-weight:700;line-height:1.2;height:16px;white-space:nowrap;flex-shrink:0;">위험지수 ${topEvent.risk_score}</span>
+                  </div>
+                </td>
+              </tr>
+              <tr style="background:var(--bg-surface);">
+                <th style="padding:12px 14px;text-align:left;font-weight:700;color:var(--text-muted);border-right:1px solid var(--border);border-bottom:1px solid var(--border);vertical-align:top;">이슈 개요</th>
+                <td style="padding:12px 14px;line-height:1.6;border-bottom:1px solid var(--border);vertical-align:top;word-break:keep-all;">${topEvent.insight.why_it_matters}</td>
+              </tr>
+            </tbody>
+          </table>` : ''}
+        </div>
+      </div>
+
+      <div class="report-section">
+        <div class="report-section-title">🔴 핵심 리스크 현황 및 권고 액션</div>
+        ${events.map((e, i) => {
+        const delta = e.risk_score - e.prev_score;
+        const cat = CATEGORIES[e.category];
+        return `<div style="margin-bottom:12px;padding:12px 14px;background:transparent;border-radius:8px;border:1px solid var(--border-md);border-left:4px solid ${e.risk_level === 'high' ? 'var(--risk-high)' : e.risk_level === 'medium' ? 'var(--risk-medium)' : 'var(--risk-low)'};">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+              <div style="font-size:13px;font-weight:800;color:var(--text-primary);">[${i + 1}] ${e.title}</div>
+              <div style="display:flex;gap:6px;align-items:center;">
+                ${delta > 0 ? `<span style="font-size:10px;color:var(--risk-high);font-weight:700;">▲${delta}pt</span>` : ''}
+                <span style="font-size:10px;font-weight:700;padding:2px 6px;border-radius:4px;background:${e.risk_level === 'high' ? 'rgba(220,38,38,0.15)' : e.risk_level === 'medium' ? 'rgba(217,119,6,0.15)' : 'rgba(22,163,74,0.15)'};color:${e.risk_level === 'high' ? 'var(--risk-high)' : e.risk_level === 'medium' ? 'var(--risk-medium)' : 'var(--risk-low)'}">${e.risk_score}점</span>
+              </div>
+            </div>
+            <div style="font-size:12px;color:var(--text-secondary);line-height:1.6;margin-bottom:10px;">${e.insight.why_it_matters}</div>
+            <div style="font-size:12px;color:var(--text-secondary);line-height:1.6;margin-bottom:12px;"><strong style="color:var(--text-primary);">💼 비즈니스 영향:</strong> ${e.insight.business_impact}</div>
+            
+            <div style="padding-top:10px;border-top:1px dashed var(--border-md);">
+              <div style="font-size:11.5px;color:var(--accent);font-weight:800;margin-bottom:6px;">⚡ 즉각 검토 권고 액션</div>
+              ${e.insight.recommended_actions.map(a => `<div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:6px;"><span style="color:var(--accent);font-weight:900;font-size:11px;margin-top:2px;">▶</span><span style="font-size:12px;color:var(--text-secondary);line-height:1.5;">${a} 의사결정을 권장합니다.</span></div>`).join('')}
+            </div>
+            
+            <div style="font-size:10px;color:var(--text-muted);margin-top:10px;">📍 ${e.region} &nbsp;·&nbsp; ${cat?.icon} ${cat?.label} &nbsp;·&nbsp; 출처: ${e.source}</div>
+          </div>`;
+      }).join('')}
+      </div>
+
+      <div style="border-top:1px solid var(--border);padding-top:10px;font-size:10.5px;color:var(--text-muted);font-family:var(--font-sans);display:flex;justify-content:space-between;">
+        <span>⚡ War Impact Desk · AI 자동 생성 브리핑</span>
+        <span>${date} 기준 · 최종 판단은 담당자 책임 하에 이루어져야 합니다</span>
+      </div>`;
+    }
+
+    function buildDetailReport(events, ind, date) {
+      return `<div class="report-section">
+      <div class="report-section-title">📋 ${ind} 산업 상세 리스크 분석 리포트</div>
+      <div style="font-size:12px;color:var(--text-muted);margin-bottom:16px;font-family:var(--font-sans);">기준일: ${date} | 이벤트 ${events.length}건</div>
+    </div>
+    ${events.map((e, i) => `
+      <div class="report-section" style="margin-bottom:16px;">
+        <div class="report-section-title" style="font-size:14px;margin-bottom:8px;">${i + 1}. ${e.title}</div>
+        <div style="font-size:11px;margin-bottom:8px;font-family:var(--font-sans);">
+          <span class="badge badge-risk-${e.risk_level}" style="font-size:10px;padding:2px 6px;">${{ high: '고위험', medium: '중간', low: '낮음' }[e.risk_level]}</span>
+          <span class="badge badge-cat" style="margin-left:6px;font-size:10px;padding:2px 6px;">${CATEGORIES[e.category]?.icon} ${CATEGORIES[e.category]?.label}</span>
+          <span style="margin-left:8px;color:var(--text-muted);">리스크 점수: ${e.risk_score}/100 | 출처: ${e.source}</span>
+        </div>
+        <div style="color:var(--text-secondary);font-size:12px;line-height:1.6;font-family:var(--font-sans);margin-bottom:8px;font-style:italic;">"${e.insight.why_it_matters}"</div>
+        <div style="color:var(--text-secondary);font-size:12px;line-height:1.6;font-family:var(--font-sans);margin-bottom:8px;"><strong style="color:var(--text-primary);">비즈니스 영향:</strong> ${e.insight.business_impact}</div>
+        <div style="font-size:12px;font-family:var(--font-sans);">
+          <strong style="color:var(--text-primary);">권고 액션:</strong>
+          ${e.insight.recommended_actions.map((a, j) => `<div style="color:var(--text-secondary);margin-top:2px;padding-left:8px;">${j + 1}. ${a} 실행을 권장합니다.</div>`).join('')}
+        </div>
+      </div>
+    `).join('')}`;
+    }
+
+    function buildActionReport(events, ind, date) {
+      const all = events.flatMap(e => e.insight.recommended_actions.map(a => ({ action: a, event: e.title, level: e.risk_level })));
+      return `<div class="report-section">
+      <div class="report-section-title">✅ ${ind} 산업 대응 액션 리스트</div>
+      <div style="font-size:12px;color:var(--text-muted);margin-bottom:16px;font-family:var(--font-sans);">생성일: ${date} | 총 ${all.length}개 항목</div>
+    </div>
+    <div class="report-section">
+      <div class="report-section-title" style="color:var(--risk-high);">🔴 즉각 조치 (고위험)</div>
+      ${all.filter(a => a.level === 'high').map((a, i) => `
+        <div style="display:flex;gap:10px;margin-bottom:8px;font-family:var(--font-sans);">
+          <span style="color:var(--risk-high);font-weight:800;flex-shrink:0;">${i + 1}.</span>
+          <div>
+            <div style="font-size:13px;color:var(--text-primary);">${a.action}</div>
+            <div style="font-size:11px;color:var(--text-muted);">← ${a.event.slice(0, 60)}...</div>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+    <div class="report-section">
+      <div class="report-section-title" style="color:var(--risk-medium);">🟡 단기 검토 (중간 위험)</div>
+      ${all.filter(a => a.level === 'medium').map((a, i) => `
+        <div style="display:flex;gap:10px;margin-bottom:8px;font-family:var(--font-sans);">
+          <span style="color:var(--risk-medium);font-weight:800;flex-shrink:0;">${i + 1}.</span>
+          <div>
+            <div style="font-size:13px;color:var(--text-primary);">${a.action}</div>
+            <div style="font-size:11px;color:var(--text-muted);">← ${a.event.slice(0, 60)}...</div>
+          </div>
+        </div>
+      `).join('')}
+    </div>`;
+    }
+
+    function buildActionChecklist(events) {
+      // Use encodeURIComponent followed by btoa to safely encode non-latin characters
+      const all = events.flatMap(e => e.insight.recommended_actions.map(a => {
+        let key = '';
+        try {
+          key = btoa(encodeURIComponent(a)).slice(0, 12);
+        } catch (err) {
+          key = Math.random().toString(36).substring(7); // Fallback key
+        }
+        return { action: a, eventTitle: e.title, level: e.risk_level, key: key };
+      }));
+      const wrap = document.getElementById('action-list');
+      wrap.innerHTML = '';
+      all.forEach(item => {
+        const done = checkedActions[item.key] || false;
+        const li = document.createElement('div');
+        li.className = 'action-li' + (done ? ' done' : '');
+        li.innerHTML = `
+        <div class="checkbox" style="${done ? 'background:var(--accent);border-color:var(--accent);' : ''}">
+          ${done ? '<span style="color:white;font-size:11px;font-weight:800;">✓</span>' : ''}
+        </div>
+        <div style="flex:1;">
+          <div style="font-size:13px;">${item.action}</div>
+          <div style="font-size:11px;color:var(--text-muted);margin-top:3px;">${item.eventTitle.slice(0, 55)}...</div>
+        </div>
+        <span class="badge badge-risk-${item.level}">${{ high: '고위험', medium: '중간', low: '낮음' }[item.level]}</span>
+      `;
+        li.onclick = () => {
+          checkedActions[item.key] = !checkedActions[item.key];
+          buildActionChecklist(events);
+        };
+        wrap.appendChild(li);
+      });
+      const doneCount = Object.values(checkedActions).filter(Boolean).length;
+      document.getElementById('action-progress-label').textContent = `${doneCount} / ${all.length} 완료`;
+    }
+
+    function resetChecklist() {
+      checkedActions = {};
+      generateReport();
+    }
+
+    function copyReport() {
+      const el = document.getElementById('report-output');
+      const text = el.innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        const toast = document.getElementById('copy-toast');
+        toast.style.display = 'block';
+        setTimeout(() => toast.style.display = 'none', 2500);
+      });
+    }
+  </script>
+</body>
+
+</html>

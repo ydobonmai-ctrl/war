@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>이벤트 모니터 — War Impact Desk</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .event-table {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .event-row {
+      display: grid;
+      grid-template-columns: 36px 1fr 140px 90px 80px 100px;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .event-row:hover {
+      background: var(--bg-elevated);
+      border-color: var(--border-md);
+    }
+
+    .event-row-header {
+      display: grid;
+      grid-template-columns: 36px 1fr 140px 90px 80px 100px;
+      gap: 12px;
+      padding: 6px 16px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .score-badge {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .filter-bar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      padding: var(--space-4) var(--space-5);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      margin-bottom: var(--space-4);
+    }
+
+    .filter-bar .form-select {
+      width: auto;
+      padding: 8px 12px;
+      font-size: 13px;
+    }
+
+    .search-input {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      color: var(--text-primary);
+      padding: 8px 14px;
+      font-size: 14px;
+      flex: 1;
+      min-width: 180px;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .search-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+
+    .detail-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+      position: sticky;
+      top: 76px;
+    }
+
+    @media (max-width:900px) {
+      .event-row {
+        grid-template-columns: 36px 1fr 90px 80px;
+      }
+
+      .event-row-header {
+        grid-template-columns: 36px 1fr 90px 80px;
+      }
+
+      .event-row .hide-mobile {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app-layout">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-logo" onclick="location.href='index.html'" style="cursor:pointer;">
+        <div class="logo-mark">
+          <div class="logo-icon">⚡</div>
+          <div>
+            <div class="logo-text">War Impact Desk</div>
+            <div class="logo-sub">Risk Intelligence</div>
+          </div>
+        </div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-section-label">주요 기능</div>
+        <a href="dashboard.html" class="nav-item"><span class="nav-icon">📊</span> 대시보드</a>
+        <a href="events.html" class="nav-item active"><span class="nav-icon">🌐</span> 이벤트 모니터</a>
+        <a href="map.html" class="nav-item"><span class="nav-icon">🗺</span> 세계 리스크 지도</a>
+        <a href="report.html" class="nav-item"><span class="nav-icon">📋</span> 브리핑 생성</a>
+        <a href="settings.html" class="nav-item"><span class="nav-icon">⚙️</span> 설정</a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-chip">
+          <div class="user-avatar">K</div>
+          <div>
+            <div class="user-name" id="sidebar-ind">반도체</div>
+            <div class="user-role">전략기획팀</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="main-content">
+      <div class="topbar">
+        <div class="topbar-title">이벤트 모니터 <span style="color:var(--text-muted);font-weight:400;font-size:14px;"
+            id="event-count-label"></span></div>
+        <div class="topbar-actions">
+          <a href="report.html" class="btn btn-primary btn-sm">📋 AI 브리핑 생성</a>
+        </div>
+      </div>
+
+      <div class="page-body">
+
+        <!-- FILTER BAR -->
+        <div class="filter-bar fade-in">
+          <input class="search-input" id="search-input" placeholder="🔍  이벤트 제목, 지역, 출처 검색..." oninput="applyFilters()">
+          <select class="form-select" id="ind-filter" onchange="applyFilters()">
+            <option value="all">전체 산업</option>
+          </select>
+          <select class="form-select" id="cat-filter" onchange="applyFilters()">
+            <option value="all">전체 카테고리</option>
+          </select>
+          <select class="form-select" id="risk-filter" onchange="applyFilters()">
+            <option value="all">전체 위험도</option>
+            <option value="high">🔴 고위험</option>
+            <option value="medium">🟡 중간</option>
+            <option value="low">🟢 낮음</option>
+          </select>
+          <button class="btn btn-ghost btn-sm" onclick="resetFilters()">초기화</button>
+        </div>
+
+        <!-- LAYOUT: List + Detail -->
+        <div style="display:grid;grid-template-columns:1fr 380px;gap:20px;align-items:start;">
+
+          <!-- EVENT LIST -->
+          <div class="fade-in">
+            <div class="event-row-header">
+              <span>점수</span>
+              <span>이벤트</span>
+              <span class="hide-mobile">카테고리</span>
+              <span class="hide-mobile">지역</span>
+              <span>수준</span>
+              <span>변화</span>
+            </div>
+            <div id="event-list" class="event-table"></div>
+          </div>
+
+          <!-- DETAIL PANEL -->
+          <div class="detail-panel fade-in" id="detail-panel">
+            <div class="empty-state" style="padding:40px 0;">
+              <div class="empty-icon">👆</div>
+              <div class="empty-text">이벤트를 선택하면<br>상세 분석이 표시됩니다</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script>
+    let filteredEvents = [...EVENTS];
+    let selectedId = null;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Init filter dropdowns
+      const indSel = document.getElementById('ind-filter');
+      INDUSTRIES.forEach(ind => {
+        const opt = document.createElement('option'); opt.value = ind.id; opt.textContent = ind.label; indSel.appendChild(opt);
+      });
+      const prefs = loadPreferences();
+      indSel.value = prefs.industry || 'semiconductor';
+
+      const catSel = document.getElementById('cat-filter');
+      Object.entries(CATEGORIES).forEach(([k, v]) => {
+        const opt = document.createElement('option'); opt.value = k; opt.textContent = `${v.icon} ${v.label}`; catSel.appendChild(opt);
+      });
+
+      document.getElementById('sidebar-ind').textContent = INDUSTRIES.find(i => i.id === prefs.industry)?.label || '반도체';
+      applyFilters();
+    });
+
+    function applyFilters() {
+      const q = document.getElementById('search-input').value.toLowerCase();
+      const ind = document.getElementById('ind-filter').value;
+      const cat = document.getElementById('cat-filter').value;
+      const risk = document.getElementById('risk-filter').value;
+
+      filteredEvents = EVENTS.filter(e => {
+        if (q && !e.title.toLowerCase().includes(q) && !e.region.toLowerCase().includes(q) && !e.source.toLowerCase().includes(q)) return false;
+        if (ind !== 'all' && !e.impact_industries.includes(ind)) return false;
+        if (cat !== 'all' && e.category !== cat) return false;
+        if (risk !== 'all' && e.risk_level !== risk) return false;
+        return true;
+      }).sort((a, b) => b.risk_score - a.risk_score);
+
+      document.getElementById('event-count-label').textContent = `(${filteredEvents.length}건)`;
+      renderList();
+    }
+
+    function resetFilters() {
+      document.getElementById('search-input').value = '';
+      document.getElementById('ind-filter').value = 'all';
+      document.getElementById('cat-filter').value = 'all';
+      document.getElementById('risk-filter').value = 'all';
+      applyFilters();
+    }
+
+    function renderList() {
+      const wrap = document.getElementById('event-list');
+      wrap.innerHTML = '';
+      if (!filteredEvents.length) {
+        wrap.innerHTML = '<div class="empty-state"><div class="empty-icon">🔍</div><div class="empty-text">검색 조건에 맞는 이벤트가 없습니다</div></div>';
+        return;
+      }
+      filteredEvents.forEach(e => {
+        const cat = CATEGORIES[e.category];
+        const delta = e.risk_score - e.prev_score;
+        const scoreColor = e.risk_level === 'high' ? 'var(--risk-high)' : e.risk_level === 'medium' ? 'var(--risk-medium)' : 'var(--risk-low)';
+        const row = document.createElement('div');
+        row.className = 'event-row' + (selectedId === e.id ? ' active' : '');
+        if (selectedId === e.id) row.style.borderColor = 'rgba(79,110,247,0.4)';
+        row.onclick = () => selectEvent(e.id);
+        row.innerHTML = `
+        <div class="score-badge" style="background:${scoreColor}22;color:${scoreColor};">${e.risk_score}</div>
+        <div>
+          <div style="font-size:13px;font-weight:600;line-height:1.35;margin-bottom:4px;">${e.title}</div>
+          <div style="font-size:11px;color:var(--text-muted);">${e.source}</div>
+        </div>
+        <div class="hide-mobile"><span class="badge badge-cat">${cat?.icon} ${cat?.label}</span></div>
+        <div class="hide-mobile" style="font-size:12px;color:var(--text-secondary);">${e.region.split(' ')[0]}</div>
+        <div><span class="badge badge-risk-${e.risk_level}">${{ high: '고위험', medium: '중간', low: '낮음' }[e.risk_level]}</span></div>
+        <div class="delta ${delta > 0 ? 'up' : delta < 0 ? 'down' : 'flat'}">${delta > 0 ? '▲' + delta : delta < 0 ? '▼' + Math.abs(delta) : '—'}</div>
+      `;
+        wrap.appendChild(row);
+      });
+    }
+
+    function selectEvent(id) {
+      selectedId = id;
+      renderList();
+
+      const e = EVENTS.find(ev => ev.id === id);
+      if (!e) return;
+      const cat = CATEGORIES[e.category];
+      const ins = e.insight;
+      const delta = e.risk_score - e.prev_score;
+      const impactInds = e.impact_industries.map(ii => INDUSTRIES.find(i => i.id === ii)?.label || ii);
+
+      document.getElementById('detail-panel').innerHTML = `
+      <div class="modal-header" style="margin-bottom:16px;">
+        <div class="modal-title" style="font-size:15px;">${e.title}</div>
+      </div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;">
+        <span class="badge badge-risk-${e.risk_level}">${{ high: '🔴 고위험', medium: '🟡 중간', low: '🟢 낮음' }[e.risk_level]}</span>
+        <span class="badge badge-cat">${cat?.icon} ${cat?.label}</span>
+        <span class="region-chip">📍 ${e.region}</span>
+      </div>
+      <div class="divider"></div>
+
+      <div style="margin-bottom:14px;">
+        <div style="font-size:12px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;">리스크 점수</div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="font-size:36px;font-weight:800;color:var(--risk-${e.risk_level});">${e.risk_score}</div>
+          <div>
+            <div class="delta ${delta > 0 ? 'up' : delta < 0 ? 'down' : 'flat'}" style="font-size:14px;">${delta > 0 ? '▲' + delta : delta < 0 ? '▼' + Math.abs(delta) : '변동없음'}</div>
+            <div style="font-size:11px;color:var(--text-muted);">전일 ${e.prev_score} → 현재 ${e.risk_score}</div>
+          </div>
+        </div>
+        <div class="progress-bar-wrap" style="margin-top:8px;"><div class="progress-bar ${e.risk_level}" style="width:${e.risk_score}%;"></div></div>
+      </div>
+
+      <div style="margin-bottom:14px;">
+        <div style="font-size:12px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;">영향 산업</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;">${impactInds.map(l => `<span class="badge badge-new">${l}</span>`).join('')}</div>
+      </div>
+
+      <div style="margin-bottom:14px;">
+        <div style="font-size:12px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;">왜 중요한가</div>
+        <div style="font-size:13px;color:var(--text-secondary);line-height:1.6;">${ins.why_it_matters}</div>
+      </div>
+
+      <div style="margin-bottom:14px;">
+        <div style="font-size:12px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;">비즈니스 영향</div>
+        <div style="font-size:13px;color:var(--text-secondary);line-height:1.6;">${ins.business_impact}</div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div style="margin-bottom:16px;">
+        <div style="font-size:12px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;">⚡ 권고 대응 액션</div>
+        <ul class="action-list">
+          ${ins.recommended_actions.slice(0, 3).map((a, i) => `<li class="action-item"><div class="action-number">${i + 1}</div><div style="font-size:12px;">${a}</div></li>`).join('')}
+        </ul>
+      </div>
+
+      <a href="report.html?id=${e.id}" class="btn btn-primary" style="width:100%;justify-content:center;">📋 이 이벤트로 AI 브리핑 생성</a>
+    `;
+    }
+  </script>
+</body>
+
+</html>

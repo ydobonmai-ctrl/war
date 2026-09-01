@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>대시보드 — War Impact Desk</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .overall-score-card {
+      background: linear-gradient(135deg, rgba(79, 110, 247, 0.10) 0%, rgba(124, 58, 237, 0.06) 100%);
+      border-color: rgba(79, 110, 247, 0.2);
+    }
+
+    .risk-bar-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .risk-bar-label {
+      font-size: 12px;
+      color: var(--text-secondary);
+      width: 80px;
+      flex-shrink: 0;
+    }
+
+    .risk-bar-count {
+      font-size: 12px;
+      font-weight: 700;
+      min-width: 20px;
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    .cat-row {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .cat-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+    }
+
+    .cat-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .cat-label {
+      flex: 1;
+      color: var(--text-secondary);
+    }
+
+    .cat-count {
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .today-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(232, 69, 69, 0.1);
+      border: 1px solid rgba(232, 69, 69, 0.2);
+      color: var(--risk-high);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 99px;
+    }
+
+    .region-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      font-size: 11px;
+      font-weight: 500;
+      padding: 3px 8px;
+      border-radius: var(--radius-sm);
+    }
+
+    .escalation-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      background: var(--bg-elevated);
+      border-radius: var(--radius-md);
+      margin-bottom: 6px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .escalation-row:hover {
+      background: var(--bg-hover);
+    }
+
+    .esc-title {
+      font-size: 13px;
+      font-weight: 500;
+      flex: 1;
+      line-height: 1.3;
+    }
+
+    .esc-delta {
+      font-size: 12px;
+      font-weight: 700;
+      min-width: 36px;
+      text-align: right;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app-layout">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-logo" onclick="location.href='index.html'" style="cursor:pointer;">
+        <div class="logo-mark">
+          <div class="logo-icon">⚡</div>
+          <div>
+            <div class="logo-text">War Impact Desk</div>
+            <div class="logo-sub">Risk Intelligence</div>
+          </div>
+        </div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-section-label">주요 기능</div>
+        <a href="dashboard.html" class="nav-item active">
+          <span class="nav-icon">📊</span> 대시보드
+          <span class="nav-badge" id="sidebar-high-count">5</span>
+        </a>
+        <a href="events.html" class="nav-item">
+          <span class="nav-icon">🌐</span> 이벤트 모니터
+        </a>
+        <a href="map.html" class="nav-item">
+          <span class="nav-icon">🗺</span> 세계 리스크 지도
+        </a>
+        <a href="report.html" class="nav-item">
+          <span class="nav-icon">📋</span> 브리핑 생성
+        </a>
+        <a href="settings.html" class="nav-item">
+          <span class="nav-icon">⚙️</span> 설정
+        </a>
+        <div class="nav-section-label" style="margin-top:16px;">카테고리</div>
+        <div class="nav-item" onclick="filterCat('supply_chain')"><span class="nav-icon">🔗</span> 공급망</div>
+        <div class="nav-item" onclick="filterCat('oil_commodity')"><span class="nav-icon">⛽</span> 유가/원자재</div>
+        <div class="nav-item" onclick="filterCat('maritime')"><span class="nav-icon">🚢</span> 해상 물류</div>
+        <div class="nav-item" onclick="filterCat('sanctions')"><span class="nav-icon">🚫</span> 제재/수출통제</div>
+        <div class="nav-item" onclick="filterCat('fx_macro')"><span class="nav-icon">📈</span> 환율/거시</div>
+        <div class="nav-item" onclick="filterCat('cyber')"><span class="nav-icon">🖥</span> 사이버</div>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-chip">
+          <div class="user-avatar" id="user-avatar-text">K</div>
+          <div>
+            <div class="user-name" id="sidebar-industry-label">반도체</div>
+            <div class="user-role" id="sidebar-user-role">전략기획팀</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <div class="main-content">
+      <div class="topbar">
+        <div>
+          <div class="topbar-title">오늘의 리스크 현황</div>
+        </div>
+        <div class="topbar-meta" id="topbar-date"></div>
+        <div class="topbar-actions">
+          <div id="active-industry-chip" class="badge badge-new">반도체</div>
+          <a href="report.html" class="btn btn-primary btn-sm">📋 AI 브리핑 생성</a>
+          <a href="settings.html" class="btn btn-ghost btn-sm btn-icon" data-tooltip="설정">⚙️</a>
+        </div>
+      </div>
+
+      <div class="page-body">
+
+        <!-- KPI ROW -->
+        <div class="grid-4 fade-in" style="margin-bottom:24px;">
+
+          <!-- Overall Score -->
+          <div class="card overall-score-card">
+            <div class="card-title">종합 리스크 지수</div>
+            <div style="display:flex;align-items:center;gap:16px;margin-top:10px;">
+              <div class="score-ring">
+                <svg viewBox="0 0 72 72" width="72" height="72">
+                  <circle class="score-ring-track" cx="36" cy="36" r="30" />
+                  <circle class="score-ring-fill" id="score-fill" cx="36" cy="36" r="30" stroke-dasharray="188.5"
+                    stroke-dashoffset="188.5" stroke="var(--risk-high)" />
+                </svg>
+                <div class="score-ring-value" id="overall-score-val" style="color:var(--risk-high);">—</div>
+              </div>
+              <div>
+                <div class="badge badge-risk-high" id="overall-badge">HIGH</div>
+                <div style="font-size:11px;color:var(--text-muted);margin-top:6px;" id="overall-score-sub">업데이트 중...
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- High Risk Count -->
+          <div class="card card-sm">
+            <div class="card-title">🔴 고위험</div>
+            <div class="card-value" id="high-count" style="color:var(--risk-high);">—</div>
+            <div class="card-meta">즉각 조치 필요</div>
+          </div>
+
+          <!-- Medium Risk Count -->
+          <div class="card card-sm">
+            <div class="card-title">🟡 중간 위험</div>
+            <div class="card-value" id="medium-count" style="color:var(--risk-medium);">—</div>
+            <div class="card-meta">모니터링 권고</div>
+          </div>
+
+          <!-- New Risks -->
+          <div class="card card-sm">
+            <div class="card-title">🆕 신규 급등</div>
+            <div class="card-value" id="new-count" style="color:var(--accent);">—</div>
+            <div class="card-meta">전일 대비 +15pt 이상</div>
+          </div>
+        </div>
+
+        <!-- INDUSTRY FILTER -->
+        <div style="margin-bottom:24px;" class="fade-in">
+          <div class="section-header">
+            <div>
+              <div class="section-title">산업 필터</div>
+              <div class="section-sub">산업 선택 시 중요도 기준이 재조정됩니다</div>
+            </div>
+            <button class="btn btn-ghost btn-sm" onclick="setIndustry('all')">전체 보기</button>
+          </div>
+          <div class="industry-chips" id="industry-chips"></div>
+        </div>
+
+        <!-- TWO COLUMN: Events + Sidebar -->
+        <div style="display:grid;grid-template-columns:1fr 320px;gap:24px;align-items:start;">
+
+          <!-- LEFT: Events -->
+          <div>
+            <!-- TODAY'S TOP RISKS -->
+            <div class="section-header">
+              <div>
+                <div class="section-title">
+                  오늘의 핵심 리스크
+                  <span class="today-badge" style="margin-left:8px;">
+                    <span class="pulse"
+                      style="width:5px;height:5px;border-radius:50%;background:var(--risk-high);display:inline-block;"></span>
+                    LIVE
+                  </span>
+                </div>
+                <div class="section-sub" id="filter-label">전체 이벤트 기준</div>
+              </div>
+            </div>
+            <div id="featured-events" style="display:flex;flex-direction:column;gap:12px;margin-bottom:24px;"></div>
+
+            <!-- ALL EVENTS -->
+            <div class="section-header">
+              <div class="section-title">전체 모니터링 이벤트</div>
+              <div style="display:flex;gap:8px;">
+                <select id="cat-filter" class="form-select" style="width:auto;padding:6px 12px;font-size:12px;"
+                  onchange="applyFilters()">
+                  <option value="all">전체 카테고리</option>
+                  <option value="supply_chain">공급망</option>
+                  <option value="oil_commodity">유가/원자재</option>
+                  <option value="maritime">해상 물류</option>
+                  <option value="sanctions">제재/수출통제</option>
+                  <option value="fx_macro">환율/거시</option>
+                  <option value="cyber">사이버/인프라</option>
+                </select>
+              </div>
+            </div>
+            <div id="all-events" style="display:flex;flex-direction:column;gap:10px;"></div>
+          </div>
+
+          <!-- RIGHT: Analytics Sidebar -->
+          <div style="display:flex;flex-direction:column;gap:16px;">
+
+            <!-- Category Breakdown -->
+            <div class="card card-sm fade-in">
+              <div class="section-title" style="margin-bottom:14px;">카테고리별 현황</div>
+              <div class="cat-row" id="cat-breakdown"></div>
+            </div>
+
+            <!-- Risk Distribution -->
+            <div class="card card-sm fade-in">
+              <div class="section-title" style="margin-bottom:14px;">위험도 분포</div>
+              <div>
+                <div class="risk-bar-item">
+                  <div class="risk-bar-label" style="color:var(--risk-high);">고위험</div>
+                  <div class="progress-bar-wrap" style="flex:1;">
+                    <div class="progress-bar high" id="bar-high"></div>
+                  </div>
+                  <div class="risk-bar-count" id="cnt-high" style="color:var(--risk-high);">—</div>
+                </div>
+                <div class="risk-bar-item">
+                  <div class="risk-bar-label" style="color:var(--risk-medium);">중간 위험</div>
+                  <div class="progress-bar-wrap" style="flex:1;">
+                    <div class="progress-bar medium" id="bar-medium"></div>
+                  </div>
+                  <div class="risk-bar-count" id="cnt-medium" style="color:var(--risk-medium);">—</div>
+                </div>
+                <div class="risk-bar-item">
+                  <div class="risk-bar-label" style="color:var(--risk-low);">낮음</div>
+                  <div class="progress-bar-wrap" style="flex:1;">
+                    <div class="progress-bar low" id="bar-low"></div>
+                  </div>
+                  <div class="risk-bar-count" id="cnt-low" style="color:var(--risk-low);">—</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Escalated Risks -->
+            <div class="card card-sm fade-in">
+              <div class="section-title" style="margin-bottom:14px;">📈 전일 대비 위험도 변화</div>
+              <div id="escalation-list"></div>
+            </div>
+
+            <!-- Alert -->
+            <div class="alert alert-warn fade-in">
+              <span class="alert-icon">⚠️</span>
+              <div>이 플랫폼은 의사결정 지원 목적으로 설계되었습니다. 최종 판단은 담당자의 고유 책임입니다.</div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="card card-sm fade-in">
+              <div class="section-title" style="margin-bottom:12px;">빠른 액션</div>
+              <div style="display:flex;flex-direction:column;gap:8px;">
+                <a href="report.html" class="btn btn-primary" style="justify-content:center;">📋 AI 브리핑 생성</a>
+                <a href="events.html" class="btn btn-secondary" style="justify-content:center;">🔍 이벤트 상세 보기</a>
+                <a href="settings.html" class="btn btn-ghost" style="justify-content:center;">⚙️ 산업/지역 설정</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- EVENT DETAIL MODAL -->
+  <div class="modal-overlay" id="event-modal" onclick="closeModal(event)">
+    <div class="modal" id="modal-content">
+      <div class="modal-header">
+        <div class="modal-title" id="modal-title">—</div>
+        <button class="modal-close" onclick="closeModalDirect()">✕</button>
+      </div>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script>
+    let currentIndustry = 'all';
+    let currentCat = 'all';
+    let currentEventId = null;
+
+    // Init
+    document.addEventListener('DOMContentLoaded', () => {
+      const prefs = loadPreferences();
+      currentIndustry = prefs.industry || 'semiconductor';
+
+      // Date
+      const now = new Date();
+      document.getElementById('topbar-date').textContent = now.toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'short' }) + ' · 기준';
+
+      renderIndustryChips();
+      render();
+    });
+
+    function renderIndustryChips() {
+      const wrap = document.getElementById('industry-chips');
+      wrap.innerHTML = '';
+      [{ id: 'all', label: '전체' }, ...INDUSTRIES].forEach(ind => {
+        const chip = document.createElement('div');
+        chip.className = 'industry-chip' + (currentIndustry === ind.id ? ' active' : '');
+        chip.textContent = ind.label;
+        chip.onclick = () => setIndustry(ind.id);
+        wrap.appendChild(chip);
+      });
+    }
+
+    function setIndustry(id) {
+      currentIndustry = id;
+      const prefs = loadPreferences();
+      prefs.industry = id;
+      savePreferences(prefs);
+      renderIndustryChips();
+      updateActiveIndustryLabel();
+      render();
+    }
+
+    function updateActiveIndustryLabel() {
+      const ind = INDUSTRIES.find(i => i.id === currentIndustry);
+      const label = ind ? ind.label : '전체';
+      document.getElementById('active-industry-chip').textContent = label;
+      document.getElementById('sidebar-industry-label').textContent = label;
+    }
+
+    function filterCat(cat) {
+      document.getElementById('cat-filter').value = cat;
+      currentCat = cat;
+      applyFilters();
+    }
+
+    function applyFilters() {
+      currentCat = document.getElementById('cat-filter').value;
+      render();
+    }
+
+    function render() {
+      let events = sortEventsByIndustry(EVENTS, currentIndustry === 'all' ? null : currentIndustry);
+      if (currentCat !== 'all') events = events.filter(e => e.category === currentCat);
+
+      // Update filter label
+      const ind = INDUSTRIES.find(i => i.id === currentIndustry);
+      document.getElementById('filter-label').textContent =
+        ind ? `${ind.label} 산업 기준 중요도 정렬` : '전체 이벤트 기준';
+
+      // KPIs
+      const counts = countByRiskLevel(events);
+      const overall = calcOverallRiskScore(currentIndustry === 'all' ? null : currentIndustry);
+      document.getElementById('overall-score-val').textContent = overall;
+      document.getElementById('high-count').textContent = counts.high;
+      document.getElementById('medium-count').textContent = counts.medium;
+      document.getElementById('new-count').textContent = getNewRisks(events).length;
+      document.getElementById('sidebar-high-count').textContent = counts.high;
+      document.getElementById('overall-score-sub').textContent = `활성 이벤트 ${events.length}건 기준`;
+
+      // Score ring
+      const pct = overall / 100;
+      const circumference = 188.5;
+      document.getElementById('score-fill').style.strokeDashoffset = circumference * (1 - pct);
+      const ringColor = overall >= 75 ? 'var(--risk-high)' : overall >= 50 ? 'var(--risk-medium)' : 'var(--risk-low)';
+      document.getElementById('score-fill').style.stroke = ringColor;
+      document.getElementById('overall-score-val').style.color = ringColor;
+      const badge = document.getElementById('overall-badge');
+      if (overall >= 75) { badge.textContent = 'HIGH RISK'; badge.className = 'badge badge-risk-high'; }
+      else if (overall >= 50) { badge.textContent = 'MEDIUM RISK'; badge.className = 'badge badge-risk-medium'; }
+      else { badge.textContent = 'LOW RISK'; badge.className = 'badge badge-risk-low'; }
+
+      // Risk bars
+      const total = events.length || 1;
+      document.getElementById('bar-high').style.width = (counts.high / total * 100) + '%';
+      document.getElementById('bar-medium').style.width = (counts.medium / total * 100) + '%';
+      document.getElementById('bar-low').style.width = ((counts.low || 0) / total * 100) + '%';
+      document.getElementById('cnt-high').textContent = counts.high;
+      document.getElementById('cnt-medium').textContent = counts.medium;
+      document.getElementById('cnt-low').textContent = counts.low || 0;
+
+      // Featured events (top 3 high risk)
+      const featured = events.filter(e => e.risk_level === 'high').slice(0, 3);
+      renderFeatured(featured);
+
+      // All events
+      renderAllEvents(events);
+
+      // Category breakdown
+      renderCatBreakdown(events);
+
+      // Escalation
+      renderEscalation(events);
+    }
+
+    function renderFeatured(events) {
+      const wrap = document.getElementById('featured-events');
+      wrap.innerHTML = events.length ? '' : '<div class="empty-state"><div class="empty-icon">✅</div><div class="empty-text">선택한 산업에 고위험 이슈가 없습니다</div></div>';
+      events.forEach(e => wrap.appendChild(buildEventCard(e, true)));
+    }
+
+    function renderAllEvents(events) {
+      const wrap = document.getElementById('all-events');
+      wrap.innerHTML = '';
+      if (!events.length) {
+        wrap.innerHTML = '<div class="empty-state"><div class="empty-icon">🔍</div><div class="empty-text">조건에 맞는 이벤트가 없습니다</div></div>';
+        return;
+      }
+      events.forEach(e => wrap.appendChild(buildEventCard(e, false)));
+    }
+
+    function buildEventCard(e, featured) {
+      const cat = CATEGORIES[e.category];
+      const delta = e.risk_score - e.prev_score;
+      const isNew = delta >= 15;
+
+      const el = document.createElement('div');
+      el.className = `event-card ${e.risk_level}${featured ? ' featured' : ''}`;
+      el.onclick = () => openModal(e.id);
+
+      el.innerHTML = `
+      <div class="event-top">
+        <div class="event-title">${e.title}</div>
+        <div class="event-score ${e.risk_level}">${e.risk_score}</div>
+      </div>
+      <div class="event-summary truncate">${e.summary}</div>
+      <div class="event-footer">
+        <span class="badge badge-risk-${e.risk_level}">
+          ${{ high: '🔴 고위험', medium: '🟡 중간', low: '🟢 낮음' }[e.risk_level]}
+        </span>
+        <span class="badge badge-cat">${cat?.icon} ${cat?.label}</span>
+        <span class="region-chip">📍 ${e.region}</span>
+        ${isNew ? '<span class="badge badge-new">▲ 급등</span>' : delta > 0 ? `<span class="delta up">▲${delta}</span>` : ''}
+        <span class="event-meta">${e.source}</span>
+      </div>
+    `;
+      return el;
+    }
+
+    function renderCatBreakdown(events) {
+      const counts = {};
+      events.forEach(e => { counts[e.category] = (counts[e.category] || 0) + 1; });
+      const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+      const wrap = document.getElementById('cat-breakdown');
+      wrap.innerHTML = '';
+      sorted.forEach(([cat, count]) => {
+        const info = CATEGORIES[cat];
+        if (!info) return;
+        const row = document.createElement('div');
+        row.className = 'cat-item';
+        row.innerHTML = `
+        <div class="cat-dot" style="background:${info.color};"></div>
+        <div class="cat-label">${info.icon} ${info.label}</div>
+        <div class="cat-count">${count}</div>
+        <div class="progress-bar-wrap" style="width:60px;"><div class="progress-bar accent" style="width:${count / events.length * 100}%;background:${info.color};opacity:0.7;"></div></div>
+      `;
+        wrap.appendChild(row);
+      });
+    }
+
+    function renderEscalation(events) {
+      const wrap = document.getElementById('escalation-list');
+      const escalated = getEscalatedRisks(events).sort((a, b) => (b.risk_score - b.prev_score) - (a.risk_score - a.prev_score)).slice(0, 5);
+      wrap.innerHTML = '';
+      if (!escalated.length) {
+        wrap.innerHTML = '<div style="font-size:13px;color:var(--text-muted);text-align:center;padding:16px 0;">위험도 상승 이슈 없음</div>';
+        return;
+      }
+      escalated.forEach(e => {
+        const delta = e.risk_score - e.prev_score;
+        const row = document.createElement('div');
+        row.className = 'escalation-row';
+        row.onclick = () => openModal(e.id);
+        row.innerHTML = `
+        <div class="cat-dot" style="background:${CATEGORIES[e.category]?.color || '#aaa'};"></div>
+        <div class="esc-title">${e.title}</div>
+        <div class="esc-delta" style="color:var(--risk-high);">▲${delta}</div>
+      `;
+        wrap.appendChild(row);
+      });
+    }
+
+    // Modal
+    function openModal(id) {
+      currentEventId = id;
+      const e = EVENTS.find(ev => ev.id === id);
+      if (!e) return;
+      const cat = CATEGORIES[e.category];
+      const ins = e.insight;
+
+      document.getElementById('modal-title').textContent = e.title;
+      document.getElementById('modal-body').innerHTML = `
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;">
+        <span class="badge badge-risk-${e.risk_level}">${{ high: '🔴 고위험', medium: '🟡 중간', low: '🟢 낮음' }[e.risk_level]}</span>
+        <span class="badge badge-cat">${cat?.icon} ${cat?.label}</span>
+        <span class="region-chip">📍 ${e.region}</span>
+        <span class="badge" style="background:rgba(255,255,255,0.05);color:var(--text-muted);">출처: ${e.source}</span>
+      </div>
+
+      <div class="divider"></div>
+
+      <div style="margin-bottom:20px;">
+        <div class="section-title" style="margin-bottom:10px;">📌 이벤트 요약</div>
+        <div style="font-size:14px;color:var(--text-secondary);line-height:1.7;">${e.summary}</div>
+      </div>
+
+      <div style="margin-bottom:20px;">
+        <div class="section-title" style="margin-bottom:10px;">🎯 왜 중요한가</div>
+        <div style="font-size:14px;color:var(--text-secondary);line-height:1.7;">${ins.why_it_matters}</div>
+      </div>
+
+      <div style="margin-bottom:20px;">
+        <div class="section-title" style="margin-bottom:10px;">💼 비즈니스 영향</div>
+        <div style="font-size:14px;color:var(--text-secondary);line-height:1.7;">${ins.business_impact}</div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div style="margin-bottom:20px;">
+        <div class="section-title" style="margin-bottom:12px;">⚡ 권고 대응 액션</div>
+        <ul class="action-list">
+          ${ins.recommended_actions.map((a, i) => `
+            <li class="action-item">
+              <div class="action-number">${i + 1}</div>
+              <div>${a}</div>
+            </li>
+          `).join('')}
+        </ul>
+      </div>
+
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+        <div style="font-size:12px;color:var(--text-muted);">AI 신뢰도: <strong style="color:var(--text-primary);">${Math.round(ins.confidence * 100)}%</strong> · 리스크 점수: <strong style="color:var(--risk-${e.risk_level});">${e.risk_score}/100</strong></div>
+        <a href="report.html?id=${e.id}" class="btn btn-primary btn-sm">이 이벤트로 AI 브리핑 생성</a>
+      </div>
+    `;
+
+      document.getElementById('event-modal').classList.add('open');
+    }
+
+    function closeModal(evt) { if (evt.target.id === 'event-modal') closeModalDirect(); }
+    function closeModalDirect() { document.getElementById('event-modal').classList.remove('open'); }
+
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModalDirect(); });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>세계 리스크 지도 — War Impact Desk</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <style>
+    /* ── Map full-height layout ─────────────────────────── */
+    html,
+    body {
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .app-layout {
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .main-content {
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .map-wrap {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #map {
+      width: 100%;
+      height: 100%;
+      background: #0b0d11;
+    }
+
+    /* Make standard OSM dark via CSS invert */
+    .leaflet-tile {
+      filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
+    }
+
+    /* ── Pulsing SVG markers ───────────────────────────── */
+    .pulse-marker {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .pulse-ring {
+      position: absolute;
+      border-radius: 50%;
+      animation: pulseAnim 2s ease-out infinite;
+      opacity: 0;
+    }
+
+    @keyframes pulseAnim {
+      0% {
+        transform: scale(0.5);
+        opacity: 0.8;
+      }
+
+      100% {
+        transform: scale(2.5);
+        opacity: 0;
+      }
+    }
+
+    .marker-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      cursor: pointer;
+      box-shadow: 0 0 8px currentColor;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── Map overlay panels ────────────────────────────── */
+    .map-legend {
+      position: absolute;
+      bottom: 24px;
+      left: 60px;
+      background: rgba(19, 22, 30, 0.92);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 14px 16px;
+      z-index: 500;
+      min-width: 180px;
+    }
+
+    .legend-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 10px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .map-stats {
+      position: absolute;
+      top: 12px;
+      left: 60px;
+      display: flex;
+      gap: 8px;
+      z-index: 500;
+      flex-wrap: wrap;
+    }
+
+    .map-stat-pill {
+      background: rgba(19, 22, 30, 0.92);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 99px;
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .map-stat-pill span {
+      color: var(--text-primary);
+    }
+
+    .gdelt-toggle {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      background: rgba(19, 22, 30, 0.92);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 12px 16px;
+      z-index: 500;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      min-width: 210px;
+    }
+
+    .gdelt-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    /* ── Detail panel (slides in from right) ──────────── */
+    .detail-slide {
+      position: absolute;
+      top: 0;
+      right: -400px;
+      bottom: 0;
+      width: 380px;
+      background: rgba(19, 22, 30, 0.97);
+      backdrop-filter: blur(16px);
+      border-left: 1px solid rgba(255, 255, 255, 0.08);
+      z-index: 600;
+      padding: 24px 20px;
+      overflow-y: auto;
+      transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .detail-slide.open {
+      right: 0;
+    }
+
+    .slide-close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--bg-elevated);
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .slide-close:hover {
+      background: var(--bg-hover);
+      color: var(--text-primary);
+    }
+
+    /* ── Leaflet popup overrides ───────────────────────── */
+    .leaflet-popup-content-wrapper {
+      background: rgba(26, 30, 42, 0.97) !important;
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1) !important;
+      border-radius: 12px !important;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6) !important;
+      color: var(--text-primary) !important;
+      font-family: var(--font-sans) !important;
+      padding: 0 !important;
+    }
+
+    .leaflet-popup-content {
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    .leaflet-popup-tip-container {
+      display: none;
+    }
+
+    .leaflet-popup-close-button {
+      color: var(--text-muted) !important;
+      top: 8px !important;
+      right: 8px !important;
+      font-size: 18px !important;
+    }
+
+    .popup-inner {
+      padding: 14px 16px;
+      min-width: 240px;
+      max-width: 300px;
+    }
+
+    .popup-score {
+      font-size: 28px;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .popup-title {
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.35;
+      margin: 6px 0;
+    }
+
+    .popup-region {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .popup-btn {
+      display: block;
+      width: 100%;
+      text-align: center;
+      padding: 7px 12px;
+      border-radius: 8px;
+      background: rgba(79, 110, 247, 0.15);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid rgba(79, 110, 247, 0.25);
+      transition: background 0.15s;
+    }
+
+    .popup-btn:hover {
+      background: rgba(79, 110, 247, 0.28);
+    }
+
+    /* ── GDELT markers ─────────────────────────────────── */
+    .gdelt-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #06b6d4;
+      border: 1px solid rgba(6, 182, 212, 0.4);
+      opacity: 0.7;
+      cursor: pointer;
+    }
+
+    /* ── Loading spinner overlay ───────────────────────── */
+    .gdelt-loading {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(19, 22, 30, 0.9);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 24px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 700;
+    }
+
+    /* ── Category filter buttons ───────────────────────── */
+    .cat-filters {
+      position: absolute;
+      bottom: 24px;
+      right: 16px;
+      background: rgba(19, 22, 30, 0.92);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 12px;
+      z-index: 500;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-width: 170px;
+    }
+
+    .cat-filter-title {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 2px;
+    }
+
+    .cat-filter-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: var(--transition);
+      border: 1px solid transparent;
+    }
+
+    .cat-filter-btn:hover {
+      background: var(--bg-hover);
+      color: var(--text-primary);
+    }
+
+    .cat-filter-btn.active {
+      background: rgba(79, 110, 247, 0.12);
+      color: var(--accent);
+      border-color: rgba(79, 110, 247, 0.2);
+    }
+
+    .cat-dot-sm {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app-layout">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-logo" onclick="location.href='index.html'" style="cursor:pointer;">
+        <div class="logo-mark">
+          <div class="logo-icon">⚡</div>
+          <div>
+            <div class="logo-text">War Impact Desk</div>
+            <div class="logo-sub">Risk Intelligence</div>
+          </div>
+        </div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-section-label">주요 기능</div>
+        <a href="dashboard.html" class="nav-item"><span class="nav-icon">📊</span> 대시보드</a>
+        <a href="events.html" class="nav-item"><span class="nav-icon">🌐</span> 이벤트 모니터</a>
+        <a href="map.html" class="nav-item active"><span class="nav-icon">🗺</span> 세계 리스크 지도</a>
+        <a href="report.html" class="nav-item"><span class="nav-icon">📋</span> 브리핑 생성</a>
+        <a href="settings.html" class="nav-item"><span class="nav-icon">⚙️</span> 설정</a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-chip">
+          <div class="user-avatar">K</div>
+          <div>
+            <div class="user-name" id="sidebar-ind">반도체</div>
+            <div class="user-role">전략기획팀</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="main-content">
+      <div class="topbar" style="z-index:800;flex-shrink:0;">
+        <div class="topbar-title">🗺 세계 지정학 리스크 지도</div>
+        <div class="topbar-meta" id="topbar-time"></div>
+        <div class="topbar-actions">
+          <div id="live-badge" class="badge badge-new" style="display:flex;align-items:center;gap:5px;">
+            <span class="pulse"
+              style="width:5px;height:5px;border-radius:50%;background:var(--risk-high);display:inline-block;"></span>
+            LIVE
+          </div>
+          <a href="report.html" class="btn btn-primary btn-sm">📋 AI 브리핑 생성</a>
+        </div>
+      </div>
+
+      <!-- MAP WRAP -->
+      <div class="map-wrap">
+        <div id="map"></div>
+
+        <!-- Stats pills -->
+        <div class="map-stats">
+          <div class="map-stat-pill">🔴 고위험 <span id="stat-high">—</span></div>
+          <div class="map-stat-pill">🟡 중간 <span id="stat-med">—</span></div>
+          <div class="map-stat-pill">🗞 GDELT 이벤트 <span id="stat-gdelt">로딩중...</span></div>
+        </div>
+
+        <!-- Top-right controls -->
+        <div class="gdelt-toggle">
+          <div class="gdelt-title">실시간 데이터 레이어</div>
+          <label class="toggle-wrap" style="cursor:pointer;">
+            <span style="font-size:12px;color:var(--text-secondary);">🗞 GDELT 뉴스 이벤트</span>
+            <div class="toggle on" id="tog-gdelt" onclick="toggleGdelt(this)"></div>
+          </label>
+          <label class="toggle-wrap" style="cursor:pointer;">
+            <span style="font-size:12px;color:var(--text-secondary);">📌 비즈니스 임팩트</span>
+            <div class="toggle on" id="tog-internal" onclick="toggleInternal(this)"></div>
+          </label>
+          <div style="height:1px;background:var(--border);margin:4px 0;"></div>
+          <div style="font-size:11px;color:var(--text-muted);line-height:1.5;">
+            GDELT: 실시간 글로벌 뉴스 이벤트<br>
+            (무료 공개 API · 15분 지연)
+          </div>
+        </div>
+
+        <!-- Category filter -->
+        <div class="cat-filters" id="cat-filters"></div>
+
+        <!-- Legend -->
+        <div class="map-legend">
+          <div class="legend-title">리스크 수준</div>
+          <div class="legend-item">
+            <div class="legend-dot" style="background:#e84545;box-shadow:0 0 6px #e84545;"></div> 고위험 (70+)
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="background:#f5a623;box-shadow:0 0 6px #f5a623;"></div> 중간 위험 (50–70)
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="background:#22c993;box-shadow:0 0 6px #22c993;"></div> 낮음 (–50)
+          </div>
+          <div class="legend-item" style="margin-top:8px;border-top:1px solid var(--border);padding-top:8px;">
+            <div class="legend-dot" style="background:#06b6d4;opacity:0.7;"></div> GDELT 실시간
+          </div>
+        </div>
+
+        <!-- Detail panel -->
+        <div class="detail-slide" id="detail-slide">
+          <div class="slide-close" onclick="closeDetail()">✕</div>
+          <div id="detail-content"></div>
+        </div>
+
+        <!-- GDELT loading -->
+        <div class="gdelt-loading" id="gdelt-loading" style="display:none;">
+          <div class="spinner"></div>
+          GDELT 실시간 데이터 수신 중...
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script>
+    // ── Clock ─────────────────────────────────────────────
+    function updateClock() {
+      const now = new Date();
+      document.getElementById('topbar-time').textContent =
+        now.toLocaleString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' }) + ' KST';
+    }
+    updateClock(); setInterval(updateClock, 1000);
+
+    // ── Map init (dark CartoDB tiles) ─────────────────────
+    const map = L.map('map', {
+      center: [20, 20],
+      zoom: 3,
+      minZoom: 2,
+      maxZoom: 10,
+      zoomControl: false,
+      attributionControl: true,
+    });
+
+    // Using OpenStreetMap which is 100% free and open, no API key ever.
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      maxZoom: 19,
+    }).addTo(map);
+
+    L.control.zoom({ position: 'bottomleft' }).addTo(map);
+
+    // ── State ─────────────────────────────────────────────
+    let internalLayer = L.layerGroup().addTo(map);
+    let gdeltLayer = L.layerGroup().addTo(map);
+    let selectedCat = 'all';
+    let gdeltVisible = true;
+    let internalVisible = true;
+    let gdeltData = [];
+
+    // ── Risk color helper ─────────────────────────────────
+    function riskColor(level, score) {
+      if (level === 'high' || score >= 70) return '#e84545';
+      if (level === 'medium' || score >= 50) return '#f5a623';
+      return '#22c993';
+    }
+
+    // ── Build pulsing marker icon ─────────────────────────
+    function pulseIcon(color, size = 14) {
+      const html = `
+    <div style="position:relative;width:${size + 20}px;height:${size + 20}px;display:flex;align-items:center;justify-content:center;">
+      <div style="position:absolute;width:${size + 16}px;height:${size + 16}px;border-radius:50%;background:${color};animation:pulseAnim 2s ease-out infinite;opacity:0;"></div>
+      <div style="position:absolute;width:${size + 8}px;height:${size + 8}px;border-radius:50%;background:${color};animation:pulseAnim 2s ease-out 0.4s infinite;opacity:0;"></div>
+      <div style="width:${size}px;height:${size}px;border-radius:50%;background:${color};border:2px solid rgba(255,255,255,0.35);box-shadow:0 0 10px ${color};position:relative;z-index:1;"></div>
+    </div>`;
+      return L.divIcon({ html, className: '', iconSize: [size + 20, size + 20], iconAnchor: [(size + 20) / 2, (size + 20) / 2] });
+    }
+
+    // ── Render internal events ────────────────────────────
+    function renderInternal() {
+      internalLayer.clearLayers();
+      if (!internalVisible) return;
+
+      let events = EVENTS;
+      if (selectedCat !== 'all') events = events.filter(e => e.category === selectedCat);
+
+      events.forEach(e => {
+        if (!e.lat || !e.lng) return;
+        const color = riskColor(e.risk_level, e.risk_score);
+        const cat = CATEGORIES[e.category];
+        const size = e.risk_level === 'high' ? 16 : e.risk_level === 'medium' ? 12 : 9;
+
+        const marker = L.marker([e.lat, e.lng], { icon: pulseIcon(color, size) });
+
+        // Popup
+        const delta = e.risk_score - e.prev_score;
+        const popupHtml = `
+      <div class="popup-inner">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:6px;">
+          <div class="popup-score" style="color:${color};">${e.risk_score}</div>
+          <span class="badge badge-risk-${e.risk_level}" style="margin-top:4px;">${{ high: '고위험', medium: '중간', low: '낮음' }[e.risk_level]}</span>
+        </div>
+        <div class="popup-title">${e.title}</div>
+        <div class="popup-region">📍 ${e.region} · ${cat?.icon} ${cat?.label}</div>
+        <div style="font-size:12px;color:${delta > 0 ? '#e84545' : '#22c993'};margin-bottom:10px;">
+          ${delta > 0 ? '▲' : delta < 0 ? '▼' : '—'}${Math.abs(delta)} 전일 대비
+        </div>
+        <div class="popup-btn" onclick="openDetail('${e.id}')">상세 분석 보기 →</div>
+      </div>`;
+
+        marker.bindPopup(popupHtml, { minWidth: 260, maxWidth: 300, closeButton: true });
+        marker.addTo(internalLayer);
+      });
+
+      // Stats
+      const counts = countByRiskLevel(events);
+      document.getElementById('stat-high').textContent = counts.high;
+      document.getElementById('stat-med').textContent = counts.medium;
+    }
+
+    // ── GDELT API fetch ────────────────────────────────────
+    async function fetchGdelt() {
+      if (!gdeltVisible) return;
+      document.getElementById('gdelt-loading').style.display = 'flex';
+      document.getElementById('stat-gdelt').textContent = '로딩중...';
+
+      try {
+        // GDELT GKG geo API — conflict/war/geopolitical events, last 24h
+        const query = encodeURIComponent('(war OR conflict OR sanctions OR military OR geopolitical) sourcelang:eng');
+        const url = `https://api.gdeltproject.org/api/v2/geo/geo?query=${query}&mode=pointdata&format=geojson&maxpoints=60&timespan=24h`;
+
+        const resp = await fetch(url);
+        if (!resp.ok) throw new Error('GDELT fetch failed');
+        const geojson = await resp.json();
+        gdeltData = geojson.features || [];
+
+        renderGdelt();
+        document.getElementById('stat-gdelt').textContent = gdeltData.length + '건';
+      } catch (err) {
+        console.warn('GDELT fetch error:', err);
+        // Fallback — show label indicating API unreachable
+        document.getElementById('stat-gdelt').textContent = '연결 불가';
+        renderGdeltFallback();
+      } finally {
+        document.getElementById('gdelt-loading').style.display = 'none';
+      }
+    }
+
+    function renderGdelt() {
+      gdeltLayer.clearLayers();
+      if (!gdeltVisible) return;
+
+      gdeltData.forEach(feat => {
+        const [lng, lat] = feat.geometry.coordinates;
+        const props = feat.properties || {};
+        const name = props.name || '뉴스 이벤트';
+        const count = props.count || 1;
+
+        const icon = L.divIcon({
+          html: `<div class="gdelt-dot" style="width:${Math.min(6 + count, 14)}px;height:${Math.min(6 + count, 14)}px;"></div>`,
+          className: '', iconSize: [14, 14], iconAnchor: [7, 7]
+        });
+
+        const m = L.marker([lat, lng], { icon });
+
+        // Extract the original article URL from GDELT's pre-rendered HTML snippet
+        let originalUrl = '';
+        if (props.html) {
+          const tempDiv = document.createElement('div');
+          tempDiv.innerHTML = props.html;
+          const firstAnchor = tempDiv.querySelector('a');
+          if (firstAnchor) originalUrl = firstAnchor.href;
+        }
+
+        // Fallback to Google News if extraction fails
+        const finalUrl = originalUrl || `https://news.google.com/search?q=${encodeURIComponent(name)}&hl=ko&gl=KR&ceid=KR%3Ako`;
+
+        m.bindPopup(`
+      <div class="popup-inner">
+        <div style="font-size:10px;color:var(--text-muted);margin-bottom:4px;">🗞 GDELT 실시간 이벤트</div>
+        <div class="popup-title">${name}</div>
+        <div style="font-size:11px;color:var(--text-muted);margin-bottom:8px;">언급 빈도: ${count}건 | 최근 24시간</div>
+        <a href="${finalUrl}" target="_blank" style="display:block;text-align:center;padding:5px 10px;border-radius:6px;background:var(--accent);color:#fff;font-size:11px;font-weight:600;text-decoration:none;">원문 기사 보기 🔗</a>
+      </div>`);
+        m.addTo(gdeltLayer);
+      });
+    }
+
+    // Fallback synthetic GDELT-style data when API is unreachable
+    function renderGdeltFallback() {
+      gdeltLayer.clearLayers();
+      if (!gdeltVisible) return;
+      const fallbackPts = [
+        [51.5, -0.12, '영국 외무부 성명'],
+        [48.8, 2.35, '프랑스 국방 동향'],
+        [52.5, 13.4, '독일 에너지 위기'],
+        [41.9, 12.5, '이탈리아 산업계'],
+        [35.7, 139.7, '일본 수출통제'],
+        [1.3, 103.8, '싱가포르 물류'],
+        [22.3, 114.2, '홍콩 금융시장'],
+        [40.7, -74.0, '미국 제재 발표'],
+        [51.4, 30.9, '우크라이나 전선'],
+        [60.2, 24.9, '핀란드 NATO 동향'],
+      ];
+      fallbackPts.forEach(([lat, lng, label]) => {
+        const icon = L.divIcon({ html: '<div class="gdelt-dot"></div>', className: '', iconSize: [8, 8], iconAnchor: [4, 4] });
+        const m = L.marker([lat, lng], { icon });
+        const searchUrl = `https://news.google.com/search?q=${encodeURIComponent(label)}&hl=ko&gl=KR&ceid=KR%3Ako`;
+        m.bindPopup(`<div class="popup-inner">
+          <div style="font-size:10px;color:var(--text-muted);margin-bottom:4px;">🗞 GDELT 이벤트 (오프라인)</div>
+          <div class="popup-title">${label}</div>
+          <a href="${searchUrl}" target="_blank" style="display:block;text-align:center;padding:5px 10px;border-radius:6px;background:var(--accent);color:#fff;font-size:11px;font-weight:600;text-decoration:none;margin-top:8px;">관련 뉴스 검색 🔗</a>
+        </div>`);
+        m.addTo(gdeltLayer);
+      });
+      document.getElementById('stat-gdelt').textContent = `${fallbackPts.length}건`;
+    }
+
+    // ── Detail side panel ─────────────────────────────────
+    function openDetail(id) {
+      map.closePopup();
+      const e = EVENTS.find(ev => ev.id === id);
+      if (!e) return;
+      const cat = CATEGORIES[e.category];
+      const ins = e.insight;
+      const color = riskColor(e.risk_level, e.risk_score);
+
+      document.getElementById('detail-content').innerHTML = `
+    <div style="margin-bottom:16px;">
+      <div style="font-size:10px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px;">${e.id} · ${cat?.icon} ${cat?.label}</div>
+      <div style="font-size:15px;font-weight:700;line-height:1.4;margin-bottom:8px;">${e.title}</div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;">
+        <span class="badge badge-risk-${e.risk_level}">${{ high: '🔴 고위험', medium: '🟡 중간', low: '🟢 낮음' }[e.risk_level]}</span>
+        <span class="region-chip">📍 ${e.region}</span>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+      <div style="font-size:48px;font-weight:900;color:${color};line-height:1;">${e.risk_score}</div>
+      <div>
+        <div class="progress-bar-wrap" style="width:120px;"><div class="progress-bar ${e.risk_level}" style="width:${e.risk_score}%;"></div></div>
+        <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">전일 ${e.prev_score} → 현재 ${e.risk_score} (▲${e.risk_score - e.prev_score})</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div style="margin-bottom:12px;">
+      <div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">이벤트 요약</div>
+      <div style="font-size:13px;color:var(--text-secondary);line-height:1.65;">${e.summary.slice(0, 200)}...</div>
+    </div>
+
+    <div style="margin-bottom:12px;">
+      <div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">왜 중요한가</div>
+      <div style="font-size:13px;color:var(--text-secondary);line-height:1.65;">${ins.why_it_matters.slice(0, 180)}...</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div style="margin-bottom:14px;">
+      <div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;">⚡ 권고 액션</div>
+      <ul class="action-list">
+        ${ins.recommended_actions.slice(0, 3).map((a, i) => `
+          <li class="action-item" style="padding:8px 10px;">
+            <div class="action-number" style="width:18px;height:18px;font-size:10px;">${i + 1}</div>
+            <div style="font-size:12px;">${a}</div>
+          </li>`).join('')}
+      </ul>
+    </div>
+
+    <a href="report.html?id=${e.id}" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:4px;">
+      📋 AI 브리핑 생성
+    </a>
+  `;
+      document.getElementById('detail-slide').classList.add('open');
+    }
+
+    function closeDetail() {
+      document.getElementById('detail-slide').classList.remove('open');
+    }
+
+    // Close on map click
+    map.on('click', () => closeDetail());
+
+    // ── Toggle handlers ────────────────────────────────────
+    function toggleGdelt(el) {
+      el.classList.toggle('on');
+      gdeltVisible = el.classList.contains('on');
+      if (gdeltVisible) {
+        if (gdeltData.length) renderGdelt(); else fetchGdelt();
+      } else { gdeltLayer.clearLayers(); }
+    }
+
+    function toggleInternal(el) {
+      el.classList.toggle('on');
+      internalVisible = el.classList.contains('on');
+      renderInternal();
+    }
+
+    // ── Category filter panel ─────────────────────────────
+    function buildCatFilters() {
+      const wrap = document.getElementById('cat-filters');
+      wrap.innerHTML = '<div class="cat-filter-title">카테고리 필터</div>';
+
+      [{ id: 'all', label: '전체', color: '#8b93a7' }, ...Object.entries(CATEGORIES).map(([k, v]) => ({ id: k, label: v.label, color: v.color, icon: v.icon }))].forEach(cat => {
+        const btn = document.createElement('div');
+        btn.className = 'cat-filter-btn' + (selectedCat === cat.id ? ' active' : '');
+        btn.innerHTML = `<div class="cat-dot-sm" style="background:${cat.color};"></div>${cat.icon || ''} ${cat.label}`;
+        btn.onclick = () => {
+          selectedCat = cat.id;
+          buildCatFilters();
+          renderInternal();
+        };
+        wrap.appendChild(btn);
+      });
+    }
+
+    // ── Init ──────────────────────────────────────────────
+    const prefs = loadPreferences();
+    document.getElementById('sidebar-ind').textContent = INDUSTRIES.find(i => i.id === prefs.industry)?.label || '반도체';
+
+    buildCatFilters();
+    renderInternal();
+    fetchGdelt();
+
+    // Auto-refresh GDELT every 5 minutes
+    setInterval(fetchGdelt, 5 * 60 * 1000);
+  </script>
+</body>
+
+</html>

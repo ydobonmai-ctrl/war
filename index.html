@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>War Impact Desk — 전쟁·제재·공급망 리스크 모니터링</title>
+  <meta name="description" content="전쟁·제재·공급망 리스크를 업무 액션으로 바꾸는 AI Agent. 기업 실무자를 위한 지정학 리스크 모니터링 플랫폼.">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .hero-screen {
+      background: linear-gradient(180deg, rgba(79, 110, 247, 0.05) 0%, transparent 60%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      max-width: 900px;
+      margin: 60px auto 0;
+      box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5);
+    }
+
+    .hero-screen-bar {
+      height: 36px;
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0 16px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .hero-screen img {
+      width: 100%;
+      display: block;
+    }
+
+    .hero-screen-preview {
+      background: var(--bg-surface);
+      padding: 24px;
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 1px;
+      background-color: var(--border);
+    }
+
+    .preview-sidebar {
+      background: var(--bg-surface);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .preview-main {
+      background: var(--bg-base);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .ph {
+      border-radius: 6px;
+    }
+
+    /* placeholder */
+    .gradient-text {
+      background: linear-gradient(135deg, #6c8aff, #a78bfa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .stat-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 99px;
+      padding: 6px 16px;
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .stat-pill strong {
+      color: var(--text-primary);
+    }
+  </style>
+</head>
+
+<body class="landing-body">
+
+  <!-- NAV -->
+  <nav class="landing-nav">
+    <div class="logo-mark" onclick="location.href='index.html'" style="cursor:pointer;">
+      <div class="logo-icon">⚡</div>
+      <div>
+        <div class="logo-text">War Impact Desk</div>
+      </div>
+    </div>
+    <div class="landing-nav-links">
+      <a href="#features" class="landing-nav-link">기능</a>
+      <a href="#use-cases" class="landing-nav-link">활용 대상</a>
+      <a href="map.html" class="landing-nav-link">실시간 관제</a>
+    </div>
+    <a href="dashboard.html" class="btn btn-primary" style="margin-left: 24px;">
+      대시보드 열기
+    </a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-label">
+      <span class="pulse"
+        style="width:6px;height:6px;border-radius:50%;background:var(--risk-high);display:inline-block;"></span>
+      LIVE MONITORING · B2B RISK INTELLIGENCE
+    </div>
+    <h1 class="hero-title">
+      전쟁·제재·공급망 리스크를<br>
+      <span>업무 액션으로</span> 바꾸는 AI Agent
+    </h1>
+    <p class="hero-sub">
+      지정학 이벤트를 단순히 모아놓는 것이 아닙니다.<br>
+      당신의 산업과 공급망 기준으로 중요한 리스크만 골라내고,
+      지금 당장 해야 할 대응 액션과 경영진 AI 브리핑까지 자동 생성합니다.
+    </p>
+    <div class="hero-cta">
+      <a href="dashboard.html" class="btn btn-primary btn-lg">
+        🔍 대시보드 시작
+      </a>
+      <a href="map.html" class="btn btn-secondary btn-lg">
+        🗺️ 글로벌 실시간 관제
+      </a>
+    </div>
+
+    <!-- STATS ROW -->
+    <div style="display:flex; gap:16px; margin-top: 40px; flex-wrap:wrap; justify-content:center;">
+      <div class="stat-pill">🌐 모니터링 이벤트 <strong>12개 활성</strong></div>
+      <div class="stat-pill">⚠️ 고위험 이슈 <strong>5건</strong></div>
+      <div class="stat-pill">🏭 6개 산업 분석</div>
+      <div class="stat-pill">📊 7개 리스크 카테고리</div>
+    </div>
+
+    <!-- MOCK SCREEN PREVIEW -->
+    <div class="hero-screen fade-in fade-in-delay-2">
+      <div class="hero-screen-bar">
+        <div class="dot" style="background:#ff5f57;"></div>
+        <div class="dot" style="background:#febc2e;"></div>
+        <div class="dot" style="background:#28c840;"></div>
+        <span style="font-size:11px;color:var(--text-muted);margin-left:8px;">War Impact Desk — 대시보드</span>
+      </div>
+      <div class="hero-screen-preview">
+        <!-- mini sidebar -->
+        <div class="preview-sidebar">
+          <div class="ph skeleton" style="height:32px;"></div>
+          <div style="height:8px;"></div>
+          <div class="ph skeleton" style="height:20px;width:60%;"></div>
+          <div class="ph skeleton"
+            style="height:32px;background:rgba(79,110,247,0.2);border:1px solid rgba(79,110,247,0.3);"></div>
+          <div class="ph skeleton" style="height:32px;"></div>
+          <div class="ph skeleton" style="height:32px;"></div>
+          <div class="ph skeleton" style="height:32px;"></div>
+          <div class="ph skeleton" style="height:32px;"></div>
+          <div class="ph skeleton" style="height:32px;"></div>
+        </div>
+        <!-- mini main -->
+        <div class="preview-main">
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;">
+            <div class="ph skeleton" style="height:72px;border-radius:10px;"></div>
+            <div class="ph skeleton" style="height:72px;border-radius:10px;background:rgba(232,69,69,0.15);"></div>
+            <div class="ph skeleton" style="height:72px;border-radius:10px;"></div>
+            <div class="ph skeleton" style="height:72px;border-radius:10px;"></div>
+          </div>
+          <div class="ph skeleton" style="height:20px;width:40%;"></div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">
+            <div class="ph skeleton" style="height:110px;border-radius:10px;border-left:3px solid var(--risk-high);">
+            </div>
+            <div class="ph skeleton" style="height:110px;border-radius:10px;border-left:3px solid var(--risk-high);">
+            </div>
+            <div class="ph skeleton" style="height:110px;border-radius:10px;border-left:3px solid var(--risk-medium);">
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">
+            <div class="ph skeleton" style="height:110px;border-radius:10px;border-left:3px solid var(--risk-medium);">
+            </div>
+            <div class="ph skeleton" style="height:110px;border-radius:10px;border-left:3px solid var(--risk-high);">
+            </div>
+            <div class="ph skeleton" style="height:110px;border-radius:10px;border-left:3px solid var(--risk-medium);">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="feature-section" id="features">
+    <h2 class="feature-section-title">실무에서 바로 쓰는 리스크 인텔리전스</h2>
+    <p class="feature-section-sub">뉴스 모음이 아닙니다. 산업·공급망·비용 기준으로 구조화된 리스크 분석입니다.</p>
+    <div class="feature-grid">
+      <div class="feature-card fade-in">
+        <div class="feature-icon">🎯</div>
+        <div class="feature-title">산업별 맞춤 우선순위</div>
+        <div class="feature-desc">반도체, 자동차, 소비재 등 6개 산업 필터를 선택하면 해당 산업 기준 리스크 중요도가 재정렬됩니다. "우리 회사에 중요한 것"만 봅니다.</div>
+      </div>
+      <div class="feature-card fade-in fade-in-delay-1">
+        <div class="feature-icon">🔗</div>
+        <div class="feature-title">7개 카테고리 자동 분류</div>
+        <div class="feature-desc">공급망·유가·해상물류·보험·제재·환율·사이버 리스크로 이벤트를 자동 분류, 어떤 영역에서 리스크가 집중되는지 구조적으로 파악합니다.</div>
+      </div>
+      <div class="feature-card fade-in fade-in-delay-2">
+        <div class="feature-icon">⚡</div>
+        <div class="feature-title">대응 액션 즉시 생성</div>
+        <div class="feature-desc">이벤트마다 "지금 해야 할 액션" 3~5개를 구체적으로 제시. 재고 점검, 대체 소싱, 보험 재검토 등 실무 언어로 제공됩니다.</div>
+      </div>
+      <div class="feature-card fade-in">
+        <div class="feature-icon">📋</div>
+        <div class="feature-title">경영진 AI 브리핑 자동 초안</div>
+        <div class="feature-desc">산업별 리스크 현황을 1페이지 브리핑 형태로 즉시 생성. 복사해서 바로 사용할 수 있는 경영진 보고용 텍스트를 제공합니다.</div>
+      </div>
+      <div class="feature-card fade-in fade-in-delay-1">
+        <div class="feature-icon">📈</div>
+        <div class="feature-title">리스크 추이 히스토리</div>
+        <div class="feature-desc">어제 대비 신규 리스크, 위험도 상승/하락 이슈를 한눈에 확인. 무엇이 변했고 무엇을 먼저 대응해야 하는지 즉각 파악합니다.</div>
+      </div>
+      <div class="feature-card fade-in fade-in-delay-2">
+        <div class="feature-icon">🛡</div>
+        <div class="feature-title">컴플라이언스 리스크 내재화</div>
+        <div class="feature-desc">OFAC, BIS 엔티티 리스트, EU 제재 패키지와 연계된 이슈를 별도 강조. 법무·컴플라이언스 부서와 협업을 위한 맥락을 제공합니다.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- USE CASES -->
+  <section class="use-case-section" id="use-cases">
+    <div style="max-width:1080px;margin:0 auto;">
+      <h2 class="feature-section-title">주요 활용 대상</h2>
+      <p class="feature-section-sub">내부 의사결정이 필요한 모든 실무자를 위한 도구입니다</p>
+      <div class="use-case-grid">
+        <div class="use-case-card">
+          <div class="use-case-icon">📊</div>
+          <div class="use-case-label">전략기획팀</div>
+        </div>
+        <div class="use-case-card">
+          <div class="use-case-icon">🏭</div>
+          <div class="use-case-label">구매/조달팀</div>
+        </div>
+        <div class="use-case-card">
+          <div class="use-case-icon">🚢</div>
+          <div class="use-case-label">물류/SCM 담당</div>
+        </div>
+        <div class="use-case-card">
+          <div class="use-case-icon">⚖️</div>
+          <div class="use-case-label">리스크 관리팀</div>
+        </div>
+        <div class="use-case-card">
+          <div class="use-case-icon">💹</div>
+          <div class="use-case-label">투자/시장분석</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section style="padding: 80px 40px; text-align:center;">
+    <h2 style="font-size:32px;font-weight:800;letter-spacing:-1px;margin-bottom:16px;">지금 바로 리스크 모니터링 시작</h2>
+    <p style="color:var(--text-secondary);font-size:15px;margin-bottom:32px;">현재 <strong>GDELT 무료 API</strong>를 연동하여 글로벌
+      분쟁·제재 실시간 뉴스를 관제 중입니다.<br>대시보드의 자체 분석 사례(더미)와 함께 실제 리스크 발생 현황을 확인해 보세요.</p>
+    <a href="dashboard.html" class="btn btn-primary btn-lg">대시보드 열기</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="lp-footer">
+    <div class="logo-mark">
+      <div class="logo-icon" style="width:24px;height:24px;font-size:12px;">⚡</div>
+      <span style="font-size:13px;font-weight:600;">War Impact Desk</span>
+    </div>
+    <div>© 2026 War Impact Desk. Portfolio Prototype. 모든 권리는 강지명에게 있습니다.</div>
+    <div style="display:flex;gap:16px;">
+      <a href="dashboard.html" style="color:var(--text-muted);">대시보드</a>
+      <a href="map.html" style="color:var(--text-muted);">실시간 관제</a>
+      <a href="events.html" style="color:var(--text-muted);">이벤트</a>
+      <a href="settings.html" style="color:var(--text-muted);">설정</a>
+    </div>
+  </footer>
+
+</body>
+
+</html>
