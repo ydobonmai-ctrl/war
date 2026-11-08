@@ -1,5 +1,5 @@
 // ============================================================
-// War Impact Desk — Dummy Data & Core Data Models
+// War Impact Desk — Data Models (실데이터: live-data.js / 예비: 시나리오)
 // ============================================================
 
 const INDUSTRIES = [
@@ -28,7 +28,8 @@ const RISK_LEVELS = {
 };
 
 // ── Events ─────────────────────────────────────────────────
-const EVENTS = [
+// 갱신 실패 시에만 쓰는 예비 시나리오 (과거 사례로 작성)
+const SCENARIO_EVENTS = [
   {
     id: "EVT-001",
     lat: 13.0, lng: 43.5,
@@ -330,6 +331,41 @@ const EVENTS = [
     },
   },
 ];
+
+// ── 실데이터 선택 ─────────────────────────────────────────────
+// live-data.js(GitHub Actions가 1시간마다 GDELT + Gemini로 갱신)가 있으면 실데이터, 없으면 시나리오
+const LIVE = (typeof window !== "undefined" && window.LIVE_DATA && Array.isArray(window.LIVE_DATA.events)
+  && window.LIVE_DATA.events.length) ? window.LIVE_DATA : null;
+const DATA_MODE = LIVE ? "live" : "scenario";
+const EVENTS = LIVE ? LIVE.events : SCENARIO_EVENTS;
+
+/** 각 화면 상단에 데이터 출처와 갱신 시각을 표시 */
+function renderDataBanner() {
+  const host = document.querySelector(".page-body");
+  if (!host || document.getElementById("data-banner")) return;
+  const el = document.createElement("div");
+  el.id = "data-banner";
+  el.style.cssText = "margin-bottom:16px;padding:10px 14px;border-radius:8px;font-size:12.5px;line-height:1.6;";
+  if (LIVE) {
+    const at = new Date(LIVE.generatedAt);
+    const hours = (Date.now() - at.getTime()) / 3600000;
+    const stale = hours > 6;
+    el.style.background = stale ? "rgba(245,158,11,0.12)" : "rgba(16,185,129,0.12)";
+    el.style.color = stale ? "#f59e0b" : "#10b981";
+    el.innerHTML = `<b>${stale ? "⚠ 갱신 지연" : "● 실데이터"}</b> · GDELT 최근 ${LIVE.window.hours}시간 사건 `
+      + `${LIVE.stats.matched_events}건 중 상위 사건을 ${LIVE.model}가 정리 · 마지막 갱신 `
+      + `${at.toLocaleString("ko-KR")} (1시간마다 자동 갱신)`;
+  } else {
+    el.style.background = "rgba(148,163,184,0.15)";
+    el.style.color = "#94a3b8";
+    el.innerHTML = "<b>시연용 시나리오</b> · 실데이터 파일을 불러오지 못해 과거 사례로 작성한 예시를 보여 줍니다.";
+  }
+  host.prepend(el);
+}
+if (typeof document !== "undefined") {
+  document.addEventListener("DOMContentLoaded", renderDataBanner);
+}
+
 
 // ── Computed helpers ────────────────────────────────────────
 

@@ -141,7 +141,6 @@
           <span class="nav-icon">📊</span> 대시보드
           <span class="nav-badge" id="sidebar-high-count">5</span>
         </a>
-        <a href="live.html" class="nav-item"><span class="nav-icon">🛰</span> 실시간 AI 분석</a>
         <a href="events.html" class="nav-item">
           <span class="nav-icon">🌐</span> 이벤트 모니터
         </a>
@@ -259,7 +258,7 @@
                   <span class="today-badge" style="margin-left:8px;">
                     <span class="pulse"
                       style="width:5px;height:5px;border-radius:50%;background:var(--risk-high);display:inline-block;"></span>
-                    LIVE
+                    <span id="live-badge-text">LIVE</span>
                   </span>
                 </div>
                 <div class="section-sub" id="filter-label">전체 이벤트 기준</div>
@@ -363,8 +362,10 @@
     </div>
   </div>
 
+  <script src="live-data.js"></script>
   <script src="data.js"></script>
   <script>
+    document.addEventListener('DOMContentLoaded', () => { const b = document.getElementById('live-badge-text'); if (b) b.textContent = DATA_MODE === 'live' ? 'LIVE · 1시간 갱신' : '시나리오'; });
     let currentIndustry = 'all';
     let currentCat = 'all';
     let currentEventId = null;

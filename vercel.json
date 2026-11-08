@@ -2,10 +2,6 @@
   "version": 2,
   "routes": [
     {
-      "src": "/api/(.*)",
-      "dest": "/api/$1"
-    },
-    {
       "src": "/",
       "dest": "/index.html"
     },
@@ -28,10 +24,6 @@
     {
       "src": "/settings",
       "dest": "/settings.html"
-    },
-    {
-      "src": "/live",
-      "dest": "/live.html"
     }
   ]
 }
