@@ -60,16 +60,24 @@ async function fetchArticles() {
   const text = await res.text();
   let body;
   try { body = JSON.parse(text); } catch { throw new Error(`GDELT 응답 오류: ${text.slice(0, 80)}`); }
+  return normalizeArticles(body.articles);
+}
+
+// 브라우저가 보낸 목록이든 서버가 받은 목록이든 같은 규칙으로 정리·검증한다.
+// (브라우저 입력은 믿지 않는다: 개수·길이 제한, http(s) 링크만, 중복 제거)
+function normalizeArticles(list) {
   const seen = new Set();
   const articles = [];
-  for (const a of body.articles || []) {
-    const key = (a.title || '').toLowerCase().replace(/\W+/g, ' ').trim().slice(0, 60);
-    if (!key || seen.has(key)) continue; // 같은 기사 재배포 제거
+  for (const a of Array.isArray(list) ? list : []) {
+    const title = String((a && a.title) || '').replace(/\s+/g, ' ').trim().slice(0, 300);
+    const url = String((a && a.url) || '');
+    const key = title.toLowerCase().replace(/\W+/g, ' ').trim().slice(0, 60);
+    if (!key || seen.has(key) || !/^https?:\/\//.test(url)) continue; // 같은 기사 재배포 제거
     seen.add(key);
-    articles.push({ id: articles.length + 1, title: a.title, url: a.url, domain: a.domain, seendate: a.seendate });
+    articles.push({ id: articles.length + 1, title, url: url.slice(0, 500), domain: String(a.domain || '').slice(0, 100) });
     if (articles.length >= 25) break;
   }
-  if (articles.length === 0) throw new Error('최근 24시간 기사 없음');
+  if (articles.length === 0) throw Object.assign(new Error('분석할 기사가 없음'), { status: 400 });
   return articles;
 }
 
@@ -102,7 +110,10 @@ async function callGemini(prompt, apiKey) {
       signal: AbortSignal.timeout(45000),
     });
     if (res.status === 429 || res.status === 503) { last = `${model} ${res.status}`; continue; }
-    if (!res.ok) throw new Error(`${model} HTTP ${res.status}`);
+    if (!res.ok) {
+      const detail = await res.json().then(b => b && b.error && b.error.message).catch(() => undefined);
+      throw new Error(`${model} HTTP ${res.status}${detail ? `: ${String(detail).slice(0, 120)}` : ''}`);
+    }
     const body = await res.json();
     const text = body?.candidates?.[0]?.content?.parts?.[0]?.text;
     if (!text) throw new Error(`${model} 빈 응답`);
@@ -136,10 +147,9 @@ function validate(data, articles) {
   return events.sort((a, b) => b.risk_score - a.risk_score);
 }
 
-async function analyze(industry) {
+async function analyze(industry, articles) {
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) throw Object.assign(new Error('서버에 GEMINI_API_KEY가 설정되지 않음'), { status: 503 });
-  const articles = await fetchArticles();
   const { model, data } = await callGemini(buildPrompt(INDUSTRIES[industry], articles), apiKey);
   const events = validate(data, articles);
   return {
@@ -150,28 +160,42 @@ async function analyze(industry) {
   };
 }
 
+// POST: 브라우저가 GDELT에서 직접 받은 기사 목록을 보낸다 (GDELT가 클라우드 IP를 자주 제한해서 기본 경로로 사용)
+// GET : 서버가 GDELT를 직접 호출한다 (예비 경로)
 module.exports = async function handler(req, res) {
-  const industry = String((req.query && req.query.industry) || 'semiconductor');
+  const body = req.method === 'POST'
+    ? (typeof req.body === 'string' ? JSON.parse(req.body || '{}') : (req.body || {}))
+    : {};
+  const industry = String(body.industry || (req.query && req.query.industry) || 'semiconductor');
   if (!INDUSTRIES[industry]) {
     res.status(400).json({ error: `industry는 ${Object.keys(INDUSTRIES).join(', ')} 중 하나` });
     return;
   }
-  const hit = cache.get(industry);
-  if (hit && hit.expires > Date.now()) {
-    res.setHeader('X-Cache', 'HIT');
-    res.status(200).json(await hit.value);
-    return;
-  }
-  const value = analyze(industry);
-  cache.set(industry, { expires: Date.now() + TTL_MS, value });
   try {
-    const result = await value;
-    res.setHeader('Cache-Control', 's-maxage=1800, stale-while-revalidate=600');
-    res.status(200).json(result);
+    const articles = req.method === 'POST' ? normalizeArticles(body.articles) : await fetchArticles();
+    // 같은 산업·같은 기사 묶음이면 30분 동안 Gemini를 다시 부르지 않는다 (무료 한도 보호)
+    const key = industry + '|' + articles.map(a => a.title).join('|');
+    const hit = cache.get(key);
+    if (hit && hit.expires > Date.now()) {
+      res.setHeader('X-Cache', 'HIT');
+      res.status(200).json(await hit.value);
+      return;
+    }
+    const value = analyze(industry, articles);
+    cache.set(key, { expires: Date.now() + TTL_MS, value });
+    try {
+      res.status(200).json(await value);
+    } catch (e) {
+      cache.delete(key); // 실패는 캐시하지 않음
+      throw e;
+    }
   } catch (e) {
-    cache.delete(industry); // 실패는 캐시하지 않음
     res.status(e.status || 502).json({ error: e.message });
   }
 };
 
 module.exports.validate = validate; // 테스트용
+module.exports.normalizeArticles = normalizeArticles;
+module.exports.fetchArticles = fetchArticles;   // scripts/snapshot.js 에서 재사용
+module.exports.analyze = analyze;
+module.exports.INDUSTRIES = INDUSTRIES;
