@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>실시간 AI 분석 — War Impact Desk</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .live-note { font-size: 12px; color: var(--text-secondary); line-height: 1.7; }
+    .live-note b { color: var(--text-primary); }
+    .live-controls { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 18px; }
+    .live-controls select {
+      background: var(--bg-elevated); color: var(--text-primary); border: 1px solid var(--border, #2a3042);
+      border-radius: 8px; padding: 8px 10px; font-size: 13px;
+    }
+    .live-meta { font-size: 12px; color: var(--text-muted); }
+    .live-event { margin-bottom: 14px; }
+    .live-head { display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; }
+    .live-title { font-size: 15px; font-weight: 800; color: var(--text-primary); margin: 6px 0 4px; }
+    .live-score { font-size: 26px; font-weight: 900; min-width: 54px; text-align: right; }
+    .live-sec { font-size: 11px; font-weight: 800; color: var(--text-muted); margin-top: 12px; letter-spacing: .3px; }
+    .live-body { font-size: 13px; color: var(--text-secondary); line-height: 1.65; margin-top: 4px; }
+    .live-actions { margin: 6px 0 0 18px; font-size: 13px; color: var(--text-secondary); line-height: 1.7; }
+    .live-src { margin-top: 10px; font-size: 12px; }
+    .live-src a { color: #7d9bff; text-decoration: none; }
+    .live-src a:hover { text-decoration: underline; }
+    .live-state { padding: 40px; text-align: center; color: var(--text-secondary); font-size: 13px; }
+  </style>
+</head>
+
+<body>
+  <div class="app-layout">
+    <aside class="sidebar">
+      <div class="sidebar-logo" onclick="location.href='index.html'" style="cursor:pointer;">
+        <div class="logo-mark">
+          <div class="logo-icon">⚡</div>
+          <div>
+            <div class="logo-text">War Impact Desk</div>
+            <div class="logo-sub">Risk Intelligence</div>
+          </div>
+        </div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-section-label">주요 기능</div>
+        <a href="dashboard.html" class="nav-item"><span class="nav-icon">📊</span> 대시보드</a>
+        <a href="live.html" class="nav-item active"><span class="nav-icon">🛰</span> 실시간 AI 분석</a>
+        <a href="events.html" class="nav-item"><span class="nav-icon">🌐</span> 이벤트 모니터</a>
+        <a href="map.html" class="nav-item"><span class="nav-icon">🗺</span> 세계 리스크 지도</a>
+        <a href="report.html" class="nav-item"><span class="nav-icon">📋</span> 브리핑 생성</a>
+        <a href="settings.html" class="nav-item"><span class="nav-icon">⚙️</span> 설정</a>
+      </nav>
+    </aside>
+
+    <div class="main-content">
+      <div class="topbar">
+        <div class="topbar-title">실시간 AI 분석</div>
+        <div class="topbar-meta">GDELT 최근 24시간 뉴스 → Gemini 구조화</div>
+      </div>
+
+      <div class="page-body">
+        <div class="card" style="margin-bottom:18px;">
+          <p class="live-note">
+            <b>실데이터</b>: GDELT DOC 2.0 API의 최근 24시간 영문 뉴스 제목(제재·수출통제·해상 공격·관세·전쟁).
+            <b>AI</b>: 서버에서 Gemini가 선택한 산업 기준으로 영향이 큰 사건을 최대 5개 골라 정리합니다.
+            제목만 근거로 쓰고, 제목에 없는 수치는 만들지 않게 지시했으며, 근거 기사 번호가 맞지 않는 항목은 버립니다.
+            다른 메뉴의 이벤트는 과거 사례로 만든 <b>시연용 시나리오</b>입니다.
+          </p>
+        </div>
+
+        <div class="live-controls">
+          <select id="industry"></select>
+          <button class="btn btn-primary btn-sm" id="run">⚡ 분석 실행</button>
+          <span class="live-meta" id="meta"></span>
+        </div>
+
+        <div id="result"><div class="live-state">산업을 고르고 분석을 실행하세요. 응답까지 10~40초 걸립니다.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script>
+    const sel = document.getElementById('industry');
+    const prefs = loadPreferences();
+    INDUSTRIES.forEach(i => sel.add(new Option(i.label, i.id, false, i.id === prefs.industry)));
+
+    const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+    function render(data) {
+      document.getElementById('meta').textContent =
+        `${data.industryLabel} · 기사 ${data.articleCount}건 분석 · ${data.model} · ` +
+        new Date(data.generatedAt).toLocaleString('ko-KR');
+      if (!data.events.length) {
+        return '<div class="live-state">최근 24시간 기사 중 이 산업에 영향이 큰 사건을 찾지 못했습니다.</div>';
+      }
+      return data.events.map(e => {
+        const cat = CATEGORIES[e.category] || { label: e.category, icon: '' };
+        const lv = RISK_LEVELS[e.risk_level];
+        return `
+        <div class="card live-event">
+          <div class="live-head">
+            <div>
+              <span class="badge badge-risk-${e.risk_level}">${esc(lv.label)}</span>
+              <span class="badge badge-cat">${cat.icon} ${esc(cat.label)}</span>
+              <span class="live-meta">${esc(e.region)} · 확신도 ${Math.round(e.confidence * 100)}%</span>
+              <div class="live-title">${esc(e.title)}</div>
+            </div>
+            <div class="live-score" style="color:${lv.color}">${e.risk_score}</div>
+          </div>
+          <div class="live-sec">왜 중요한가</div><div class="live-body">${esc(e.why_it_matters)}</div>
+          <div class="live-sec">사업 영향</div><div class="live-body">${esc(e.business_impact)}</div>
+          <div class="live-sec">이번 주 확인할 것</div>
+          <ul class="live-actions">${e.recommended_actions.map(a => `<li>${esc(a)}</li>`).join('')}</ul>
+          <div class="live-src">근거 기사: ${e.sources.map(s =>
+            `<a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.domain)}</a>`).join(' · ')}</div>
+        </div>`;
+      }).join('');
+    }
+
+    async function run() {
+      const box = document.getElementById('result');
+      const btn = document.getElementById('run');
+      btn.disabled = true;
+      box.innerHTML = '<div class="live-state">GDELT에서 뉴스를 받아 Gemini가 분석하는 중입니다…</div>';
+      try {
+        const res = await fetch(`/api/live-analysis?industry=${encodeURIComponent(sel.value)}`);
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || res.status);
+        box.innerHTML = render(data);
+      } catch (err) {
+        box.innerHTML = `<div class="live-state">분석 실패: ${esc(err.message)}<br>잠시 후 다시 시도하세요. (GDELT는 5초에 1회 요청 제한이 있습니다)</div>`;
+      } finally {
+        btn.disabled = false;
+      }
+    }
+    document.getElementById('run').addEventListener('click', run);
+  </script>
+</body>
+
+</html>
