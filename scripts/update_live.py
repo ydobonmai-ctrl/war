@@ -1,6 +1,6 @@
-"""War Impact Desk — 실데이터 갱신 (GitHub Actions에서 1시간마다 실행)
+"""War Impact Desk — 실데이터 갱신 (GitHub Actions에서 하루 1회 실행)
 
-1) GDELT 2.0 '15분 단위 사건 파일'(정적 파일, 검색 API가 아니라 요청 제한 없음, 키 불필요)을 최근 12시간치 받는다
+1) GDELT 2.0 '15분 단위 사건 파일'(정적 파일, 검색 API가 아니라 요청 제한 없음, 키 불필요)을 최근 24시간치 받는다
 2) 제재·위협·무력 사용 같은 사건 중 공급망·에너지·해상·사이버와 관련된 것만 기사 주소의 단어로 골라 집계한다
 3) 기사가 많이 쓰인 상위 사건만 Gemini가 산업별 영향과 이번 주 확인할 일로 정리한다 (한 번 호출)
 4) live-data.js 로 저장 → 사이트의 대시보드·이벤트·지도·브리핑이 이 파일을 읽는다
@@ -25,7 +25,7 @@ from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / 'live-data.js'
-HOURS = 12
+HOURS = 24
 MODELS = ['gemini-2.5-flash', 'gemini-2.5-flash-lite']
 INDUSTRIES = ['semiconductor', 'automotive', 'consumer', 'energy', 'manufacturing', 'chemical']
 CATEGORIES = ['supply_chain', 'oil_commodity', 'maritime', 'insurance', 'sanctions', 'fx_macro', 'cyber']

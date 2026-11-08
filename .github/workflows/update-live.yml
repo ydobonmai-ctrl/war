@@ -1,10 +1,10 @@
 name: Update live data
 
-# 1시간마다 GDELT 사건 파일을 받아 Gemini로 정리하고 live-data.js 를 갱신한다.
+# 하루 한 번 GDELT 사건 파일을 받아 Gemini로 정리하고 live-data.js 를 갱신한다.
 # 변경이 있으면 커밋 → Vercel(Git 연결)이 자동으로 다시 배포한다.
 on:
   schedule:
-    - cron: "17 * * * *"   # 매시 17분 (정각 혼잡 시간 회피)
+    - cron: "17 23 * * *"  # 매일 08:17 KST (23:17 UTC) — Gemini 무료 한도를 넉넉히 남기려고 하루 1회
   workflow_dispatch: {}     # Actions 탭에서 수동 실행
 
 permissions:

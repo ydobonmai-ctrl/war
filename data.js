@@ -333,7 +333,7 @@ const SCENARIO_EVENTS = [
 ];
 
 // ── 실데이터 선택 ─────────────────────────────────────────────
-// live-data.js(GitHub Actions가 1시간마다 GDELT + Gemini로 갱신)가 있으면 실데이터, 없으면 시나리오
+// live-data.js(GitHub Actions가 하루 1회 GDELT + Gemini로 갱신)가 있으면 실데이터, 없으면 시나리오
 const LIVE = (typeof window !== "undefined" && window.LIVE_DATA && Array.isArray(window.LIVE_DATA.events)
   && window.LIVE_DATA.events.length) ? window.LIVE_DATA : null;
 const DATA_MODE = LIVE ? "live" : "scenario";
@@ -349,12 +349,12 @@ function renderDataBanner() {
   if (LIVE) {
     const at = new Date(LIVE.generatedAt);
     const hours = (Date.now() - at.getTime()) / 3600000;
-    const stale = hours > 6;
+    const stale = hours > 30;
     el.style.background = stale ? "rgba(245,158,11,0.12)" : "rgba(16,185,129,0.12)";
     el.style.color = stale ? "#f59e0b" : "#10b981";
     el.innerHTML = `<b>${stale ? "⚠ 갱신 지연" : "● 실데이터"}</b> · GDELT 최근 ${LIVE.window.hours}시간 사건 `
       + `${LIVE.stats.matched_events}건 중 상위 사건을 ${LIVE.model}가 정리 · 마지막 갱신 `
-      + `${at.toLocaleString("ko-KR")} (1시간마다 자동 갱신)`;
+      + `${at.toLocaleString("ko-KR")} (매일 오전 자동 갱신)`;
   } else {
     el.style.background = "rgba(148,163,184,0.15)";
     el.style.color = "#94a3b8";
