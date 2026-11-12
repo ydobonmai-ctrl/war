@@ -1,100 +1,155 @@
 // 자동 생성 파일 (scripts/update_live.py) — 직접 수정하지 마세요
 window.LIVE_DATA = {
- "generatedAt": "2026-11-11T02:52:02.018451+00:00",
+ "generatedAt": "2026-11-12T03:54:08.945714+00:00",
  "window": {
   "hours": 24,
-  "files": 94,
-  "until": "2026-11-11T03:00:00+00:00"
+  "files": 96,
+  "until": "2026-11-12T04:00:00+00:00"
  },
  "source": "GDELT 2.0 Events (15분 단위 공개 파일)",
  "model": "gemini-2.5-flash",
  "stats": {
-  "matched_events": 418,
+  "matched_events": 497,
   "by_category": {
-   "maritime": 148,
-   "supply_chain": 51,
-   "fx_macro": 12,
-   "sanctions": 80,
-   "oil_commodity": 89,
-   "cyber": 38
+   "sanctions": 102,
+   "supply_chain": 67,
+   "oil_commodity": 66,
+   "fx_macro": 32,
+   "maritime": 211,
+   "cyber": 19
   },
   "top_places": [
    "United States",
-   "Iran",
-   "United Kingdom",
    "China",
-   "India",
+   "Iran",
    "Saudi Arabia",
+   "Yemen",
    "Russia",
-   "Yemen"
+   "United Kingdom",
+   "India"
   ],
   "candidates": 30
  },
  "events": [
   {
    "id": "LIVE-002",
-   "lat": 35.0,
-   "lng": 105.0,
-   "title": "미국 상무부, 제재 대상과 연루된 중국 기업에 엔비디아 칩 판매 승인 논란",
-   "source": "investmentwatchblog.com",
+   "lat": 32.0,
+   "lng": 53.0,
+   "title": "중동 해상 유조선 화재 및 이란의 해상 위협 증대",
+   "source": "foxbaltimore.com / econotimes.com / dominicanrepublicpost.com / aljazeera.com",
    "sources": [
     {
-     "url": "https://www.investmentwatchblog.com/commerce-approved-nvidia-chip-sales-to-chinese-firms-with-empty-offices-and-ties-to-sanctioned-military-suppliers/",
-     "domain": "investmentwatchblog.com"
+     "url": "https://foxbaltimore.com/station/share/tankers-continue-to-burn-across-middle-east-amid-support-for-de-escalation-in-iran-gop-democrats-pete-hegseth-thomas-massie-rtt",
+     "domain": "foxbaltimore.com"
     },
     {
-     "url": "https://www.investmentwatchblog.com/nvidias-jensen-huang-faces-fbi-scrutiny-while-shareholders-take-the-fight-to-court/",
-     "domain": "investmentwatchblog.com"
+     "url": "https://econotimes.com/Iran-Attacks-Ship-Navigation-Equipment-on-Oman-s-Didamar-Island-as-Oil-Flows-Recover-1775588",
+     "domain": "econotimes.com"
+    },
+    {
+     "url": "https://dominicanrepublicpost.com/iran-designates-argentinian-navy-air-force-as-terrorist-organisations/",
+     "domain": "dominicanrepublicpost.com"
+    },
+    {
+     "url": "https://www.aljazeera.com/news/2026/11/11/iran-designates-argentinian-navy-air-force-as-terrorist",
+     "domain": "aljazeera.com"
     }
    ],
-   "region": "중국",
-   "category": "sanctions",
-   "summary": "미국 상무부가 빈 사무실을 가진 중국 기업 및 제재 대상 군사 공급업체와 연루된 기업에 엔비디아 칩 판매를 승인하여 논란이 일고 있다. 엔비디아 CEO는 FBI 조사를 받고 있으며 주주들은 소송을 제기했다.",
+   "region": "중동, 이란, 오만",
+   "category": "maritime",
+   "summary": "중동 해역에서 유조선 화재가 지속되고 있으며, 이란이 오만 디다마르 섬의 선박 항해 장비를 공격하고 아르헨티나 해군 및 공군을 테러 조직으로 지정하는 등 해상 위협을 고조시키고 있다.",
    "impact_industries": [
-    "semiconductor",
     "automotive",
     "consumer",
-    "manufacturing"
+    "energy",
+    "manufacturing",
+    "chemical"
    ],
    "industry_scores": {
-    "semiconductor": 90,
-    "automotive": 50,
-    "consumer": 40,
-    "energy": 20,
-    "manufacturing": 60,
-    "chemical": 20
+    "semiconductor": 30,
+    "automotive": 60,
+    "consumer": 50,
+    "energy": 90,
+    "manufacturing": 70,
+    "chemical": 80
    },
    "risk_score": 90,
    "risk_level": "high",
    "prev_score": 90,
-   "created_at": "2026-11-11T02:52:02.018451+00:00",
+   "created_at": "2026-11-12T03:54:08.945714+00:00",
    "insight": {
-    "why_it_matters": "이는 미국의 대중국 반도체 수출 통제 정책의 실효성에 대한 의문을 제기하며, 향후 제재 집행의 불확실성을 높인다. 한국 반도체 기업에 대한 미국의 압박 또는 규제 변화 가능성을 시사한다.",
-    "business_impact": "한국 반도체 기업은 대중국 수출 전략 및 미국 제재 준수 여부를 재검토해야 할 수 있다. 불확실한 규제 환경은 투자 및 사업 계획에 영향을 미칠 수 있다.",
+    "why_it_matters": "중동은 주요 원유 및 LNG 수송로이며, 해상 안보 불안정은 유가 변동성 확대 및 해상 운송 비용 증가로 이어질 수 있다. 한국은 에너지 수입 의존도가 높아 직접적인 영향을 받는다.",
+    "business_impact": "유가 상승 압력으로 에너지 비용 증가, 해상 운송 보험료 및 운임 상승, 중동 지역을 경유하는 선박의 안전성 우려 증대.",
     "recommended_actions": [
-     "미국 상무부의 대중국 반도체 수출 통제 정책 및 집행 동향 면밀히 주시.",
-     "자사 대중국 수출 품목 및 거래처에 대한 제재 리스크 재평가.",
-     "법률 및 규제 전문가와 협력하여 준수 전략 강화.",
-     "미중 기술 경쟁 심화에 따른 공급망 다변화 전략 검토."
+     "중동 해상 운송 경로의 안전 상황을 실시간으로 모니터링하고 비상 계획을 수립한다.",
+     "유가 및 해상 운임 변동성 확대에 대비하여 헤징 전략을 검토한다.",
+     "선박 보험 조건 및 보장 범위를 재확인하고 필요시 추가 보험 가입을 고려한다.",
+     "중동 지역을 경유하는 원자재 및 제품의 재고 수준을 점검하고 운송 일정 지연 가능성에 대비한다."
     ],
     "confidence": 0.85
    }
   },
   {
-   "id": "LIVE-003",
-   "lat": 39.9289,
-   "lng": 116.388,
-   "title": "국제 유가, 8월 이후 최저 수준으로 하락",
+   "id": "LIVE-004",
+   "lat": 55.7522,
+   "lng": 37.6156,
+   "title": "자포리자 원자력 발전소 드론 공격으로 직원 사망",
+   "source": "straitstimes.com",
+   "sources": [
+    {
+     "url": "https://www.straitstimes.com/world/europe/zaporizhzhia-nuclear-plant-worker-killed-in-drone-strike-russian-management-says",
+     "domain": "straitstimes.com"
+    }
+   ],
+   "region": "러시아",
+   "category": "supply_chain",
+   "summary": "러시아 측 관리들은 자포리자 원자력 발전소에서 드론 공격으로 직원이 사망했다고 밝혔다.",
+   "impact_industries": [
+    "automotive",
+    "consumer",
+    "energy",
+    "manufacturing",
+    "chemical"
+   ],
+   "industry_scores": {
+    "semiconductor": 30,
+    "automotive": 40,
+    "consumer": 40,
+    "energy": 90,
+    "manufacturing": 60,
+    "chemical": 50
+   },
+   "risk_score": 90,
+   "risk_level": "high",
+   "prev_score": 90,
+   "created_at": "2026-11-12T03:54:08.945714+00:00",
+   "insight": {
+    "why_it_matters": "유럽 최대 원전인 자포리자 원전의 안전 문제는 유럽 전역의 에너지 공급 안정성에 심각한 위협이 될 수 있으며, 이는 글로벌 에너지 시장에도 영향을 미친다.",
+    "business_impact": "유럽 에너지 가격 변동성 확대, 에너지 집약 산업의 생산 비용 증가, 원자력 관련 기술 및 부품 공급망 불안정.",
+    "recommended_actions": [
+     "유럽 에너지 시장 동향을 면밀히 주시하고 에너지 구매 전략을 재검토한다.",
+     "에너지 비용 상승에 대비하여 생산 효율화 방안을 모색한다.",
+     "원자력 발전 관련 부품을 공급하는 경우, 공급망 안정성을 점검한다.",
+     "지정학적 리스크에 따른 에너지 공급 중단 시나리오에 대비한 비상 계획을 수립한다."
+    ],
+    "confidence": 0.75
+   }
+  },
+  {
+   "id": "LIVE-007",
+   "lat": 32.0,
+   "lng": 53.0,
+   "title": "사우디아라비아 원유 생산량 26% 증가 보고",
    "source": "oilprice.com",
    "sources": [
     {
-     "url": "https://oilprice.com/Energy/Crude-Oil/Oil-Falls-to-Lowest-Level-Since-August.html",
+     "url": "https://oilprice.com/Latest-Energy-News/World-News/Saudi-Crude-Output-Jumps-26-as-Riyadh-Reports-Near-Pre-War-Production.html",
      "domain": "oilprice.com"
     }
    ],
-   "region": "전 세계 (중국 베이징에서 보도)",
+   "region": "사우디아라비아",
    "category": "oil_commodity",
-   "summary": "국제 유가가 8월 이후 최저 수준으로 떨어졌다.",
+   "summary": "사우디아라비아의 원유 생산량이 26% 증가하여 전쟁 이전 수준에 근접했다고 보고되었다.",
    "impact_industries": [
     "semiconductor",
     "automotive",
@@ -107,53 +162,100 @@ window.LIVE_DATA = {
     "semiconductor": 40,
     "automotive": 70,
     "consumer": 60,
-    "energy": 80,
+    "energy": 90,
     "manufacturing": 80,
-    "chemical": 90
+    "chemical": 80
    },
    "risk_score": 90,
    "risk_level": "high",
    "prev_score": 90,
-   "created_at": "2026-11-11T02:52:02.018451+00:00",
+   "created_at": "2026-11-12T03:54:08.945714+00:00",
    "insight": {
-    "why_it_matters": "유가 하락은 원자재 및 운송 비용 감소로 이어져 제조 및 소비재 기업의 생산 비용 절감에 긍정적인 영향을 미친다. 그러나 에너지 기업의 수익성에는 부정적일 수 있다.",
-    "business_impact": "제조, 화학, 자동차, 소비재 산업의 생산 비용 감소 및 마진 개선 가능성. 물류 및 운송 비용 절감. 에너지 기업의 수익성 악화 우려.",
+    "why_it_matters": "글로벌 원유 공급량 증가로 국제 유가 안정화에 기여할 수 있으며, 이는 한국 기업의 에너지 비용 부담 완화에 긍정적인 영향을 미칠 수 있다.",
+    "business_impact": "유가 하락 압력으로 에너지 비용 절감 가능성, 원자재 가격 안정화, 생산 비용 예측 가능성 증대.",
     "recommended_actions": [
-     "유가 변동성 추이 지속 모니터링 및 원자재 구매 전략 재검토.",
-     "운송 및 물류 비용 절감 기회 모색.",
-     "에너지 관련 기업은 유가 하락에 대비한 리스크 헤징 전략 강화.",
-     "생산 비용 절감분을 활용한 가격 경쟁력 확보 방안 검토."
+     "국제 유가 동향을 면밀히 주시하고 에너지 구매 전략에 반영한다.",
+     "유가 변동에 따른 생산 비용 변화 시나리오를 분석한다.",
+     "원자재 구매 계약 시 유가 연동 조항을 검토한다.",
+     "에너지 효율 개선 및 대체 에너지원 활용 방안을 지속적으로 모색한다."
     ],
-    "confidence": 0.9
+    "confidence": 0.8
    }
   },
   {
-   "id": "LIVE-004",
-   "lat": 26.0,
-   "lng": 56.25,
-   "title": "걸프만 및 UAE 해역에서 유조선 공격 발생, 미군 유조기 기지 철수",
-   "source": "gcaptain.com / gulfnews.com / redstate.com / washingtonexaminer.com",
+   "id": "LIVE-001",
+   "lat": 39.9289,
+   "lng": 116.388,
+   "title": "미국 엔비디아 칩의 중국 우회 공급 및 제재 지연 논란",
+   "source": "wtvbam.com / article.wn.com / businesstimes.com.sg / 933thedrive.com",
    "sources": [
     {
-     "url": "https://gcaptain.com/adnoc-vessel-damaged-in-gulf-attack-as-ukmto-reports-fresh-tanker-strike-near-hormuz/",
-     "domain": "gcaptain.com"
+     "url": "https://wtvbam.com/2026/11/11/exclusive-pla-linked-chinese-university-bought-nvidia-h200-chips-despite-us-blacklist-records-show/",
+     "domain": "wtvbam.com"
     },
     {
-     "url": "https://gulfnews.com/business/markets/adnoc-logistics-vessel-damaged-in-attack-in-uae-territorial-waters-1.500742780",
-     "domain": "gulfnews.com"
+     "url": "https://article.wn.com/view/2026/11/12/Trumps_Nvidia_chip_crackdown_on_China_stalled_by_Lutnick_Rep/",
+     "domain": "article.wn.com"
     },
     {
-     "url": "https://redstate.com/wardclark/2026/11/10/us-moves-tankers-from-raf-mildenhall-over-possible-iran-threat-n2209232",
-     "domain": "redstate.com"
+     "url": "https://www.businesstimes.com.sg/international/lutnick-stalled-trump-crackdown-diversion-nvidia-chips-china-report",
+     "domain": "businesstimes.com.sg"
     },
     {
-     "url": "http://www.washingtonexaminer.com/policy/defense/4798312/us-evacuates-air-tankers-uk-base-security-concern/",
-     "domain": "washingtonexaminer.com"
+     "url": "https://www.933thedrive.com/2026/11/11/lutnick-stalled-trump-crackdown-on-diversion-of-nvidia-chips-to-china-axios-reports/",
+     "domain": "933thedrive.com"
     }
    ],
-   "region": "걸프만, UAE 해역, 영국 (이란 위협 관련)",
+   "region": "중국",
+   "category": "sanctions",
+   "summary": "미국 정부의 엔비디아 고성능 AI 칩 대중국 수출 통제 조치가 지연되거나, 중국 대학이 블랙리스트에도 불구하고 엔비디아 H200 칩을 구매하는 등 우회 공급 정황이 포착되었다는 보도가 나왔다.",
+   "impact_industries": [
+    "semiconductor",
+    "manufacturing"
+   ],
+   "industry_scores": {
+    "semiconductor": 80,
+    "automotive": 30,
+    "consumer": 20,
+    "energy": 10,
+    "manufacturing": 40,
+    "chemical": 10
+   },
+   "risk_score": 80,
+   "risk_level": "high",
+   "prev_score": 90,
+   "created_at": "2026-11-12T03:54:08.945714+00:00",
+   "insight": {
+    "why_it_matters": "미국의 대중국 기술 제재의 실효성에 대한 의문이 제기되며, 첨단 기술 공급망의 불확실성이 커질 수 있다. 한국 반도체 및 관련 산업에 간접적인 영향을 미칠 수 있다.",
+    "business_impact": "한국 반도체 기업은 미국-중국 기술 갈등 심화 시 양국 시장에서의 사업 전략 재검토가 필요할 수 있다. 중국 시장에서의 경쟁 환경 변화 가능성.",
+    "recommended_actions": [
+     "미국 상무부의 대중국 반도체 수출 통제 관련 최신 지침을 주시하고 법률 준수 여부를 재확인한다.",
+     "중국 내 사업 운영 시 잠재적 제재 위반 리스크를 평가하고 대응 계획을 수립한다.",
+     "첨단 기술 부품의 공급망 다변화 및 재고 확보 전략을 검토한다.",
+     "미중 기술 갈등 심화에 따른 시장 변화 시나리오를 분석하고 사업 계획에 반영한다."
+    ],
+    "confidence": 0.8
+   }
+  },
+  {
+   "id": "LIVE-006",
+   "lat": 24.6408,
+   "lng": 46.7728,
+   "title": "후티 반군, 사우디아라비아에 미사일 및 드론 공격",
+   "source": "thepeninsulaqatar.com / arabnews.com",
+   "sources": [
+    {
+     "url": "http://thepeninsulaqatar.com/article/11/11/2026/coalition-says-it-intercepted-3-houthi-cruise-missiles-targeting-riyadh",
+     "domain": "thepeninsulaqatar.com"
+    },
+    {
+     "url": "https://www.arabnews.com/saudi-arabia/coalition-says-houthi-drones-and-missiles-launched-toward-saudi-arabia-destroyed-3011220",
+     "domain": "arabnews.com"
+    }
+   ],
+   "region": "사우디아라비아 리야드",
    "category": "maritime",
-   "summary": "아드녹(ADNOC) 물류 선박이 걸프만 및 UAE 영해에서 공격을 받아 손상되었으며, 호르무즈 해협 근처에서 새로운 유조선 공격이 보고되었다. 이란의 위협 가능성으로 인해 미군이 영국 기지에서 공중 급유기를 철수했다.",
+   "summary": "후티 반군이 사우디아라비아 리야드를 겨냥한 순항 미사일과 드론을 발사했으나, 연합군에 의해 요격되었다.",
    "impact_industries": [
     "automotive",
     "consumer",
@@ -162,201 +264,161 @@ window.LIVE_DATA = {
     "chemical"
    ],
    "industry_scores": {
-    "semiconductor": 30,
-    "automotive": 60,
-    "consumer": 50,
+    "semiconductor": 20,
+    "automotive": 50,
+    "consumer": 40,
     "energy": 80,
-    "manufacturing": 70,
-    "chemical": 80
+    "manufacturing": 60,
+    "chemical": 70
    },
    "risk_score": 80,
    "risk_level": "high",
    "prev_score": 80,
-   "created_at": "2026-11-11T02:52:02.018451+00:00",
+   "created_at": "2026-11-12T03:54:08.945714+00:00",
    "insight": {
-    "why_it_matters": "호르무즈 해협은 세계 석유 운송의 핵심 통로이며, 이 지역의 해상 안보 불안정은 유가 상승 및 해상 운송 비용 증가로 직결된다. 중동 정세 불안은 공급망 전반에 큰 영향을 미칠 수 있다.",
-    "business_impact": "중동발 원유 및 LNG 수입 의존도가 높은 한국 기업의 에너지 조달 비용 증가. 해상 운송 보험료 상승 및 운송 지연 가능성. 중동 지역 사업 불확실성 증대.",
+    "why_it_matters": "홍해 및 아라비아만 지역의 해상 안보를 위협하며, 이는 중동발 에너지 및 물류 수송에 차질을 줄 수 있다. 한국 기업의 중동 지역 사업 운영에 리스크를 가중시킨다.",
+    "business_impact": "중동 지역을 경유하는 선박의 운항 위험 증가, 해상 보험료 인상, 에너지 및 원자재 공급망 불안정.",
     "recommended_actions": [
-     "걸프만 해상 안보 상황 및 이란 관련 지정학적 리스크 실시간 모니터링.",
-     "해상 운송 보험 조건 및 비용 변화 확인.",
-     "중동발 원자재 및 에너지 수입 시 대체 경로 또는 재고 확보 방안 검토.",
-     "운송 계약 시 전쟁 위험 조항 등 비상 계획 점검."
+     "홍해 및 아라비아만 지역의 해상 안보 상황을 실시간으로 모니터링한다.",
+     "해당 지역을 경유하는 선박의 안전 조치를 강화하고 비상 계획을 업데이트한다.",
+     "에너지 및 원자재 공급망의 다변화를 검토하고 재고 수준을 확보한다.",
+     "중동 지역 사업장의 직원 안전 및 비상 대피 계획을 점검한다."
     ],
-    "confidence": 0.9
+    "confidence": 0.8
    }
   },
   {
-   "id": "LIVE-001",
-   "lat": 60.0,
-   "lng": -96.0,
-   "title": "한국 조선사, LNG 운반선 가격 압박 직면",
-   "source": "hellenicshippingnews.com",
+   "id": "LIVE-008",
+   "lat": 32.0,
+   "lng": 53.0,
+   "title": "이란의 사이버 및 군사 위협 증대",
+   "source": "cbn.com",
    "sources": [
     {
-     "url": "https://www.hellenicshippingnews.com/korea-shipbuilders-face-lng-carrier-price-squeeze-as-north-america-orders-seen-next-year/",
-     "domain": "hellenicshippingnews.com"
+     "url": "https://cbn.com/news/world/irans-shadow-war-intensifies-terror-cells-go-live-while-cyber-and-military-threats-grow",
+     "domain": "cbn.com"
     }
    ],
-   "region": "캐나다 (북미)",
-   "category": "oil_commodity",
-   "summary": "북미 지역의 LNG 운반선 발주가 내년에 예상되는 가운데, 한국 조선사들이 가격 경쟁 심화로 압박을 받고 있다.",
+   "region": "이란",
+   "category": "cyber",
+   "summary": "이란의 그림자 전쟁이 심화되면서 테러 조직이 활동을 시작하고 사이버 및 군사적 위협이 증가하고 있다.",
    "impact_industries": [
+    "semiconductor",
+    "automotive",
+    "consumer",
     "energy",
-    "manufacturing"
+    "manufacturing",
+    "chemical"
    ],
    "industry_scores": {
-    "semiconductor": 10,
-    "automotive": 20,
-    "consumer": 10,
-    "energy": 60,
-    "manufacturing": 70,
-    "chemical": 30
+    "semiconductor": 50,
+    "automotive": 50,
+    "consumer": 60,
+    "energy": 70,
+    "manufacturing": 60,
+    "chemical": 60
    },
    "risk_score": 70,
    "risk_level": "high",
    "prev_score": 70,
-   "created_at": "2026-11-11T02:52:02.018451+00:00",
+   "created_at": "2026-11-12T03:54:08.945714+00:00",
    "insight": {
-    "why_it_matters": "LNG 운반선은 글로벌 에너지 공급망의 핵심이며, 한국 조선 산업의 주요 수익원이다. 가격 압박은 수익성 악화 및 수주 경쟁 심화를 의미한다.",
-    "business_impact": "한국 조선사들의 수익성 감소 및 신규 수주 마진 하락. 장기적으로는 LNG 운반선 운임에도 영향을 미쳐 에너지 수입 기업의 물류 비용에 간접적 영향 가능.",
+    "why_it_matters": "이란의 사이버 공격 능력 증대는 글로벌 기업의 IT 인프라 및 공급망에 대한 사이버 보안 리스크를 높인다. 중동 지역의 지정학적 긴장을 고조시켜 사업 환경의 불확실성을 증대시킨다.",
+    "business_impact": "사이버 공격으로 인한 데이터 유출, 시스템 마비, 생산 중단 등의 직접적인 피해 발생 가능성. 중동 지역 사업장의 운영 리스크 증가.",
     "recommended_actions": [
-     "LNG 운반선 시장 동향 및 경쟁사 가격 전략 모니터링.",
-     "수주 전략 재검토 및 고부가가치 기술 개발 투자 강화.",
-     "에너지 기업은 LNG 운반선 운임 변동성 주시 및 장기 운송 계약 조건 검토."
+     "사이버 보안 시스템을 강화하고 최신 위협 정보에 기반한 방어 체계를 구축한다.",
+     "공급망 전반의 사이버 보안 취약점을 점검하고 협력사와의 보안 협력을 강화한다.",
+     "중동 지역 사업장의 사이버 보안 프로토콜을 재검토하고 직원 교육을 강화한다.",
+     "사이버 공격 발생 시 신속한 대응 및 복구 계획을 수립하고 모의 훈련을 실시한다."
     ],
-    "confidence": 0.8
-   }
-  },
-  {
-   "id": "LIVE-006",
-   "lat": 43.6667,
-   "lng": -79.4167,
-   "title": "캐나다 온타리오주, 전기 자전거·스쿠터 배터리 개조 금지 추진",
-   "source": "lfpress.com",
-   "sources": [
-    {
-     "url": "https://lfpress.com/news/queens-park/ontario-eyes-ban-on-e-bike-e-scooter-battery-modifications-to-prevent-fires/",
-     "domain": "lfpress.com"
-    }
-   ],
-   "region": "캐나다 온타리오주",
-   "category": "supply_chain",
-   "summary": "캐나다 온타리오주가 화재 예방을 위해 전기 자전거 및 전기 스쿠터 배터리 개조를 금지하는 방안을 검토 중이다.",
-   "impact_industries": [
-    "automotive",
-    "consumer",
-    "manufacturing"
-   ],
-   "industry_scores": {
-    "semiconductor": 20,
-    "automotive": 40,
-    "consumer": 60,
-    "energy": 10,
-    "manufacturing": 50,
-    "chemical": 20
-   },
-   "risk_score": 60,
-   "risk_level": "medium",
-   "prev_score": 60,
-   "created_at": "2026-11-11T02:52:02.018451+00:00",
-   "insight": {
-    "why_it_matters": "이는 전기 자전거 및 스쿠터 제조업체와 수입업체에 직접적인 영향을 미치며, 제품 설계, 생산, 유통 과정에서 새로운 규제 준수 요구사항을 발생시킨다.",
-    "business_impact": "관련 제품을 캐나다에 수출하는 한국 기업은 제품 사양 변경, 인증 절차 강화, 재고 관리 등 추가 비용 및 시간 소요가 발생할 수 있다.",
-    "recommended_actions": [
-     "온타리오주의 배터리 규제 법안 발효 여부 및 세부 내용 면밀히 확인.",
-     "관련 제품의 설계 및 제조 공정에서 규제 준수 여부 사전 검토.",
-     "캐나다 시장 수출 전략 및 제품 포트폴리오 조정 가능성 분석.",
-     "배터리 안전성 강화 기술 개발 및 적용 검토."
-    ],
-    "confidence": 0.8
+    "confidence": 0.75
    }
   },
   {
    "id": "LIVE-005",
-   "lat": -26.9167,
-   "lng": -65.2833,
-   "title": "아르헨티나, 영국 유전 탐사 중단 요구하며 국제해양법재판소에 제소",
-   "source": "buenosairesherald.com",
+   "lat": 60.0,
+   "lng": 100.0,
+   "title": "러시아 디젤 유조선, 뉴욕 인근 해상에서 항로 변경",
+   "source": "econotimes.com",
    "sources": [
     {
-     "url": "https://buenosairesherald.com/world/international-relations/malvinas-argentina-asks-law-of-the-sea-tribunal-to-halt-uk-oil-exploration",
-     "domain": "buenosairesherald.com"
+     "url": "https://econotimes.com/Russian-Diesel-Tanker-Reverses-Course-400-Nautical-Miles-From-New-York-1775485",
+     "domain": "econotimes.com"
     }
    ],
-   "region": "말비나스 (포클랜드)",
-   "category": "oil_commodity",
-   "summary": "아르헨티나가 말비나스(포클랜드) 제도 인근에서 영국의 석유 탐사를 중단할 것을 요구하며 국제해양법재판소에 제소했다.",
+   "region": "러시아, 미국 인근 해상",
+   "category": "maritime",
+   "summary": "러시아 디젤 유조선이 뉴욕에서 400해리 떨어진 해상에서 항로를 변경했다.",
    "impact_industries": [
     "energy",
+    "manufacturing",
     "chemical"
    ],
    "industry_scores": {
     "semiconductor": 10,
     "automotive": 30,
     "consumer": 20,
-    "energy": 50,
+    "energy": 60,
+    "manufacturing": 40,
+    "chemical": 50
+   },
+   "risk_score": 60,
+   "risk_level": "medium",
+   "prev_score": 60,
+   "created_at": "2026-11-12T03:54:08.945714+00:00",
+   "insight": {
+    "why_it_matters": "러시아 유조선의 항로 변경은 서방 제재 회피 또는 해상 운송의 지정학적 긴장과 관련될 수 있으며, 이는 국제 해상 물류 및 유류 공급망에 불확실성을 더한다.",
+    "business_impact": "러시아산 유류의 국제 시장 공급 경로 변화, 해상 운송 비용 및 보험료 변동 가능성, 제재 관련 리스크 증가.",
+    "recommended_actions": [
+     "러시아산 유류 및 관련 제품의 국제 운송 동향을 모니터링한다.",
+     "제재 대상 국가와의 거래 시 법률 및 규제 준수 여부를 철저히 확인한다.",
+     "해상 운송 계약 시 제재 관련 조항을 면밀히 검토한다.",
+     "유류 공급망의 투명성을 확보하고 잠재적 리스크를 식별한다."
+    ],
+    "confidence": 0.65
+   }
+  },
+  {
+   "id": "LIVE-003",
+   "lat": 12.6664,
+   "lng": 100.901,
+   "title": "태국 촌부리 해상 유조선 침몰 및 승무원 실종",
+   "source": "bangkokpost.com",
+   "sources": [
+    {
+     "url": "https://www.bangkokpost.com/learning/easy/3353344/6-crew-missing-after-oil-tanker-sinks-off-chon-buri",
+     "domain": "bangkokpost.com"
+    }
+   ],
+   "region": "태국 촌부리",
+   "category": "maritime",
+   "summary": "태국 촌부리 해상에서 유조선이 침몰하여 6명의 승무원이 실종되었다.",
+   "impact_industries": [
+    "energy",
+    "chemical"
+   ],
+   "industry_scores": {
+    "semiconductor": 10,
+    "automotive": 20,
+    "consumer": 20,
+    "energy": 40,
     "manufacturing": 30,
-    "chemical": 40
+    "chemical": 50
    },
    "risk_score": 50,
    "risk_level": "medium",
    "prev_score": 50,
-   "created_at": "2026-11-11T02:52:02.018451+00:00",
+   "created_at": "2026-11-12T03:54:08.945714+00:00",
    "insight": {
-    "why_it_matters": "남대서양의 잠재적 유전 개발에 대한 국제 분쟁은 장기적으로 해당 지역의 에너지 공급 안정성에 영향을 미칠 수 있다. 이는 국제법적 선례를 남길 수도 있다.",
-    "business_impact": "당장 직접적인 영향은 적으나, 분쟁 장기화 시 해당 지역의 에너지 개발 지연 및 국제 유가에 간접적인 상승 압력으로 작용할 수 있다.",
+    "why_it_matters": "유조선 사고는 해양 오염 및 해상 물류 차질을 유발할 수 있으며, 해당 지역의 해상 운송 안전에 대한 우려를 높인다.",
+    "business_impact": "해당 해역을 이용하는 선박의 운항 지연 가능성, 해상 보험료 인상 압력, 잠재적 환경 규제 강화.",
     "recommended_actions": [
-     "아르헨티나-영국 간 해양 분쟁 진행 상황 및 국제해양법재판소 결정 추이 주시.",
-     "남대서양 지역의 에너지 개발 동향 및 잠재적 공급망 영향 분석.",
-     "장기적인 관점에서 에너지원 다변화 및 공급처 안정성 확보 전략 검토."
+     "태국만 해역을 이용하는 선박의 운항 안전 지침을 확인하고 준수한다.",
+     "해상 운송 중인 유류 및 화학 제품의 안전 관리 절차를 재점검한다.",
+     "해양 오염 사고 발생 시 비상 대응 계획을 업데이트한다.",
+     "해상 보험 계약의 보장 범위를 검토하고 필요시 조정한다."
     ],
     "confidence": 0.7
-   }
-  },
-  {
-   "id": "LIVE-007",
-   "lat": 32.0,
-   "lng": 53.0,
-   "title": "이란, 프랑스 겨냥 사이버 공격 부인",
-   "source": "independent.co.uk / wknofm.org",
-   "sources": [
-    {
-     "url": "https://www.independent.co.uk/news/world/europe/france-iran-fridge-cyberattack-hack-b3081934.html",
-     "domain": "independent.co.uk"
-    },
-    {
-     "url": "https://www.wknofm.org/politics-npr-news/2026-11-09/iran-denies-it-was-behind-cyber-fridge-attacks-targeting-france",
-     "domain": "wknofm.org"
-    }
-   ],
-   "region": "이란, 프랑스",
-   "category": "cyber",
-   "summary": "이란이 프랑스를 겨냥한 '냉장고 사이버 공격' 배후설을 부인했다.",
-   "impact_industries": [
-    "energy"
-   ],
-   "industry_scores": {
-    "semiconductor": 20,
-    "automotive": 30,
-    "consumer": 20,
-    "energy": 40,
-    "manufacturing": 30,
-    "chemical": 20
-   },
-   "risk_score": 40,
-   "risk_level": "medium",
-   "prev_score": 40,
-   "created_at": "2026-11-11T02:52:02.018451+00:00",
-   "insight": {
-    "why_it_matters": "국가 간 사이버 공격은 지정학적 긴장을 고조시키고, 중요 인프라 및 산업 시스템에 대한 사이버 위협을 증가시킨다. 이는 간접적으로 공급망 안정성에 영향을 줄 수 있다.",
-    "business_impact": "직접적인 영향은 낮으나, 사이버 공격이 확산될 경우 중요 산업 시설 또는 물류 시스템 마비로 이어질 수 있다. 기업의 사이버 보안 투자 및 대비 필요성 증대.",
-    "recommended_actions": [
-     "국가 간 사이버 공격 동향 및 지정학적 긴장 고조 여부 모니터링.",
-     "자사 및 협력사의 사이버 보안 시스템 점검 및 강화.",
-     "공급망 내 사이버 보안 취약점 분석 및 대응 계획 수립.",
-     "비상 상황 발생 시 데이터 백업 및 복구 절차 점검."
-    ],
-    "confidence": 0.75
    }
   }
  ]
