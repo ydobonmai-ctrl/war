@@ -76,7 +76,7 @@ def slug_title(url):
     seg = path.split('/')[-1] if path else ''
     seg = re.sub(r'\.(html?|php|aspx?)$', '', seg, flags=re.I)
     seg = re.sub(r'[-_]?\d{5,}[-_]?', ' ', seg)
-    words = [w for w in re.split(r'[-_+]+', seg) if w]
+    words = [w for w in re.split(r'[-_+\s]+', seg) if w]  # 숫자 ID를 지운 자리의 공백도 구분자로 처리
     alpha = [w for w in words if re.fullmatch(r'[A-Za-z][A-Za-z\']*', w)]
     if len(alpha) < 4 or len(alpha) < len(words) * 0.7:
         return None
