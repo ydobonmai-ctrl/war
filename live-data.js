@@ -1,31 +1,31 @@
 // 자동 생성 파일 (scripts/update_live.py) — 직접 수정하지 마세요
 window.LIVE_DATA = {
- "generatedAt": "2026-11-16T02:49:57.639778+00:00",
+ "generatedAt": "2026-11-17T05:08:13.390236+00:00",
  "window": {
   "hours": 24,
-  "files": 94,
-  "until": "2026-11-16T03:00:00+00:00"
+  "files": 93,
+  "until": "2026-11-17T05:15:00+00:00"
  },
  "source": "GDELT 2.0 Events (15분 단위 공개 파일)",
  "model": "gemini-2.5-flash",
  "stats": {
-  "matched_events": 283,
+  "matched_events": 515,
   "by_category": {
-   "maritime": 140,
-   "fx_macro": 23,
-   "sanctions": 24,
-   "supply_chain": 36,
-   "oil_commodity": 50,
-   "cyber": 10
+   "maritime": 189,
+   "oil_commodity": 49,
+   "cyber": 32,
+   "sanctions": 89,
+   "fx_macro": 78,
+   "supply_chain": 78
   },
   "top_places": [
    "United States",
-   "Saudi Arabia",
-   "China",
-   "Yemen",
    "Iran",
+   "United Kingdom",
+   "Yemen",
+   "China",
+   "Saudi Arabia",
    "Russia",
-   "Nigeria",
    "Israel"
   ],
   "candidates": 30
@@ -33,39 +33,264 @@ window.LIVE_DATA = {
  "events": [
   {
    "id": "LIVE-004",
-   "lat": 51.5,
-   "lng": -0.116667,
-   "title": "호르무즈 해협 및 아라비아만 유조선 공격 및 긴장 고조",
-   "source": "ianslive.in / hellenicshippingnews.com / middleeasteye.net / arabtimesonline.com",
+   "lat": 26.0,
+   "lng": 56.25,
+   "title": "호르무즈 해협 및 오만 인근 해상에서 유조선 피격 사건 발생",
+   "source": "gcaptain.com / econotimes.com / arabnews.com / middleeasteye.net",
    "sources": [
     {
-     "url": "https://ianslive.in/indian-shipping-authorities-report-attack-on-tanker-in-arabian-gulf-near-hormuz-crew-safe-ukmto--20261115185702",
-     "domain": "ianslive.in"
+     "url": "https://gcaptain.com/ukmto-reports-two-tanker-attacks-in-strait-of-hormuz/",
+     "domain": "gcaptain.com"
     },
     {
-     "url": "https://www.hellenicshippingnews.com/iran-claims-fresh-strike-on-u-s-base-as-hormuz-shipping-crisis-deepens/",
-     "domain": "hellenicshippingnews.com"
+     "url": "https://econotimes.com/Iran-Claims-Two-More-Tankers-Hit-Mines-as-UKMTO-Reports-Projectile-Strike-1777946",
+     "domain": "econotimes.com"
     },
     {
-     "url": "https://www.middleeasteye.net/live-blog/live-blog-update/two-oil-tankers-ablaze-after-striking-naval-mines-strait-hormuz",
+     "url": "https://www.arabnews.com/world/tanker-attacked-north-of-omans-khasab-ukmto-says-3012356",
+     "domain": "arabnews.com"
+    },
+    {
+     "url": "https://www.middleeasteye.net/live-blog/live-blog-update/ukmto-tanker-transiting-strait-hormuz-attacked-near-oman",
      "domain": "middleeasteye.net"
-    },
-    {
-     "url": "https://www.arabtimesonline.com/news/indian-shipping-authorities-report-tanker-attack-east-of-strait-of-hormuz/",
-     "domain": "arabtimesonline.com"
-    },
-    {
-     "url": "https://news.az/news/bahrain-intercepts-iranian-attacks-as-strait-of-hormuz-tensions-persist",
-     "domain": "news.az"
-    },
-    {
-     "url": "https://www.al-monitor.com/originals/2026/11/gulf-oil-rebound-risk-us-iran-war-enters-uncharted-waters",
-     "domain": "al-monitor.com"
     }
    ],
-   "region": "호르무즈 해협/아라비아만 (이란)",
+   "region": "호르무즈 해협, 오만 인근",
    "category": "maritime",
-   "summary": "호르무즈 해협 인근 아라비아만에서 유조선 공격이 보고되었으며, 이란이 미군 기지에 대한 추가 공격을 주장하고 바레인이 이란의 공격을 저지했다고 밝혔다. 이는 호르무즈 해협의 해상 운송 위기가 심화되고 있음을 나타낸다.",
+   "summary": "영국 해상무역작전(UKMTO)이 호르무즈 해협 및 오만 카삽 북부 해상에서 유조선 피격 사건을 보고했으며, 이란은 추가 유조선이 기뢰에 피격되었다고 주장했다.",
+   "impact_industries": [
+    "semiconductor",
+    "automotive",
+    "consumer",
+    "energy",
+    "manufacturing",
+    "chemical"
+   ],
+   "industry_scores": {
+    "semiconductor": 60,
+    "automotive": 80,
+    "consumer": 70,
+    "energy": 95,
+    "manufacturing": 85,
+    "chemical": 90
+   },
+   "risk_score": 95,
+   "risk_level": "high",
+   "prev_score": 95,
+   "created_at": "2026-11-17T05:08:13.390236+00:00",
+   "insight": {
+    "why_it_matters": "호르무즈 해협은 세계 원유 및 LNG 수송의 핵심 통로이다. 유조선 피격은 중동 지역의 지정학적 긴장을 고조시키고 유가 상승 및 해상 운송 비용 증가로 이어져 글로벌 에너지 공급망에 심각한 영향을 미친다.",
+    "business_impact": "원유 및 LNG 등 에너지 자원 수급 불안정성 증가, 유가 및 해상 운송료 상승, 해상 보험료 인상, 중동발 공급망 교란 위험 증대.",
+    "recommended_actions": [
+     "중동 지역 지정학적 리스크 및 해상 운송 안전 동향 면밀히 주시",
+     "원유 및 에너지 원자재 재고 수준 점검 및 비상 계획 수립",
+     "해상 운송 경로 다변화 가능성 검토",
+     "해상 보험 조건 및 비용 변화 추이 모니터링"
+    ],
+    "confidence": 0.95
+   }
+  },
+  {
+   "id": "LIVE-002",
+   "lat": 25.0478,
+   "lng": 121.532,
+   "title": "중국, 대만 주변에 100척 이상 선박 배치",
+   "source": "middleeaststar.com",
+   "sources": [
+    {
+     "url": "http://www.middleeaststar.com/news/279431332/china-deploys-more-than-100-ships-around-taiwan",
+     "domain": "middleeaststar.com"
+    }
+   ],
+   "region": "대만",
+   "category": "maritime",
+   "summary": "중국이 대만 주변 해역에 100척 이상의 선박을 배치하여 군사적 긴장을 고조시키고 있다.",
+   "impact_industries": [
+    "semiconductor",
+    "automotive",
+    "consumer",
+    "energy",
+    "manufacturing",
+    "chemical"
+   ],
+   "industry_scores": {
+    "semiconductor": 90,
+    "automotive": 70,
+    "consumer": 60,
+    "energy": 70,
+    "manufacturing": 80,
+    "chemical": 70
+   },
+   "risk_score": 90,
+   "risk_level": "high",
+   "prev_score": 90,
+   "created_at": "2026-11-17T05:08:13.390236+00:00",
+   "insight": {
+    "why_it_matters": "대만 해협은 세계 주요 해상 운송 경로이자 반도체 공급망의 핵심 지역이다. 군사적 긴장 고조는 해상 물류에 심각한 차질을 초래하고 글로벌 공급망에 막대한 영향을 미칠 수 있다.",
+    "business_impact": "대만 해협 통과 선박의 운항 지연 및 비용 증가, 해상 보험료 인상, 반도체 및 전자 부품 공급망 교란 위험 증대.",
+    "recommended_actions": [
+     "대만 해협을 지나는 해상 운송 경로의 대체 방안 검토",
+     "해상 운송 보험 조건 및 비용 변화 모니터링",
+     "대만 관련 지정학적 리스크 보고서 주간 단위 확인",
+     "재고 수준 및 비상 재고 확보 계획 점검"
+    ],
+    "confidence": 0.9
+   }
+  },
+  {
+   "id": "LIVE-003",
+   "lat": 35.0,
+   "lng": 105.0,
+   "title": "미국, 엔비디아 사태 속 AI 기술 원격 접근 통제 강화",
+   "source": "kzyx.org",
+   "sources": [
+    {
+     "url": "https://www.kzyx.org/npr-news/2026-11-16/u-s-tightens-controls-on-remote-access-to-ai-technology-amid-nvidia-fallout",
+     "domain": "kzyx.org"
+    }
+   ],
+   "region": "중국",
+   "category": "sanctions",
+   "summary": "미국이 엔비디아 관련 사태 속에서 AI 기술에 대한 원격 접근 통제를 강화하고 있으며, 이는 중국을 겨냥한 것으로 보인다.",
+   "impact_industries": [
+    "semiconductor",
+    "automotive",
+    "consumer",
+    "manufacturing"
+   ],
+   "industry_scores": {
+    "semiconductor": 80,
+    "automotive": 50,
+    "consumer": 40,
+    "energy": 20,
+    "manufacturing": 60,
+    "chemical": 20
+   },
+   "risk_score": 80,
+   "risk_level": "high",
+   "prev_score": 80,
+   "created_at": "2026-11-17T05:08:13.390236+00:00",
+   "insight": {
+    "why_it_matters": "AI 기술 접근 제한은 관련 산업의 기술 개발 및 생산에 직접적인 영향을 미치며, 특히 반도체 및 첨단 기술 분야의 글로벌 공급망에 중요한 변화를 가져올 수 있다.",
+    "business_impact": "AI 관련 기술 개발 및 협력의 제약, 반도체 및 IT 기업의 대중국 사업 전략 재검토 필요성, 첨단 기술 부품 조달의 어려움.",
+    "recommended_actions": [
+     "미국의 대중국 AI 기술 제재 동향 면밀히 주시",
+     "AI 관련 부품 및 소프트웨어 공급망 다변화 검토",
+     "중국 내 AI 기술 개발 및 활용 전략 재평가",
+     "미국 제재 대상 기업 및 기술 목록 확인"
+    ],
+    "confidence": 0.8
+   }
+  },
+  {
+   "id": "LIVE-005",
+   "lat": 42.1497,
+   "lng": -74.9384,
+   "title": "체이스, 마이크로소프트, 유나이티드 항공의 심각한 서비스 중단 사태 및 악화 전망",
+   "source": "nypost.com",
+   "sources": [
+    {
+     "url": "https://nypost.com/2026/11/16/business/why-chase-microsoft-and-united-are-facing-crippling-outages-and-why-itll-get-worse/",
+     "domain": "nypost.com"
+    }
+   ],
+   "region": "미국 뉴욕",
+   "category": "cyber",
+   "summary": "체이스 은행, 마이크로소프트, 유나이티드 항공 등 주요 기업들이 심각한 서비스 중단 사태를 겪고 있으며, 이러한 상황이 더욱 악화될 것이라는 전망이 나왔다.",
+   "impact_industries": [
+    "semiconductor",
+    "automotive",
+    "consumer",
+    "energy",
+    "manufacturing",
+    "chemical"
+   ],
+   "industry_scores": {
+    "semiconductor": 80,
+    "automotive": 80,
+    "consumer": 80,
+    "energy": 80,
+    "manufacturing": 80,
+    "chemical": 80
+   },
+   "risk_score": 80,
+   "risk_level": "high",
+   "prev_score": 80,
+   "created_at": "2026-11-17T05:08:13.390236+00:00",
+   "insight": {
+    "why_it_matters": "주요 IT 및 금융 서비스 기업의 서비스 중단은 광범위한 산업에 걸쳐 업무 마비 및 경제적 손실을 초래할 수 있다. 이는 사이버 공격 또는 시스템 오류로 인한 것으로, 디지털 의존도가 높은 현대 기업에 심각한 위협이다.",
+    "business_impact": "IT 인프라 의존도가 높은 기업의 업무 마비 위험 증가, 클라우드 서비스 및 금융 거래 지연, 공급망 전반의 디지털 연결성 취약점 노출.",
+    "recommended_actions": [
+     "주요 IT 서비스 제공업체의 안정성 및 복구 계획 확인",
+     "자사 IT 시스템 및 클라우드 서비스의 이중화 및 백업 전략 점검",
+     "사이버 보안 위협 정보 실시간 모니터링",
+     "비상시 수동 업무 전환 계획 수립"
+    ],
+    "confidence": 0.9
+   }
+  },
+  {
+   "id": "LIVE-006",
+   "lat": 15.461,
+   "lng": 45.3253,
+   "title": "예멘군, 군사 작전 강화로 후티 반군 173명 사상",
+   "source": "arabtimesonline.com",
+   "sources": [
+    {
+     "url": "https://www.arabtimesonline.com/news/173-houthis-killed-or-wounded-as-yemen-army-intensifies-military-operations/",
+     "domain": "arabtimesonline.com"
+    }
+   ],
+   "region": "예멘",
+   "category": "maritime",
+   "summary": "예멘군이 군사 작전을 강화하여 후티 반군 173명이 사상했다.",
+   "impact_industries": [
+    "semiconductor",
+    "automotive",
+    "consumer",
+    "energy",
+    "manufacturing",
+    "chemical"
+   ],
+   "industry_scores": {
+    "semiconductor": 50,
+    "automotive": 70,
+    "consumer": 60,
+    "energy": 80,
+    "manufacturing": 70,
+    "chemical": 70
+   },
+   "risk_score": 80,
+   "risk_level": "high",
+   "prev_score": 80,
+   "created_at": "2026-11-17T05:08:13.390236+00:00",
+   "insight": {
+    "why_it_matters": "예멘 내전은 홍해 및 아덴만 해상 운송의 불안정성을 야기하는 주요 원인이다. 군사 작전 강화는 지역 긴장을 고조시키고, 이는 홍해를 통한 해상 물류에 지속적인 위험을 초래한다.",
+    "business_impact": "홍해/아덴만 통과 선박의 운항 위험 증가, 해상 운송 비용 및 보험료 상승, 운송 지연, 중동발 에너지 및 원자재 공급망 불안정성.",
+    "recommended_actions": [
+     "홍해 및 아덴만 해상 운송 경로의 안전성 지속 모니터링",
+     "중동 지역 지정학적 리스크 보고서 확인",
+     "해상 운송 경로 다변화 및 비상 계획 검토",
+     "선박 보험 조건 및 비용 변화 추이 주시"
+    ],
+    "confidence": 0.8
+   }
+  },
+  {
+   "id": "LIVE-008",
+   "lat": 27.9667,
+   "lng": 30.85,
+   "title": "리비아, 아프리카 최대 석유 매장량에도 서방 주요 기업 투자 부진",
+   "source": "oilprice.com",
+   "sources": [
+    {
+     "url": "https://oilprice.com/Energy/Crude-Oil/Libya-Has-Africas-Biggest-Oil-Reserves-but-Western-Majors-Arent-Biting.html",
+     "domain": "oilprice.com"
+    }
+   ],
+   "region": "리비아 (아프리카)",
+   "category": "oil_commodity",
+   "summary": "리비아가 아프리카 최대 석유 매장량을 보유하고 있음에도 불구하고, 서방 주요 석유 기업들의 투자가 부진하다는 내용이다.",
    "impact_industries": [
     "semiconductor",
     "automotive",
@@ -78,342 +303,116 @@ window.LIVE_DATA = {
     "semiconductor": 40,
     "automotive": 60,
     "consumer": 50,
-    "energy": 90,
-    "manufacturing": 70,
-    "chemical": 80
-   },
-   "risk_score": 90,
-   "risk_level": "high",
-   "prev_score": 90,
-   "created_at": "2026-11-16T02:49:57.639778+00:00",
-   "insight": {
-    "why_it_matters": "호르무즈 해협은 전 세계 원유 및 액화천연가스(LNG) 운송의 핵심 통로로, 이곳의 긴장 고조는 국제 유가 및 에너지 가격에 즉각적이고 심각한 영향을 미쳐 한국 기업의 원가 부담을 크게 높일 수 있다.",
-    "business_impact": "유가 및 LNG 가격 급등으로 에너지 집약적인 산업(화학, 정유, 제조)의 생산 비용이 크게 증가하고, 해상 운송 보험료 및 운임이 상승하여 전반적인 물류 비용이 증가할 수 있다. 중동 지역과의 교역에도 차질이 발생할 수 있다.",
-    "recommended_actions": [
-     "중동 정세 및 국제 유가 동향 실시간 모니터링",
-     "해상 운송 경로 다변화 및 대체 운송 수단 검토",
-     "원유 및 LNG 비축량 점검 및 추가 확보 방안 논의",
-     "선박 보험 조건 및 전쟁 위험 할증료 변동 확인",
-     "중동 지역 사업장 및 인력 안전 계획 재검토"
-    ],
-    "confidence": 0.9
-   }
-  },
-  {
-   "id": "LIVE-003",
-   "lat": 35.0,
-   "lng": 105.0,
-   "title": "미국 대중국 반도체 제재 완화 논의 및 비판",
-   "source": "cnycentral.com / nytimes.com",
-   "sources": [
-    {
-     "url": "https://cnycentral.com/news/nation-world/lutnick-pushed-narrower-chip-curbs-as-critics-warned-china-could-gain-ground-in-ai",
-     "domain": "cnycentral.com"
-    },
-    {
-     "url": "http://www.nytimes.com/2026/11/15/us/politics/lutnick-pushed-to-weaken-chip-rules-that-overlap-with-his-family-business.html",
-     "domain": "nytimes.com"
-    }
-   ],
-   "region": "중국/미국",
-   "category": "sanctions",
-   "summary": "미국에서 대중국 반도체 수출 규제 완화를 주장하는 목소리가 나오며, 일부 비평가들은 중국이 인공지능 분야에서 우위를 점할 수 있다고 경고했다. 이는 미국의 대중국 제재 정책의 변화 가능성을 시사한다.",
-   "impact_industries": [
-    "semiconductor",
-    "automotive",
-    "manufacturing"
-   ],
-   "industry_scores": {
-    "semiconductor": 80,
-    "automotive": 40,
-    "consumer": 30,
-    "energy": 10,
-    "manufacturing": 40,
-    "chemical": 10
+    "energy": 80,
+    "manufacturing": 60,
+    "chemical": 70
    },
    "risk_score": 80,
    "risk_level": "high",
    "prev_score": 80,
-   "created_at": "2026-11-16T02:49:57.639778+00:00",
+   "created_at": "2026-11-17T05:08:13.390236+00:00",
    "insight": {
-    "why_it_matters": "미국의 대중국 반도체 제재는 글로벌 반도체 공급망에 큰 영향을 미치며, 한국 반도체 및 관련 산업 기업에 직접적인 영향을 준다. 제재 완화 또는 강화 논의는 기업의 전략 수립에 중요한 변수이다.",
-    "business_impact": "제재 완화 시 중국 시장 접근성 개선 및 부품 조달 용이성 증가를 기대할 수 있으나, 동시에 기술 유출 및 경쟁 심화 우려가 있다. 제재 강화 시에는 중국향 수출 및 부품 조달에 더 큰 어려움이 발생할 수 있다.",
+    "why_it_matters": "리비아의 정치적 불안정성 및 투자 환경의 불확실성은 글로벌 원유 공급 안정성에 영향을 미칠 수 있다. 이는 장기적인 유가 및 에너지 수급 전망에 영향을 주며, 에너지 안보 측면에서 중요하다.",
+    "business_impact": "글로벌 원유 공급의 잠재적 불안정성 지속, 유가 변동성 증가, 에너지 자원 확보 전략 재검토 필요성, 아프리카 지역 에너지 프로젝트 리스크 평가 강화.",
     "recommended_actions": [
-     "미국 정부의 대중국 반도체 정책 동향 면밀히 주시",
-     "중국 시장 전략 및 공급망 다변화 계획 재검토",
-     "미국 및 중국 규제 당국과의 소통 채널 유지",
-     "기술 보호 및 지적 재산권 관리 강화"
+     "글로벌 원유 시장 동향 및 중동/아프리카 산유국의 지정학적 리스크 모니터링",
+     "장기적인 에너지 수급 계획 재검토",
+     "원유 가격 변동성에 대비한 헤징 전략 검토",
+     "아프리카 지역 투자 환경 변화 주시"
     ],
     "confidence": 0.8
-   }
-  },
-  {
-   "id": "LIVE-005",
-   "lat": 25.0478,
-   "lng": 121.532,
-   "title": "중국, 대만 주변에 100척 이상 함정 배치",
-   "source": "milwaukeesun.com",
-   "sources": [
-    {
-     "url": "http://www.milwaukeesun.com/news/279431332/china-deploys-more-than-100-ships-around-taiwan",
-     "domain": "milwaukeesun.com"
-    }
-   ],
-   "region": "대만 해협",
-   "category": "maritime",
-   "summary": "중국이 대만 주변에 100척 이상의 함정을 배치했다는 보도가 나왔다. 이는 대만 해협의 군사적 긴장 고조를 시사하며, 역내 안보 상황에 대한 우려를 증폭시킨다.",
-   "impact_industries": [
-    "semiconductor",
-    "automotive",
-    "consumer",
-    "manufacturing"
-   ],
-   "industry_scores": {
-    "semiconductor": 80,
-    "automotive": 60,
-    "consumer": 50,
-    "energy": 30,
-    "manufacturing": 70,
-    "chemical": 30
-   },
-   "risk_score": 80,
-   "risk_level": "high",
-   "prev_score": 80,
-   "created_at": "2026-11-16T02:49:57.639778+00:00",
-   "insight": {
-    "why_it_matters": "대만 해협은 글로벌 해상 운송의 주요 경로이자 세계 반도체 생산의 핵심 지역이다. 중국의 군사 활동 증가는 대만 해협 봉쇄 또는 무력 충돌 가능성을 높여 전 세계 공급망에 치명적인 영향을 미칠 수 있다.",
-    "business_impact": "대만 해협을 통과하는 선박의 운항 지연, 운임 및 보험료 상승, 최악의 경우 운항 중단으로 인해 반도체 및 주요 부품 공급에 심각한 차질이 발생할 수 있다. 이는 한국 제조 기업의 생산 중단으로 이어질 수 있다.",
-    "recommended_actions": [
-     "대만 해협 정세 및 중국 군사 활동 동향 면밀히 주시",
-     "대만산 반도체 및 부품 재고 수준 점검 및 대체 공급처 확보 방안 모색",
-     "대만 해협 우회 경로 및 비상 운송 계획 수립",
-     "물류 파트너와 비상 계획 공유 및 협력 강화",
-     "지정학적 리스크 시나리오별 대응 계획 수립"
-    ],
-    "confidence": 0.8
-   }
-  },
-  {
-   "id": "LIVE-001",
-   "lat": 57.0,
-   "lng": 25.0,
-   "title": "우크라이나 에너지 방어 위협: 스타실드 제한",
-   "source": "readingchronicle.co.uk",
-   "sources": [
-    {
-     "url": "https://www.readingchronicle.co.uk/news/national/26730804.starshield-restrictions-threaten-ukraines-energy-defences-ahead-winter/",
-     "domain": "readingchronicle.co.uk"
-    }
-   ],
-   "region": "라트비아 (우크라이나 에너지 안보 관련)",
-   "category": "oil_commodity",
-   "summary": "겨울을 앞두고 스타실드(Starshield) 제한이 우크라이나의 에너지 방어 능력을 위협하고 있다는 보도가 나왔다. 이는 우크라이나의 에너지 인프라 보호에 영향을 미칠 수 있다.",
-   "impact_industries": [
-    "energy"
-   ],
-   "industry_scores": {
-    "semiconductor": 10,
-    "automotive": 10,
-    "consumer": 20,
-    "energy": 70,
-    "manufacturing": 20,
-    "chemical": 20
-   },
-   "risk_score": 70,
-   "risk_level": "high",
-   "prev_score": 70,
-   "created_at": "2026-11-16T02:49:57.639778+00:00",
-   "insight": {
-    "why_it_matters": "우크라이나의 에너지 안보 약화는 유럽 전반의 에너지 시장 불안정성을 가중시킬 수 있으며, 이는 국제 유가 및 에너지 상품 가격에 영향을 미쳐 한국 기업의 원가 부담을 높일 수 있다.",
-    "business_impact": "유럽 지역의 에너지 공급망 불안정 심화로 에너지 가격이 상승할 수 있으며, 이는 에너지 집약적인 한국 제조 기업의 생산 비용 증가로 이어질 수 있다. 또한, 유럽 시장의 소비 심리 위축을 야기할 수 있다.",
-    "recommended_actions": [
-     "유럽 에너지 시장 동향 및 유가 변동성 주시",
-     "에너지 구매 계약 조건 재검토 및 대체 공급원 확보 가능성 타진",
-     "에너지 효율 개선 및 절감 방안 모색",
-     "유럽 시장의 소비재 수요 변화 모니터링"
-    ],
-    "confidence": 0.6
-   }
-  },
-  {
-   "id": "LIVE-008",
-   "lat": 2.5,
-   "lng": 112.5,
-   "title": "싱가포르 엔비디아 칩 수출 사기 혐의",
-   "source": "english.pravda.ru",
-   "sources": [
-    {
-     "url": "https://english.pravda.ru/news/world/172849-singapore-nvidia-chip-export-fraud-charges/",
-     "domain": "english.pravda.ru"
-    }
-   ],
-   "region": "싱가포르/말레이시아",
-   "category": "supply_chain",
-   "summary": "싱가포르에서 엔비디아 칩 수출과 관련된 사기 혐의가 발생했다는 보도가 나왔다. 이는 반도체 유통 과정에서의 불법 행위 가능성을 시사하며, 공급망 투명성 및 규제 준수 문제를 제기한다.",
-   "impact_industries": [
-    "semiconductor"
-   ],
-   "industry_scores": {
-    "semiconductor": 60,
-    "automotive": 20,
-    "consumer": 30,
-    "energy": 5,
-    "manufacturing": 20,
-    "chemical": 5
-   },
-   "risk_score": 60,
-   "risk_level": "medium",
-   "prev_score": 60,
-   "created_at": "2026-11-16T02:49:57.639778+00:00",
-   "insight": {
-    "why_it_matters": "엔비디아 칩은 AI 및 고성능 컴퓨팅 분야의 핵심 부품으로, 이러한 사기 혐의는 글로벌 반도체 공급망의 투명성과 신뢰성에 대한 우려를 높인다. 특히 제재 회피 목적의 불법 유통 가능성은 한국 기업에도 규제 준수 리스크를 야기할 수 있다.",
-    "business_impact": "불법 유통된 칩의 사용은 기업의 평판 리스크 및 법적 제재로 이어질 수 있다. 또한, 반도체 공급망 내의 불확실성을 증가시켜 정품 조달에 어려움을 겪거나 비용이 상승할 수 있다.",
-    "recommended_actions": [
-     "반도체 구매 경로 및 공급업체 실사 강화",
-     "수출입 규제 및 제재 준수 여부 재확인",
-     "내부 컴플라이언스 시스템 점검 및 강화",
-     "엔비디아 등 주요 칩 제조사와의 직접 소통 채널 유지",
-     "공급망 내 불법 행위 감지 시스템 구축"
-    ],
-    "confidence": 0.7
-   }
-  },
-  {
-   "id": "LIVE-006",
-   "lat": 25.0,
-   "lng": 45.0,
-   "title": "후티 반군 아덴 진격 및 홍해 해상 운송 위협",
-   "source": "hindustantimes.com",
-   "sources": [
-    {
-     "url": "https://www.hindustantimes.com/world-news/us-news/houthis-advance-on-aden-as-govt-bolsters-city-defences-101794773152113.html",
-     "domain": "hindustantimes.com"
-    }
-   ],
-   "region": "예멘/홍해",
-   "category": "maritime",
-   "summary": "후티 반군이 아덴으로 진격하고 있으며, 정부군이 도시 방어를 강화하고 있다는 보도가 나왔다. 이는 예멘 내전의 심화와 홍해 지역의 해상 안보 위협을 증가시킨다.",
-   "impact_industries": [
-    "energy"
-   ],
-   "industry_scores": {
-    "semiconductor": 20,
-    "automotive": 30,
-    "consumer": 20,
-    "energy": 50,
-    "manufacturing": 30,
-    "chemical": 30
-   },
-   "risk_score": 50,
-   "risk_level": "medium",
-   "prev_score": 50,
-   "created_at": "2026-11-16T02:49:57.639778+00:00",
-   "insight": {
-    "why_it_matters": "홍해는 수에즈 운하와 연결되는 주요 해상 통로로, 이곳의 안보 불안정은 유럽-아시아 간 해상 운송에 큰 영향을 미친다. 운송 지연 및 비용 증가는 한국 기업의 물류 효율성을 저해할 수 있다.",
-    "business_impact": "홍해를 통과하는 선박의 운항 지연, 운임 및 보험료 상승이 발생할 수 있으며, 이는 유럽향 수출 및 중동/아프리카 지역과의 교역에 부정적인 영향을 미칠 수 있다.",
-    "recommended_actions": [
-     "홍해 지역 정세 및 해상 운송 안전 정보 지속 확인",
-     "수에즈 운하 이용 선박의 운항 스케줄 및 경로 변경 가능성 검토",
-     "물류 파트너와 비상 계획 공유 및 협력 강화",
-     "해상 보험 조건 및 전쟁 위험 할증료 변동 확인"
-    ],
-    "confidence": 0.7
    }
   },
   {
    "id": "LIVE-007",
-   "lat": 46.0,
-   "lng": 25.0,
-   "title": "흑해 선박 대상 드론 공격 규탄",
-   "source": "politico.eu",
+   "lat": 32.0,
+   "lng": 53.0,
+   "title": "프랑스, 이란 혁명수비대 소행 추정 슈퍼마켓 사이버 공격에 EU 제재 추진",
+   "source": "theyeshivaworld.com",
    "sources": [
     {
-     "url": "https://www.politico.eu/article/romanian-pm-condemns-unacceptable-drone-strikes-black-sea-ships/",
-     "domain": "politico.eu"
+     "url": "https://www.theyeshivaworld.com/news/general/2623886/fridge-attack-france-pushes-eu-sanctions-over-supermarket-cyberattack-it-blames-on-irans-revolutionary-guard.html",
+     "domain": "theyeshivaworld.com"
     }
    ],
-   "region": "흑해 (루마니아)",
-   "category": "maritime",
-   "summary": "루마니아 총리가 흑해 선박에 대한 용납할 수 없는 드론 공격을 규탄했다. 이는 흑해 지역의 해상 운송 안전에 대한 우려를 높이며, 러시아-우크라이나 전쟁의 해상 전선 확대를 시사한다.",
+   "region": "이란 (프랑스, EU 관련)",
+   "category": "sanctions",
+   "summary": "프랑스가 이란 혁명수비대의 소행으로 추정되는 슈퍼마켓 사이버 공격에 대해 EU의 제재를 추진하고 있다.",
    "impact_industries": [
-    "energy"
+    "consumer",
+    "energy",
+    "manufacturing"
    ],
    "industry_scores": {
-    "semiconductor": 10,
-    "automotive": 10,
-    "consumer": 10,
+    "semiconductor": 30,
+    "automotive": 30,
+    "consumer": 60,
     "energy": 40,
-    "manufacturing": 10,
-    "chemical": 10
+    "manufacturing": 40,
+    "chemical": 30
    },
-   "risk_score": 40,
+   "risk_score": 60,
    "risk_level": "medium",
-   "prev_score": 40,
-   "created_at": "2026-11-16T02:49:57.639778+00:00",
+   "prev_score": 60,
+   "created_at": "2026-11-17T05:08:13.390236+00:00",
    "insight": {
-    "why_it_matters": "흑해는 곡물 및 일부 에너지 자원 운송의 중요한 경로이다. 선박에 대한 공격은 흑해 곡물 협정의 불안정성을 가중시키고, 해당 지역을 지나는 선박의 안전을 위협하여 운송 비용 상승 및 공급 차질을 유발할 수 있다.",
-    "business_impact": "흑해를 통한 곡물 및 원자재 수입에 의존하는 기업은 공급망 불안정 및 가격 상승에 직면할 수 있다. 해당 지역을 지나는 선박의 보험료 및 운임이 상승할 수 있다.",
+    "why_it_matters": "사이버 공격이 국가 간 제재로 이어질 수 있음을 보여주며, 이는 국제 관계 및 특정 국가와의 거래에 영향을 미칠 수 있다. 특히 소비재 유통망의 사이버 보안 취약성과 지정학적 리스크의 연계를 강조한다.",
+    "business_impact": "이란 관련 사업의 리스크 증가, EU의 대이란 제재 강화 가능성, 소비재 유통망의 사이버 보안 강화 필요성, 국제 무역 환경의 불확실성 증대.",
     "recommended_actions": [
-     "흑해 지역 해상 운송 안전 정보 및 전쟁 위험 동향 주시",
-     "흑해를 통한 원자재 수입 경로 및 대체 공급원 검토",
-     "물류 파트너와 비상 계획 공유 및 협력 강화",
-     "선박 보험 조건 및 전쟁 위험 할증료 변동 확인"
+     "이란 관련 사업 및 거래의 법적 리스크 검토",
+     "EU의 대이란 제재 동향 면밀히 주시",
+     "소비재 유통망의 사이버 보안 시스템 점검 및 강화",
+     "지정학적 요인에 따른 사이버 위협 증가 대비"
     ],
-    "confidence": 0.6
+    "confidence": 0.75
    }
   },
   {
-   "id": "LIVE-002",
-   "lat": 39.9523,
-   "lng": -75.1638,
-   "title": "미국 미시시피 강 유조선 충돌 사고 및 소송",
-   "source": "cedarnews.net / wdio.com / boston.com / standardspeaker.com / moneycontrol.com",
+   "id": "LIVE-001",
+   "lat": 39.8017,
+   "lng": -89.6437,
+   "title": "미국 일리노이 에탄올 공장 폭탄 발견 및 용의자 체포",
+   "source": "wtag.iheart.com / wccbcharlotte.com / saharareporters.com",
    "sources": [
     {
-     "url": "https://cedarnews.net/newstasks/1152845/tankers-steering-failed-before-it-crashed-cruise/",
-     "domain": "cedarnews.net"
+     "url": "https://wtag.iheart.com/content/2026-11-16-person-of-interest-in-custody-after-bomb-discovered-at-illinois-ethanol-plant/",
+     "domain": "wtag.iheart.com"
     },
     {
-     "url": "https://www.wdio.com/ap-top-news/ap-top-news-us-headlines-ap-top-news/new-orleans-port-sues-to-get-control-of-tanker-that-crashed-into-cruise-ship-on-mississippi-river/",
-     "domain": "wdio.com"
+     "url": "https://www.wccbcharlotte.com/2026/11/16/peoria-mayor-says-suspect-in-custody-related-to-illinois-ethanol-plant-bomb/",
+     "domain": "wccbcharlotte.com"
     },
     {
-     "url": "https://www.boston.com/news/national-news/2026/11/15/officials-say-a-tankers-steering-failed-before-it-crashed-into-a-cruise-ship-in-new-orleans/",
-     "domain": "boston.com"
-    },
-    {
-     "url": "https://www.standardspeaker.com/2026/11/15/investigators-flagged-problems-with-tanker-for-years-before-new-orleans-paddleboat-crash/",
-     "domain": "standardspeaker.com"
-    },
-    {
-     "url": "https://www.moneycontrol.com/world/new-orleans-port-sues-tanker-owner-for-over-1-million-after-cruise-ship-crash-on-mississippi-river-article-14080544.html",
-     "domain": "moneycontrol.com"
+     "url": "https://saharareporters.com/2026/11/16/suspect-arrested-us-over-explosive-device-found-illinois-ethanol-plant",
+     "domain": "saharareporters.com"
     }
    ],
-   "region": "미국 미시시피 강 (뉴올리언스)",
-   "category": "maritime",
-   "summary": "뉴올리언스 미시시피 강에서 유조선이 유람선과 충돌하는 사고가 발생했으며, 항만 당국이 유조선 소유주를 상대로 소송을 제기했다. 유조선의 조향 장치 문제 가능성이 제기되었다.",
-   "impact_industries": [],
+   "region": "미국 일리노이",
+   "category": "supply_chain",
+   "summary": "미국 일리노이주의 한 에탄올 생산 공장에서 폭탄이 발견되었으며, 관련 용의자가 체포되었다. 공장 가동 중단 여부는 불분명하다.",
+   "impact_industries": [
+    "energy",
+    "chemical"
+   ],
    "industry_scores": {
-    "semiconductor": 5,
-    "automotive": 15,
+    "semiconductor": 10,
+    "automotive": 20,
     "consumer": 10,
-    "energy": 20,
-    "manufacturing": 15,
-    "chemical": 15
+    "energy": 40,
+    "manufacturing": 30,
+    "chemical": 50
    },
-   "risk_score": 20,
-   "risk_level": "low",
-   "prev_score": 20,
-   "created_at": "2026-11-16T02:49:57.639778+00:00",
+   "risk_score": 50,
+   "risk_level": "medium",
+   "prev_score": 50,
+   "created_at": "2026-11-17T05:08:13.390236+00:00",
    "insight": {
-    "why_it_matters": "미시시피 강은 미국 내륙 물류의 핵심 수로로, 사고로 인한 운송 차질은 미국 내륙으로 향하는 원자재 및 제품의 공급망에 영향을 미칠 수 있다.",
-    "business_impact": "미국 내륙으로 운송되는 한국 기업의 수출품(자동차, 소비재, 화학제품 등) 및 수입 원자재의 운송 지연이 발생할 수 있으며, 이는 물류 비용 증가와 납기 지연으로 이어질 수 있다.",
+    "why_it_matters": "에탄올은 바이오 연료 및 다양한 산업용 화학물질의 원료로 사용된다. 주요 생산 시설에서의 보안 위협은 에탄올 공급망의 불안정성을 야기하고 관련 산업에 영향을 미칠 수 있다.",
+    "business_impact": "에탄올을 원료로 사용하는 화학 및 에너지 산업의 생산 비용 상승 가능성, 공급망 불안정성 증가.",
     "recommended_actions": [
-     "미시시피 강 운송 경로 이용 여부 확인 및 대체 운송 방안 검토",
-     "미국 내륙 물류 파트너와 소통하여 운송 지연 가능성 파악",
-     "재고 수준 점검 및 비상 재고 확보 고려",
-     "물류 보험 조건 재확인"
+     "에탄올 시장 동향 및 가격 변동성 모니터링",
+     "대체 원료 또는 공급처 확보 가능성 검토",
+     "미국 내 유사 시설의 보안 강화 여부 확인"
     ],
     "confidence": 0.7
    }
