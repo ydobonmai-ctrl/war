@@ -1,63 +1,180 @@
 // 자동 생성 파일 (scripts/update_live.py) — 직접 수정하지 마세요
 window.LIVE_DATA = {
- "generatedAt": "2026-11-19T04:15:24.966410+00:00",
+ "generatedAt": "2026-11-20T04:02:20.273866+00:00",
  "window": {
   "hours": 24,
-  "files": 96,
-  "until": "2026-11-19T04:15:00+00:00"
+  "files": 94,
+  "until": "2026-11-20T04:00:00+00:00"
  },
  "source": "GDELT 2.0 Events (15분 단위 공개 파일)",
  "model": "gemini-2.5-flash",
  "stats": {
-  "matched_events": 544,
+  "matched_events": 503,
   "by_category": {
-   "cyber": 46,
-   "maritime": 206,
-   "sanctions": 155,
-   "supply_chain": 50,
-   "oil_commodity": 48,
-   "fx_macro": 39
+   "oil_commodity": 52,
+   "cyber": 38,
+   "maritime": 197,
+   "supply_chain": 60,
+   "fx_macro": 34,
+   "sanctions": 122
   },
   "top_places": [
    "United States",
-   "Iran",
    "Saudi Arabia",
-   "Israel",
-   "India",
    "Yemen",
+   "Iran",
+   "Australia",
    "United Kingdom",
-   "Australia"
+   "China",
+   "Israel"
   ],
   "candidates": 30
  },
  "events": [
   {
-   "id": "LIVE-002",
-   "lat": 24.4667,
-   "lng": 54.3667,
-   "title": "호르무즈 해협 인근 선박 공격 및 이란의 해협 관련 조치",
-   "source": "tradearabia.com:443 / siasat.com / gulfnews.com / hellenicshippingnews.com",
+   "id": "LIVE-001",
+   "lat": 24.6408,
+   "lng": 46.7728,
+   "title": "중동 해상 안보 위협 및 유가 불안정 심화",
+   "source": "bignewsnetwork.com / zerohedge.com / arabnews.com / maritime-executive.com / bus",
    "sources": [
     {
-     "url": "https://tradearabia.com:443/News/489872/ADNOC-LandS-vessel-attacked-while-transiting-Strait-of-Hormuz",
-     "domain": "tradearabia.com:443"
+     "url": "http://www.bignewsnetwork.com/news/279443926/yemen-houthis-claim-attacks-on-saudi-airport-financial-facilities",
+     "domain": "bignewsnetwork.com"
     },
     {
-     "url": "https://www.siasat.com/oil-tanker-carrying-3-indians-targeted-near-strait-of-hormuz-3580725/",
-     "domain": "siasat.com"
+     "url": "http://www.zerohedge.com/geopolitical/windows-blown-out-pif-skyscraper-riyadh-reportedly-damaged-amid-houthi-attacks",
+     "domain": "zerohedge.com"
     },
     {
-     "url": "https://gulfnews.com/world/gulf/oman/tanker-hit-by-unknown-projectile-near-oman-in-latest-hormuz-attack-1.500752860",
-     "domain": "gulfnews.com"
+     "url": "https://www.arabnews.com/business/oil-prices-edge-higher-as-houthi-attacks-on-riyadh-raise-supply-concerns-3013070",
+     "domain": "arabnews.com"
     },
     {
-     "url": "https://www.hellenicshippingnews.com/irans-hormuz-blacklist-reshapes-flows-but-exports-hold/",
-     "domain": "hellenicshippingnews.com"
+     "url": "https://maritime-executive.com/article/lpg-tanker-tara-gas-fire-fought-in-the-strait-of-hormuz",
+     "domain": "maritime-executive.com"
+    },
+    {
+     "url": "https://www.businesstimes.com.sg/international/oil-settles-flat-hormuz-disruptions-offset-global-surplus-fears",
+     "domain": "businesstimes.com.sg"
+    },
+    {
+     "url": "https://www.samaa.tv/2087360643-saudi-arabia-condemns-houthi-attacks-on-civilian-facilities-in-riyadh",
+     "domain": "samaa.tv"
+    },
+    {
+     "url": "https://pakobserver.net/saudi-arabias-tallest-skyscraper-pif-tower-damaged-in-houthi-missile-attack/",
+     "domain": "pakobserver.net"
+    },
+    {
+     "url": "https://www.theyeshivaworld.com/news/israel-news/2625566/hormuz-attack-iran-claims-it-struck-two-tankers-carrying-more-than-four-million-barrels-of-oil.html",
+     "domain": "theyeshivaworld.com"
+    },
+    {
+     "url": "https://www.whmi.com/news/fox/iran-backed-houthi-terrorist-attack-hits-riyadh-tallest-skyscraper-hq-saudi-public-investment-fund",
+     "domain": "whmi.com"
+    },
+    {
+     "url": "https://article.wn.com/view/2026/11/19/Riyadh_tower_damaged_in_Houthi_attack_on_November_19_no_inju/",
+     "domain": "article.wn.com"
     }
    ],
-   "region": "호르무즈 해협, 오만, 아랍에미리트, 이란",
+   "region": "중동 (사우디아라비아, 예멘, 이란, 오만, 호르무즈 해협)",
    "category": "maritime",
-   "summary": "호르무즈 해협 인근에서 ADNOC 선박 및 유조선이 공격받는 사건이 발생했으며, 이란의 호르무즈 관련 조치가 해상 물류 흐름에 영향을 미치고 있다.",
+   "summary": "예멘 후티 반군이 사우디아라비아 수도 리야드의 주요 시설을 공격하고, 이란은 호르무즈 해협에서 유조선 공격을 주장했으며, 호르무즈 해협에서 LPG 운반선 화재가 발생하여 중동 지역의 해상 안보와 유가 불안정 우려가 커지고 있습니다.",
+   "impact_industries": [
+    "semiconductor",
+    "automotive",
+    "consumer",
+    "energy",
+    "manufacturing",
+    "chemical"
+   ],
+   "industry_scores": {
+    "semiconductor": 50,
+    "automotive": 70,
+    "consumer": 60,
+    "energy": 90,
+    "manufacturing": 70,
+    "chemical": 80
+   },
+   "risk_score": 90,
+   "risk_level": "high",
+   "prev_score": 90,
+   "created_at": "2026-11-20T04:02:20.273866+00:00",
+   "insight": {
+    "why_it_matters": "중동은 한국의 주요 원유 및 가스 수입원이며, 호르무즈 해협은 핵심 해상 운송로입니다. 이 지역의 불안정은 에너지 비용 상승과 해상 물류 차질로 이어져 한국 기업의 생산 비용과 공급망 안정성에 직접적인 영향을 미칩니다.",
+    "business_impact": "원유 및 LPG 가격 상승으로 인한 원가 부담 증가. 해상 운송 보험료 인상 및 운송 지연 가능성. 중동 지역 프로젝트 및 투자 리스크 증가.",
+    "recommended_actions": [
+     "원유 및 LPG 재고 수준 점검 및 비상 계획 수립.",
+     "해상 운송 경로 및 보험 조건 재검토.",
+     "중동 정세 변화 모니터링 강화 및 대체 공급처 확보 가능성 타진.",
+     "에너지 효율 개선 및 재생에너지 전환 가속화 검토."
+    ],
+    "confidence": 0.8
+   }
+  },
+  {
+   "id": "LIVE-004",
+   "lat": 24.0,
+   "lng": 121.0,
+   "title": "엔비디아, AI 공급망 도전 과제 언급",
+   "source": "e-commerce.news",
+   "sources": [
+    {
+     "url": "https://e-commerce.news/story/nvidia-s-deb-shoquist-details-ai-supply-chain-challenge",
+     "domain": "e-commerce.news"
+    }
+   ],
+   "region": "대만",
+   "category": "supply_chain",
+   "summary": "엔비디아(Nvidia)의 고위 관계자가 인공지능(AI) 공급망의 도전 과제에 대해 언급했습니다. 이는 AI 기술 발전에 필수적인 반도체 및 관련 부품의 안정적인 공급에 대한 우려를 시사합니다.",
+   "impact_industries": [
+    "semiconductor",
+    "automotive",
+    "consumer",
+    "energy",
+    "manufacturing"
+   ],
+   "industry_scores": {
+    "semiconductor": 90,
+    "automotive": 60,
+    "consumer": 50,
+    "energy": 40,
+    "manufacturing": 70,
+    "chemical": 30
+   },
+   "risk_score": 90,
+   "risk_level": "high",
+   "prev_score": 90,
+   "created_at": "2026-11-20T04:02:20.273866+00:00",
+   "insight": {
+    "why_it_matters": "AI 기술은 다양한 산업 분야에서 혁신을 주도하고 있으며, AI 반도체는 그 핵심 부품입니다. 엔비디아와 같은 선두 기업의 공급망 문제는 AI 관련 산업 전반에 파급 효과를 미칠 수 있으며, 특히 대만은 핵심 반도체 생산 기지로서 지정학적 리스크가 상존합니다.",
+    "business_impact": "AI 반도체 및 관련 부품 수급 불안정성 증가. AI 기반 제품 개발 및 생산 지연 가능성. 반도체 산업 내 경쟁 심화 및 비용 상승.",
+    "recommended_actions": [
+     "AI 반도체 및 관련 부품의 공급망 다변화 전략 수립.",
+     "대만 지정학적 리스크에 대한 비상 계획 검토.",
+     "AI 기술 도입 및 활용 계획에 공급망 리스크 반영.",
+     "차세대 반도체 기술 개발 동향 및 투자 기회 모색."
+    ],
+    "confidence": 0.85
+   }
+  },
+  {
+   "id": "LIVE-003",
+   "lat": 34.0089,
+   "lng": 109.859,
+   "title": "중국 증시 하락 및 상장 폐지 경고 증가",
+   "source": "theepochtimes.com",
+   "sources": [
+    {
+     "url": "https://www.theepochtimes.com/china/more-than-100-chinese-stocks-fall-below-2-yuan-as-5-companies-issue-delisting-warnings-6126809",
+     "domain": "theepochtimes.com"
+    }
+   ],
+   "region": "중국",
+   "category": "fx_macro",
+   "summary": "100개 이상의 중국 주식이 2위안 아래로 떨어지고 5개 기업이 상장 폐지 경고를 받으면서 중국 증시의 불안정성이 심화되고 있습니다. 이는 중국 경제의 전반적인 둔화와 투자 심리 위축을 반영하는 것으로 해석됩니다.",
    "impact_industries": [
     "semiconductor",
     "automotive",
@@ -69,250 +186,87 @@ window.LIVE_DATA = {
    "industry_scores": {
     "semiconductor": 60,
     "automotive": 70,
-    "consumer": 60,
-    "energy": 90,
-    "manufacturing": 80,
-    "chemical": 80
-   },
-   "risk_score": 90,
-   "risk_level": "high",
-   "prev_score": 90,
-   "created_at": "2026-11-19T04:15:24.966410+00:00",
-   "insight": {
-    "why_it_matters": "호르무즈 해협은 세계 석유 및 가스 운송의 핵심 통로로, 이곳에서의 불안정은 에너지 가격 상승과 해상 운송 보험료 인상으로 직결된다. 이는 한국 기업의 원자재 수급 및 물류 비용에 막대한 영향을 미친다.",
-    "business_impact": "유가 및 가스 가격 상승으로 인한 생산 비용 증가, 해상 운송 지연 및 운임 상승, 보험료 인상. 중동발 원자재 수급에 차질 발생 가능성.",
-    "recommended_actions": [
-     "중동발 원유 및 가스 수급 다변화 방안 검토",
-     "해상 운송 경로 및 보험 조건 재검토",
-     "물류 파트너사와 비상 계획 수립 및 공유",
-     "에너지 비축량 점검 및 추가 확보 방안 논의"
-    ],
-    "confidence": 0.9
-   }
-  },
-  {
-   "id": "LIVE-006",
-   "lat": 0,
-   "lng": 0,
-   "title": "엔비디아 공급망 대상 랜섬웨어 공격 가능성",
-   "source": "investmentwatchblog.com",
-   "sources": [
-    {
-     "url": "https://www.investmentwatchblog.com/the-gentlemen-may-have-been-targeting-companies-in-nvidias-supply-chain-before-putting-the-chip-giant-on-its-ransomware-leak-site/",
-     "domain": "investmentwatchblog.com"
-    }
-   ],
-   "region": "글로벌",
-   "category": "supply_chain",
-   "summary": "'The Gentlemen'이라는 해킹 그룹이 엔비디아의 공급망 내 기업들을 표적으로 삼아 랜섬웨어 공격을 시도했을 가능성이 제기되었다.",
-   "impact_industries": [
-    "semiconductor",
-    "automotive",
-    "consumer",
-    "energy",
-    "manufacturing",
-    "chemical"
-   ],
-   "industry_scores": {
-    "semiconductor": 90,
-    "automotive": 70,
-    "consumer": 60,
-    "energy": 40,
-    "manufacturing": 80,
-    "chemical": 50
-   },
-   "risk_score": 90,
-   "risk_level": "high",
-   "prev_score": 90,
-   "created_at": "2026-11-19T04:15:24.966410+00:00",
-   "insight": {
-    "why_it_matters": "주요 기술 기업의 공급망에 대한 사이버 공격은 전체 산업에 파급 효과를 미칠 수 있다. 특히 반도체와 같은 핵심 부품의 공급망 교란은 한국 제조 기업의 생산에 직접적인 타격을 줄 수 있다.",
-    "business_impact": "반도체 및 관련 부품 수급 불안정, 생산 지연 또는 중단, 공급망 전체의 보안 취약성 노출.",
-    "recommended_actions": [
-     "공급망 내 IT 및 OT 보안 취약점 점검 강화",
-     "주요 공급업체의 사이버 보안 프로토콜 확인 및 협력",
-     "공급망 리스크 관리 시스템 고도화",
-     "비상 시 대체 공급처 확보 계획 수립"
-    ],
-    "confidence": 0.8
-   }
-  },
-  {
-   "id": "LIVE-007",
-   "lat": 35.3001,
-   "lng": -81.1998,
-   "title": "리튬 공장 폭발 사고 발생",
-   "source": "isssource.com",
-   "sources": [
-    {
-     "url": "https://www.isssource.com/blast-hurts-3-workers-at-lithium-plant/",
-     "domain": "isssource.com"
-    }
-   ],
-   "region": "미국 노스캐롤라이나",
-   "category": "supply_chain",
-   "summary": "미국 노스캐롤라이나의 한 리튬 공장에서 폭발 사고가 발생하여 3명의 작업자가 부상을 입었다.",
-   "impact_industries": [
-    "semiconductor",
-    "automotive",
-    "consumer",
-    "energy",
-    "manufacturing",
-    "chemical"
-   ],
-   "industry_scores": {
-    "semiconductor": 70,
-    "automotive": 80,
-    "consumer": 70,
-    "energy": 90,
-    "manufacturing": 80,
-    "chemical": 90
-   },
-   "risk_score": 90,
-   "risk_level": "high",
-   "prev_score": 90,
-   "created_at": "2026-11-19T04:15:24.966410+00:00",
-   "insight": {
-    "why_it_matters": "리튬은 전기차 배터리, 에너지 저장 시스템 등 첨단 산업의 핵심 원자재이다. 리튬 생산 시설의 사고는 글로벌 리튬 공급망에 차질을 초래하여 관련 산업의 생산 비용 증가 및 공급 부족을 야기할 수 있다.",
-    "business_impact": "리튬 가격 상승 및 수급 불안정, 전기차 및 배터리 생산 비용 증가, 관련 제품 생산 지연.",
-    "recommended_actions": [
-     "리튬 공급망 현황 및 재고 수준 점검",
-     "리튬 공급업체 다변화 방안 검토",
-     "리튬 대체 소재 개발 동향 모니터링",
-     "생산 계획에 잠재적 리튬 수급 차질 반영"
-    ],
-    "confidence": 0.8
-   }
-  },
-  {
-   "id": "LIVE-001",
-   "lat": 38.889,
-   "lng": -77.0003,
-   "title": "미국 및 일본의 광범위한 기술 장애 및 사이버 위협 증가",
-   "source": "fox23maine.com / grandforksherald.com / investmentwatchblog.com / dailymail.com ",
-   "sources": [
-    {
-     "url": "https://fox23maine.com/news/nation-world/cascade-of-tech-outages-raises-alarm-over-reliability-of-digital-infrastructure",
-     "domain": "fox23maine.com"
-    },
-    {
-     "url": "https://www.grandforksherald.com/news/national/us-senators-warn-white-house-that-ai-enabled-cyber-threats-are-outpacing-defenses",
-     "domain": "grandforksherald.com"
-    },
-    {
-     "url": "https://www.investmentwatchblog.com/japans-largest-bank-leaks-6-5-million-customer-records-one-hack-hits-companies-across-the-country/",
-     "domain": "investmentwatchblog.com"
-    },
-    {
-     "url": "https://www.dailymail.com/news/article-16304393/Trump-tells-US-relax-amid-tech-outages-failures-promising-country-launches-cyber-attack-hit-hard.html",
-     "domain": "dailymail.com"
-    },
-    {
-     "url": "https://fortune.com/2026/11/18/jd-vance-stock-up-supplies-outages-allies-prepare-pentagon/",
-     "domain": "fortune.com"
-    }
-   ],
-   "region": "미국, 일본",
-   "category": "cyber",
-   "summary": "미국에서 광범위한 기술 인프라 장애가 발생하고 AI 기반 사이버 위협이 증가하고 있으며, 일본 최대 은행에서 대규모 고객 정보 유출 사고가 발생했다. 이는 디지털 인프라의 신뢰성에 대한 우려를 증폭시키고 있다.",
-   "impact_industries": [
-    "semiconductor",
-    "automotive",
-    "consumer",
-    "energy",
-    "manufacturing",
-    "chemical"
-   ],
-   "industry_scores": {
-    "semiconductor": 70,
-    "automotive": 60,
     "consumer": 80,
     "energy": 50,
-    "manufacturing": 70,
-    "chemical": 50
+    "manufacturing": 80,
+    "chemical": 60
    },
    "risk_score": 80,
    "risk_level": "high",
    "prev_score": 80,
-   "created_at": "2026-11-19T04:15:24.966410+00:00",
+   "created_at": "2026-11-20T04:02:20.273866+00:00",
    "insight": {
-    "why_it_matters": "디지털 인프라의 취약성은 모든 산업의 운영 연속성에 직접적인 위협이 된다. 특히 공급망 전반의 디지털화가 가속화되는 상황에서 사이버 공격은 생산 중단, 데이터 유출, 재정적 손실로 이어질 수 있다.",
-    "business_impact": "기업의 IT 시스템 마비, 생산 라인 중단, 고객 데이터 유출로 인한 신뢰도 하락 및 법적 문제 발생 가능성. 공급망 파트너 간의 정보 교환에도 차질이 생길 수 있다.",
+    "why_it_matters": "중국은 한국의 최대 교역국이자 주요 생산 기지 및 소비 시장입니다. 중국 경제의 불안정은 한국 기업의 대중국 수출 감소, 현지 생산 및 투자 위축, 소비재 시장 둔화 등 광범위한 영향을 미칠 수 있습니다.",
+    "business_impact": "대중국 수출 및 매출 감소 가능성. 중국 내 생산 법인의 운영 환경 악화. 중국 소비 시장 위축으로 인한 소비재 기업 타격. 위안화 약세 압력 증가.",
     "recommended_actions": [
-     "사이버 보안 시스템 전반에 대한 긴급 점검 실시",
-     "공급망 파트너사의 사이버 보안 수준 확인 및 협력 강화",
-     "데이터 백업 및 복구 계획 재검토 및 모의 훈련 실시",
-     "임직원 대상 사이버 보안 교육 강화"
+     "중국 시장 매출 및 수익성 재평가.",
+     "중국 내 생산 및 공급망 다변화 전략 검토.",
+     "중국 정부의 경기 부양책 및 규제 변화 모니터링.",
+     "환율 변동성 관리 강화."
     ],
     "confidence": 0.8
    }
   },
   {
-   "id": "LIVE-003",
-   "lat": 15.3547,
-   "lng": 44.2067,
-   "title": "예멘 후티 반군 관련 사우디 및 연합군의 군사 작전",
-   "source": "sconeadvocate.com.au / arabnews.com",
+   "id": "LIVE-002",
+   "lat": 40.3736,
+   "lng": -82.7755,
+   "title": "미국 오하이오주 데이터센터 전용 대규모 발전소 승인",
+   "source": "peakoil.com",
    "sources": [
     {
-     "url": "https://www.sconeadvocate.com.au/story/9394288/saudi-forces-launch-major-yemen-attack-on-houthi-rebels/",
-     "domain": "sconeadvocate.com.au"
-    },
-    {
-     "url": "https://www.arabnews.com/saudi-arabia/coalition-forces-intercept-houthi-missile-launched-towards-riyadh-debris-causes-damage-3012860",
-     "domain": "arabnews.com"
+     "url": "https://peakoil.com/publicpolicy/ohio-approves-two-large-power-plants-exclusively-for-data-centers",
+     "domain": "peakoil.com"
     }
    ],
-   "region": "예멘, 사우디아라비아",
-   "category": "maritime",
-   "summary": "사우디 군이 예멘 후티 반군에 대한 대규모 공격을 개시했으며, 연합군이 리야드를 향한 후티 미사일을 요격하여 잔해가 피해를 입혔다.",
+   "region": "미국 오하이오",
+   "category": "supply_chain",
+   "summary": "미국 오하이오주가 데이터센터 전용 대규모 발전소 두 곳의 건설을 승인했습니다. 이는 인공지능(AI) 기술 발전과 함께 급증하는 데이터센터의 전력 수요를 충족시키기 위한 조치로 보입니다.",
    "impact_industries": [
     "semiconductor",
-    "automotive",
     "consumer",
     "energy",
-    "manufacturing",
-    "chemical"
+    "manufacturing"
    ],
    "industry_scores": {
-    "semiconductor": 50,
-    "automotive": 60,
-    "consumer": 50,
-    "energy": 80,
-    "manufacturing": 70,
-    "chemical": 70
+    "semiconductor": 70,
+    "automotive": 30,
+    "consumer": 40,
+    "energy": 60,
+    "manufacturing": 50,
+    "chemical": 30
    },
-   "risk_score": 80,
+   "risk_score": 70,
    "risk_level": "high",
-   "prev_score": 80,
-   "created_at": "2026-11-19T04:15:24.966410+00:00",
+   "prev_score": 70,
+   "created_at": "2026-11-20T04:02:20.273866+00:00",
    "insight": {
-    "why_it_matters": "예멘 후티 반군의 활동은 홍해 및 아라비아해의 해상 안보를 위협하며, 이는 중동 지역의 지정학적 불안정성을 심화시킨다. 간접적으로 해상 운송 경로의 안전성에 대한 우려를 높여 운임 및 보험료에 영향을 줄 수 있다.",
-    "business_impact": "중동 지역을 경유하는 해상 운송의 잠재적 위험 증가, 운송 지연 및 비용 상승 가능성. 에너지 및 원자재 시장의 불확실성 증대.",
+    "why_it_matters": "AI 및 디지털 전환 가속화로 데이터센터 전력 수요가 폭증하면서 전력 공급 안정성이 중요해지고 있습니다. 이는 반도체, IT 산업의 성장을 뒷받침하지만, 동시에 전력 시장의 경쟁 심화와 비용 상승을 야기할 수 있습니다.",
+    "business_impact": "데이터센터 관련 기업의 전력 확보 용이성 증대. 전력 수요 증가로 인한 전력망 부하 및 잠재적 전력 비용 상승. 반도체 및 관련 장비 수요 증가.",
     "recommended_actions": [
-     "중동 지역 해상 운송 경로의 위험도 지속 모니터링",
-     "선박 보험 조건 및 비상 계획 재검토",
-     "물류 파트너사와 비상 시 대체 경로 논의",
-     "지정학적 리스크 분석 보고서 정기 구독"
+     "데이터센터 전력 수요 증가에 따른 전력 수급 계획 검토.",
+     "에너지 효율적인 데이터센터 기술 도입 및 투자 고려.",
+     "전력 시장 동향 및 규제 변화 지속적 모니터링.",
+     "AI 관련 반도체 및 장비 시장의 성장 기회 분석."
     ],
     "confidence": 0.7
    }
   },
   {
    "id": "LIVE-005",
-   "lat": 49.0,
-   "lng": 32.0,
-   "title": "글로벌 원유 시장 공급 과잉으로 안정화 추세",
-   "source": "gtreview.com",
+   "lat": 51.4306,
+   "lng": -2.18972,
+   "title": "영국 최대 배터리 저장 시설 계획에 대한 경쟁사 위협",
+   "source": "dailymail.com",
    "sources": [
     {
-     "url": "https://www.gtreview.com/news/global/global-oil-market-straightening-out-as-supply-outstrips-demand/",
-     "domain": "gtreview.com"
+     "url": "https://www.dailymail.com/news/article-16306503/Rivals-estate-threat-plans-Britains-biggest-battery-storage-facility.html",
+     "domain": "dailymail.com"
     }
    ],
-   "region": "전 세계",
-   "category": "oil_commodity",
-   "summary": "글로벌 원유 시장에서 공급이 수요를 초과하면서 시장이 안정화되는 추세를 보이고 있다.",
+   "region": "영국",
+   "category": "supply_chain",
+   "summary": "영국에서 가장 큰 규모의 배터리 저장 시설 건설 계획이 경쟁사로부터 위협을 받고 있다는 보도가 나왔습니다. 이는 에너지 전환의 핵심 인프라 구축에 대한 잠재적 장애물을 시사합니다.",
    "impact_industries": [
     "semiconductor",
     "automotive",
@@ -322,76 +276,27 @@ window.LIVE_DATA = {
     "chemical"
    ],
    "industry_scores": {
-    "semiconductor": 50,
-    "automotive": 70,
-    "consumer": 60,
-    "energy": 80,
-    "manufacturing": 70,
-    "chemical": 80
-   },
-   "risk_score": 80,
-   "risk_level": "high",
-   "prev_score": 80,
-   "created_at": "2026-11-19T04:15:24.966410+00:00",
-   "insight": {
-    "why_it_matters": "원유 시장의 공급 과잉은 유가 하락 압력으로 작용하여, 에너지 비용에 민감한 한국 제조 기업들의 생산 비용 절감에 긍정적인 영향을 줄 수 있다.",
-    "business_impact": "유가 안정화 또는 하락으로 인한 원자재 및 운송 비용 부담 완화. 생산 비용 절감으로 인한 수익성 개선 기대.",
-    "recommended_actions": [
-     "유가 변동성 지속 모니터링 및 구매 전략 검토",
-     "에너지 효율 개선 투자 계획 재검토",
-     "원자재 구매 계약 조건 유연성 확보 방안 논의",
-     "장기적인 에너지 수급 계획 업데이트"
-    ],
-    "confidence": 0.8
-   }
-  },
-  {
-   "id": "LIVE-004",
-   "lat": 33.0,
-   "lng": 66.0,
-   "title": "미국 및 호주의 미얀마, 이스라엘 관련 제재 부과",
-   "source": "theguardian.com / news.az",
-   "sources": [
-    {
-     "url": "https://www.theguardian.com/world/2026/nov/18/us-sanctions-icj-judges-myanmar-genocide-ruling-israel-gaza-court",
-     "domain": "theguardian.com"
-    },
-    {
-     "url": "https://news.az/news/australia-announces-fresh-sanctions-targeting-west-bank-settlers",
-     "domain": "news.az"
-    }
-   ],
-   "region": "미얀마, 이스라엘, 서안 지구",
-   "category": "sanctions",
-   "summary": "미국이 미얀마 및 이스라엘-가자 분쟁 관련 국제사법재판소(ICJ) 판사들에 대한 제재를 부과했으며, 호주도 서안 지구 정착민들을 대상으로 새로운 제재를 발표했다.",
-   "impact_industries": [
-    "semiconductor",
-    "automotive",
-    "consumer",
-    "manufacturing"
-   ],
-   "industry_scores": {
     "semiconductor": 40,
-    "automotive": 40,
-    "consumer": 40,
-    "energy": 30,
-    "manufacturing": 40,
-    "chemical": 30
+    "automotive": 60,
+    "consumer": 50,
+    "energy": 70,
+    "manufacturing": 60,
+    "chemical": 50
    },
-   "risk_score": 40,
-   "risk_level": "medium",
-   "prev_score": 40,
-   "created_at": "2026-11-19T04:15:24.966410+00:00",
+   "risk_score": 70,
+   "risk_level": "high",
+   "prev_score": 70,
+   "created_at": "2026-11-20T04:02:20.273866+00:00",
    "insight": {
-    "why_it_matters": "특정 국가 및 개인에 대한 제재는 해당 지역과의 거래를 복잡하게 만들고, 우회 제재(secondary sanctions) 위험을 증가시킨다. 이는 한국 기업의 글로벌 공급망 및 시장 접근성에 영향을 줄 수 있다.",
-    "business_impact": "제재 대상 국가/지역과의 거래 제한, 금융 거래 어려움, 법적 및 평판 리스크 증가. 공급망 내 제재 대상 기업/개인 포함 여부 확인 필요.",
+    "why_it_matters": "배터리 저장 시설은 재생에너지 확대와 전력망 안정화에 필수적입니다. 이러한 인프라 구축의 지연은 에너지 전환 목표 달성을 어렵게 하고, 관련 산업(배터리 제조, 전기차 등)의 성장에 영향을 미칠 수 있습니다.",
+    "business_impact": "영국 내 에너지 저장 시장의 불확실성 증가. 배터리 및 관련 부품 공급망에 대한 잠재적 영향. 영국 시장 진출을 계획하는 배터리 및 에너지 기업의 투자 리스크.",
     "recommended_actions": [
-     "제재 대상 국가/지역과의 거래 현황 점검",
-     "공급망 내 제재 대상 기업/개인 포함 여부 실사 강화",
-     "제재 준수 프로그램 업데이트 및 임직원 교육",
-     "법무팀과 제재 관련 최신 동향 검토"
+     "영국 에너지 정책 및 인프라 투자 동향 지속 모니터링.",
+     "배터리 저장 시장의 경쟁 환경 및 규제 변화 분석.",
+     "유럽 내 에너지 전환 관련 투자 기회 및 리스크 재평가.",
+     "배터리 소재 및 부품 공급망 안정성 점검."
     ],
-    "confidence": 0.6
+    "confidence": 0.65
    }
   }
  ]
