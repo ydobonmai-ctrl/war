@@ -1,51 +1,59 @@
 // 자동 생성 파일 (scripts/update_live.py) — 직접 수정하지 마세요
 window.LIVE_DATA = {
- "generatedAt": "2026-11-26T05:10:21.004186+00:00",
+ "generatedAt": "2026-11-27T05:07:00.766866+00:00",
  "window": {
   "hours": 24,
-  "files": 96,
-  "until": "2026-11-26T05:15:00+00:00"
+  "files": 94,
+  "until": "2026-11-27T05:15:00+00:00"
  },
  "source": "GDELT 2.0 Events (15분 단위 공개 파일)",
- "model": "gemini-2.5-flash",
+ "model": "gemini-2.5-flash-lite",
  "stats": {
-  "matched_events": 568,
+  "matched_events": 430,
   "by_category": {
-   "fx_macro": 26,
-   "sanctions": 175,
-   "maritime": 237,
-   "supply_chain": 46,
-   "oil_commodity": 63,
-   "cyber": 21
+   "sanctions": 127,
+   "maritime": 145,
+   "oil_commodity": 69,
+   "cyber": 27,
+   "supply_chain": 45,
+   "fx_macro": 17
   },
   "top_places": [
-   "United States",
    "Saudi Arabia",
-   "Yemen",
-   "Iran",
+   "United States",
    "China",
+   "Thailand",
    "India",
-   "Russia",
-   "Djibouti"
+   "Iran",
+   "Ukraine",
+   "Australia"
   ],
   "candidates": 30
  },
  "events": [
   {
-   "id": "LIVE-005",
+   "id": "LIVE-003",
    "lat": 35.0,
    "lng": 105.0,
-   "title": "미국, 중국 AI 산업에 대한 반도체 수출 규제 강화",
-   "source": "article.wn.com",
+   "title": "미국의 대중국 반도체 수출 통제 강화 및 엔비디아의 대응",
+   "source": "bankingnews.gr / ventureburn.com / complianceweek.com",
    "sources": [
     {
-     "url": "https://article.wn.com/view/2026/11/26/US_chip_curbs_close_pathways_for_Chinese_AI/",
-     "domain": "article.wn.com"
+     "url": "https://www.bankingnews.gr/ta-paraksena/articles/913395/secret-romance-between-nvidia-and-super-micro-executives-emerges-amid-500m-fbi-chip-probe%20title=",
+     "domain": "bankingnews.gr"
+    },
+    {
+     "url": "https://ventureburn.com/nvidia-halts-ai-chip-shipments-southeast-asia-us-china-curbs/",
+     "domain": "ventureburn.com"
+    },
+    {
+     "url": "https://www.complianceweek.com/risk-management/nvidia-clamps-down-on-export-rules-with-new-national-security-and-export-control-oversight-committee/",
+     "domain": "complianceweek.com"
     }
    ],
-   "region": "미국, 중국",
+   "region": "China",
    "category": "supply_chain",
-   "summary": "미국이 중국의 인공지능(AI) 산업 발전을 저해하기 위해 반도체 수출 규제를 강화하고 있다.",
+   "summary": "미국이 중국에 대한 반도체 수출 통제를 강화하면서 엔비디아가 관련 규제를 준수하기 위한 새로운 위원회를 설립했습니다. 이는 중국의 AI 기술 개발 및 관련 산업에 영향을 미칠 것으로 예상됩니다.",
    "impact_industries": [
     "semiconductor",
     "automotive",
@@ -53,346 +61,359 @@ window.LIVE_DATA = {
     "manufacturing"
    ],
    "industry_scores": {
-    "semiconductor": 95,
+    "semiconductor": 90,
     "automotive": 60,
-    "consumer": 50,
-    "energy": 20,
-    "manufacturing": 70,
-    "chemical": 20
-   },
-   "risk_score": 95,
-   "risk_level": "high",
-   "prev_score": 95,
-   "created_at": "2026-11-26T05:10:21.004186+00:00",
-   "insight": {
-    "why_it_matters": "미국의 대중국 반도체 규제는 글로벌 반도체 공급망에 지속적인 불확실성을 야기하며, 한국 반도체 기업의 대중국 수출 및 기술 협력에 직접적인 영향을 미칠 수 있다. 또한, AI 관련 산업 전반에 파급 효과를 미칠 것이다.",
-    "business_impact": "중국향 반도체 수출 감소 가능성, 기술 개발 및 투자 전략 재검토, 글로벌 반도체 시장 경쟁 구도 변화.",
-    "recommended_actions": [
-     "미국 및 중국의 반도체 정책 변화 면밀히 주시",
-     "규제 대상 품목 및 기술 범위 확인",
-     "공급망 내 중국 의존도 재평가 및 다변화 전략 수립",
-     "기술 개발 로드맵 조정",
-     "법률 및 규제 준수 여부 재검토"
-    ],
-    "confidence": 0.85
-   }
-  },
-  {
-   "id": "LIVE-004",
-   "lat": 21.5169,
-   "lng": 39.2192,
-   "title": "사우디아라비아 주요 항만 및 유전 시설 피격, 홍해/걸프 해상 안보 위협 증가",
-   "source": "freemalaysiatoday.com / investinglive.com / samaa.tv / oilprice.com / dailysabah",
-   "sources": [
-    {
-     "url": "https://www.freemalaysiatoday.com/category/world/2026/11/26/saudis-down-missiles-targeting-capital-after-yemen-port-strikes",
-     "domain": "freemalaysiatoday.com"
-    },
-    {
-     "url": "https://investinglive.com/commodities/projectile-explodes-near-tanker-50-nautical-miles-off-dubai-as-gulf-shipping-attacks-mount/",
-     "domain": "investinglive.com"
-    },
-    {
-     "url": "https://www.samaa.tv/2087361024-saudi-led-coalition-reports-projectile-strike-on-jazan-port",
-     "domain": "samaa.tv"
-    },
-    {
-     "url": "https://oilprice.com/Latest-Energy-News/World-News/Oil-Jumps-Over-2-as-Saudi-Arabia-Downs-Drones-Over-Ras-Tanura.html",
-     "domain": "oilprice.com"
-    },
-    {
-     "url": "https://www.dailysabah.com/politics/diplomacy/turkiye-strongly-condemns-houthi-attack-on-riyadh-financial-hub",
-     "domain": "dailysabah.com"
-    }
-   ],
-   "region": "사우디아라비아, 예멘, 중동 해역",
-   "category": "maritime",
-   "summary": "예멘 반군의 공격으로 사우디아라비아의 주요 항만과 유전 시설이 피격되었으며, 두바이 인근 해상에서 유조선 근처에 발사체가 폭발하는 등 걸프 해상 안보 위협이 고조되고 있다.",
-   "impact_industries": [
-    "semiconductor",
-    "automotive",
-    "consumer",
-    "energy",
-    "manufacturing",
-    "chemical"
-   ],
-   "industry_scores": {
-    "semiconductor": 50,
-    "automotive": 60,
-    "consumer": 60,
-    "energy": 90,
-    "manufacturing": 70,
-    "chemical": 80
+    "consumer": 70,
+    "energy": 10,
+    "manufacturing": 60,
+    "chemical": 10
    },
    "risk_score": 90,
    "risk_level": "high",
    "prev_score": 90,
-   "created_at": "2026-11-26T05:10:21.004186+00:00",
+   "created_at": "2026-11-27T05:07:00.766866+00:00",
    "insight": {
-    "why_it_matters": "중동 지역의 해상 안보 불안정은 원유 및 가스 운송에 직접적인 위협이 되며, 이는 국제 유가 상승과 해상 운임 증가로 이어져 한국 기업의 에너지 비용 및 물류 비용에 막대한 영향을 미칠 수 있다.",
-    "business_impact": "원유 및 LNG 조달 비용 상승, 중동발 해상 운송 지연 및 보험료 증가, 에너지 집약 산업의 생산 비용 증가.",
+    "why_it_matters": "미국의 첨단 기술 수출 통제는 글로벌 반도체 공급망 재편을 가속화하고, AI 기술 발전 속도에 영향을 미칩니다. 이는 관련 기업들의 연구개발 및 생산 전략에 중대한 변화를 요구합니다.",
+    "business_impact": "중국 시장 의존도가 높은 기업은 매출 감소 및 시장 접근 제한에 직면할 수 있습니다. 또한, 대체 공급처 확보 및 기술 개발에 대한 투자가 필요합니다.",
     "recommended_actions": [
-     "중동 해상 운송 경로의 안전성 지속 모니터링",
-     "대체 운송 경로 및 비상 계획 검토",
-     "원유 및 LNG 재고 수준 점검",
-     "해상 보험 조건 및 비용 재확인",
-     "선박 운항사와의 긴밀한 소통 유지"
-    ],
-    "confidence": 0.9
-   }
-  },
-  {
-   "id": "LIVE-003",
-   "lat": 38.8951,
-   "lng": -77.0364,
-   "title": "미국, 중국 및 13개 무역 파트너에 대한 신규 관세 부과 예정",
-   "source": "goulburnpost.com.au / hellenicshippingnews.com / livemint.com / theepochtimes.co",
-   "sources": [
-    {
-     "url": "https://www.goulburnpost.com.au/story/9398042/trump-administration-set-to-unveil-new-us-tariffs/",
-     "domain": "goulburnpost.com.au"
-    },
-    {
-     "url": "https://www.hellenicshippingnews.com/the-us-tariff-wall-keeps-changing-but-it-isnt-coming-down/",
-     "domain": "hellenicshippingnews.com"
-    },
-    {
-     "url": "https://www.livemint.com/market/indian-shares-set-to-extend-gains-on-strong-foreign-flows-us-tariffs-in-focus-11795662523778.html",
-     "domain": "livemint.com"
-    },
-    {
-     "url": "https://www.theepochtimes.com/epochtv/us-to-impose-new-tariffs-on-china-13-trade-partners-holiday-travel-disruptions-what-to-know-6129547",
-     "domain": "theepochtimes.com"
-    }
-   ],
-   "region": "미국, 중국, 기타 13개국",
-   "category": "sanctions",
-   "summary": "미국이 중국 및 13개 무역 파트너에 대해 새로운 관세를 부과할 예정이며, 기존 관세 장벽은 유지될 것으로 보인다.",
-   "impact_industries": [
-    "semiconductor",
-    "automotive",
-    "consumer",
-    "manufacturing",
-    "chemical"
-   ],
-   "industry_scores": {
-    "semiconductor": 80,
-    "automotive": 70,
-    "consumer": 70,
-    "energy": 30,
-    "manufacturing": 85,
-    "chemical": 60
-   },
-   "risk_score": 85,
-   "risk_level": "high",
-   "prev_score": 85,
-   "created_at": "2026-11-26T05:10:21.004186+00:00",
-   "insight": {
-    "why_it_matters": "미국의 신규 관세 부과는 글로벌 공급망 재편을 가속화하고, 관련 국가들과의 무역 관계에 불확실성을 증대시켜 한국 기업의 수출 전략 및 생산 기지 운영에 직접적인 영향을 미칠 수 있다.",
-    "business_impact": "대미 수출 기업의 비용 증가 및 경쟁력 약화, 글로벌 생산 기지 재편 압박, 특정 부품 및 원자재 조달 비용 상승.",
-    "recommended_actions": [
-     "미국 관세 정책 변화 면밀히 모니터링",
-     "관세 부과 대상 품목 및 국가 확인",
-     "공급망 다변화 및 생산 기지 재배치 검토",
-     "무역 분쟁 장기화에 대비한 시나리오 플래닝",
-     "관세 영향 분석 및 비용 절감 방안 모색"
+     "미국 및 중국의 첨단 기술 수출 통제 정책 변화 지속적 모니터링",
+     "핵심 부품 공급망의 지정학적 리스크 평가 및 대체 공급선 확보 방안 마련",
+     "AI 및 반도체 기술 관련 R&D 투자 전략 재검토"
     ],
     "confidence": 0.8
    }
   },
   {
-   "id": "LIVE-006",
-   "lat": 26.6439,
-   "lng": 50.1592,
-   "title": "미국 원유 생산량 및 재고 지속 증가",
-   "source": "oilprice.com",
+   "id": "LIVE-004",
+   "lat": 13.6833,
+   "lng": 100.583,
+   "title": "태국 방콕 석유 시설 폭발 및 구리 절도 사건",
+   "source": "dungogchronicle.com.au / asiaone.com / voiceofvienna.org",
    "sources": [
     {
-     "url": "https://oilprice.com/Energy/Crude-Oil/US-Rig-Count-Holds-Steady-as-Oil-Production-Hits-Fifth-Straight-Record.html",
-     "domain": "oilprice.com"
+     "url": "https://www.dungogchronicle.com.au/story/9398725/three-men-charged-after-months-long-copper-theft-investigation/",
+     "domain": "dungogchronicle.com.au"
     },
     {
-     "url": "https://oilprice.com/Energy/Crude-Oil/Oil-Inventories-Continue-to-Rise-in-the-US.html",
-     "domain": "oilprice.com"
+     "url": "https://www.asiaone.com/asia/least-9-injured-large-explosion-and-fire-major-oil-facility-bangkok",
+     "domain": "asiaone.com"
+    },
+    {
+     "url": "https://voiceofvienna.org/bangkok-oil-facility-explosion-2/",
+     "domain": "voiceofvienna.org"
     }
    ],
-   "region": "미국",
+   "region": "Thailand",
    "category": "oil_commodity",
-   "summary": "미국 원유 생산량이 5회 연속 최고치를 기록하고 원유 재고가 지속적으로 증가하며 글로벌 원유 공급 안정화에 기여하고 있다.",
+   "summary": "태국 방콕의 석유 시설에서 대규모 폭발 및 화재가 발생했으며, 별도로 구리 절도 사건도 보고되었습니다. 이는 에너지 공급망의 불안정성과 산업 시설의 보안 문제에 대한 우려를 제기합니다.",
    "impact_industries": [
     "energy",
-    "manufacturing",
-    "chemical"
+    "manufacturing"
    ],
    "industry_scores": {
-    "semiconductor": 15,
-    "automotive": 35,
-    "consumer": 25,
-    "energy": 75,
-    "manufacturing": 45,
-    "chemical": 55
+    "semiconductor": 10,
+    "automotive": 15,
+    "consumer": 20,
+    "energy": 80,
+    "manufacturing": 40,
+    "chemical": 30
    },
-   "risk_score": 75,
+   "risk_score": 80,
    "risk_level": "high",
-   "prev_score": 75,
-   "created_at": "2026-11-26T05:10:21.004186+00:00",
+   "prev_score": 80,
+   "created_at": "2026-11-27T05:07:00.766866+00:00",
    "insight": {
-    "why_it_matters": "미국 원유 생산량 및 재고 증가는 글로벌 원유 공급 안정화에 기여하여 국제 유가 상승 압력을 완화할 수 있다. 이는 한국 기업의 에너지 비용 부담을 줄이는 긍정적인 요인으로 작용할 수 있다.",
-    "business_impact": "원유 가격 안정화 또는 하락에 따른 에너지 비용 절감 기대, 석유화학 제품 원가 부담 완화.",
+    "why_it_matters": "주요 에너지 시설의 사고는 국제 유가 변동성을 높이고 에너지 공급에 차질을 줄 수 있습니다. 또한, 산업 시설의 보안 문제는 생산 활동 전반에 영향을 미칩니다.",
+    "business_impact": "에너지 가격 상승으로 생산 비용이 증가하고, 공급망 차질로 인한 납기 지연이 발생할 수 있습니다. 원자재 도난은 직접적인 재산 손실로 이어집니다.",
     "recommended_actions": [
-     "국제 유가 동향 및 원유 재고 변화 지속 모니터링",
-     "원유 및 에너지 관련 구매 전략 재검토",
-     "에너지 효율 개선 투자 지속",
-     "장기적인 에너지 수급 계획 수립"
+     "태국 및 주변 지역의 에너지 공급망 동향 및 안전 규제 강화 여부 확인",
+     "주요 에너지 공급처의 안정성 평가 및 비상 계획 수립",
+     "산업 시설의 보안 강화 조치 검토"
     ],
     "confidence": 0.7
    }
   },
   {
-   "id": "LIVE-001",
-   "lat": 29.0744,
-   "lng": 31.0978,
-   "title": "이집트 카이로 인근 연료 운반선 충돌 및 대형 화재 발생",
-   "source": "thetelegraphandargus.co.uk / cbsnews.com / irishtimes.com / news.az",
+   "id": "LIVE-005",
+   "lat": 24.6408,
+   "lng": 46.7728,
+   "title": "홍해 지역 긴장 고조: 후티 반군의 사우디아라비아 석유 시설 공격",
+   "source": "kenyastar.com / arabnews.com",
    "sources": [
     {
-     "url": "https://www.thetelegraphandargus.co.uk/news/national/26763777.dozens-killed-fuel-tanker-crash-ignites-massive-fire-major-road-near-cairo/",
-     "domain": "thetelegraphandargus.co.uk"
+     "url": "http://www.kenyastar.com/news/279454915/houthis-attack-saudi-arabia-red-sea-port-coalition-intercepts-drone-near-jeddah-missiles-over-riyadh",
+     "domain": "kenyastar.com"
     },
     {
-     "url": "https://www.cbsnews.com/news/egypt-fuel-tanker-crash-cairo-highway-fire/",
-     "domain": "cbsnews.com"
-    },
-    {
-     "url": "https://www.irishtimes.com/world/africa/2026/11/25/at-least-31-killed-in-egypt-as-fuel-tanker-crash-ignites-huge-fire-near-cairo/",
-     "domain": "irishtimes.com"
-    },
-    {
-     "url": "https://news.az/news/fuel-tanker-fire-injures-at-least-10-on-egypts-giza-ring-road",
-     "domain": "news.az"
+     "url": "https://www.arabnews.com/saudi-arabia/houthi-attack-on-saudi-arabias-jazan-refinery-kills-nepali-worker-3014153",
+     "domain": "arabnews.com"
     }
    ],
-   "region": "이집트",
+   "region": "Saudi Arabia",
    "category": "maritime",
-   "summary": "이집트 카이로 인근 도로에서 연료 운반선 충돌로 대형 화재가 발생하여 다수의 사상자가 발생했다.",
+   "summary": "예멘의 후티 반군이 사우디아라비아의 홍해 연안 석유 시설 및 정유 공장을 공격했습니다. 이 공격으로 사상자가 발생했으며, 홍해 항로의 안전에 대한 우려가 커지고 있습니다.",
    "impact_industries": [
-    "energy",
-    "manufacturing",
-    "chemical"
+    "energy"
    ],
    "industry_scores": {
     "semiconductor": 10,
-    "automotive": 30,
+    "automotive": 15,
     "consumer": 20,
     "energy": 70,
-    "manufacturing": 40,
-    "chemical": 60
+    "manufacturing": 25,
+    "chemical": 20
    },
    "risk_score": 70,
    "risk_level": "high",
    "prev_score": 70,
-   "created_at": "2026-11-26T05:10:21.004186+00:00",
+   "created_at": "2026-11-27T05:07:00.766866+00:00",
    "insight": {
-    "why_it_matters": "이집트 주요 도로에서의 연료 운반선 사고는 해당 지역의 육상 물류 및 연료 공급망에 즉각적인 차질을 야기할 수 있다.",
-    "business_impact": "이집트 내륙 운송 지연, 연료 가격 변동성 증가, 현지 사업장의 운영 차질 가능성.",
+    "why_it_matters": "홍해는 세계 해상 물동량의 상당 부분을 차지하는 주요 항로입니다. 이 지역의 불안정은 해상 운송 비용 증가 및 공급망 차질을 야기하며, 국제 유가에도 영향을 미칩니다.",
+    "business_impact": "해상 운송 지연 및 비용 상승으로 물류 부담이 가중될 수 있습니다. 에너지 공급망의 불안정성은 원자재 가격 상승으로 이어져 생산 비용 증가를 초래합니다.",
     "recommended_actions": [
-     "이집트 내륙 운송 경로 및 대체 수단 확인",
-     "현지 연료 재고 수준 점검",
-     "비상 운송 계획 수립",
-     "현지 파트너사와 소통하여 상황 업데이트 확인"
+     "홍해 항로 이용 시 운송 경로 및 보험 조건 재검토",
+     "에너지 공급망의 지정학적 리스크 평가 및 대체 공급선 확보 방안 모색",
+     "중동 지역의 지정학적 동향 및 관련 제재 변화 주시"
+    ],
+    "confidence": 0.8
+   }
+  },
+  {
+   "id": "LIVE-007",
+   "lat": 35.75,
+   "lng": 51.5148,
+   "title": "미국-이란 긴장 고조 및 러시아 칼리닌그라드 유조선 관련 사건",
+   "source": "cnbc.com / peakoil.com",
+   "sources": [
+    {
+     "url": "https://www.cnbc.com/2026/11/27/us-iran-war-trump-hormuz-italian-killed-trump.html",
+     "domain": "cnbc.com"
+    },
+    {
+     "url": "https://peakoil.com/publicpolicy/france-releases-stateless-tanker-df-peak-after-1m-fine",
+     "domain": "peakoil.com"
+    }
+   ],
+   "region": "Global",
+   "category": "maritime",
+   "summary": "미국과 이란 간의 긴장 고조 가능성이 언급되었으며, 러시아 칼리닌그라드에서는 유조선이 석방되었습니다. 이는 국제 유류 운송 및 지정학적 리스크에 영향을 미칠 수 있습니다.",
+   "impact_industries": [
+    "energy"
+   ],
+   "industry_scores": {
+    "semiconductor": 5,
+    "automotive": 10,
+    "consumer": 10,
+    "energy": 60,
+    "manufacturing": 15,
+    "chemical": 15
+   },
+   "risk_score": 60,
+   "risk_level": "medium",
+   "prev_score": 60,
+   "created_at": "2026-11-27T05:07:00.766866+00:00",
+   "insight": {
+    "why_it_matters": "미국과 이란의 관계는 국제 유가 및 중동 지역의 안보에 큰 영향을 미칩니다. 러시아 관련 사건은 유럽 에너지 시장의 안정성과도 연관될 수 있습니다.",
+    "business_impact": "국제 유가 변동성이 커질 수 있으며, 특정 지역의 에너지 공급망에 차질이 발생할 가능성이 있습니다. 이는 원자재 가격 상승으로 이어져 기업의 비용 부담을 늘릴 수 있습니다.",
+    "recommended_actions": [
+     "미국-이란 관계 및 중동 지역 지정학적 동향 모니터링 강화",
+     "러시아 및 유럽 에너지 시장 동향 주시",
+     "국제 유가 변동성에 대비한 재무 리스크 관리 강화"
+    ],
+    "confidence": 0.7
+   }
+  },
+  {
+   "id": "LIVE-008",
+   "lat": 39.828175,
+   "lng": -98.5795,
+   "title": "국제형사재판소, 미국 무역 제재, 이스라엘-하마스 분쟁, 콩고 수출 금지 등 지정학적 및 제재 관련 이슈",
+   "source": "channelnewsasia.com / gsmarena.com / freethoughtblogs.com / canadianminingjourna",
+   "sources": [
+    {
+     "url": "https://www.channelnewsasia.com/watch/icc-acting-prosecutor-speaks-cna-ahead-dutertes-crimes-against-humanity-trial-6586321",
+     "domain": "channelnewsasia.com"
+    },
+    {
+     "url": "https://www.gsmarena.com/the_us_will_hit_china_and_13_other_trading_partners_with_fresh_tariffs_affecting_apple-news-75659.php",
+     "domain": "gsmarena.com"
+    },
+    {
+     "url": "https://freethoughtblogs.com/singham/2026/11/26/hopeful-sign-by-new-congresspersons/",
+     "domain": "freethoughtblogs.com"
+    },
+    {
+     "url": "https://www.canadianminingjournal.com/news/cobalt-jumps-33-ahead-of-congo-export-ban/",
+     "domain": "canadianminingjournal.com"
+    }
+   ],
+   "region": "Global",
+   "category": "sanctions",
+   "summary": "국제형사재판소의 인권 재판 관련 언급, 미국의 무역 파트너에 대한 추가 관세 부과, 가자 지구 분쟁, 콩고의 코발트 수출 금지 등 다양한 지정학적 및 제재 관련 이슈가 발생했습니다. 이는 국제 무역 및 원자재 공급망에 영향을 미칠 수 있습니다.",
+   "impact_industries": [
+    "consumer",
+    "chemical"
+   ],
+   "industry_scores": {
+    "semiconductor": 20,
+    "automotive": 30,
+    "consumer": 40,
+    "energy": 30,
+    "manufacturing": 30,
+    "chemical": 50
+   },
+   "risk_score": 50,
+   "risk_level": "medium",
+   "prev_score": 50,
+   "created_at": "2026-11-27T05:07:00.766866+00:00",
+   "insight": {
+    "why_it_matters": "국제 분쟁, 무역 제재, 특정 자원 수출 금지 등은 글로벌 공급망의 불안정성을 증대시키고 원자재 가격 변동성을 키웁니다. 특히 코발트와 같은 핵심 광물 공급망에 직접적인 영향을 미칩니다.",
+    "business_impact": "원자재 조달 비용이 상승하고 공급망 차질이 발생할 수 있습니다. 또한, 특정 국가와의 무역 관계에 불확실성이 커져 사업 운영에 어려움을 겪을 수 있습니다.",
+    "recommended_actions": [
+     "주요 원자재(특히 코발트) 공급망의 지정학적 리스크 평가 및 대체 공급선 확보",
+     "미국 및 주요 교역국의 무역 정책 및 제재 동향 모니터링 강화",
+     "분쟁 지역 및 관련 국가와의 사업 리스크 재평가"
     ],
     "confidence": 0.7
    }
   },
   {
    "id": "LIVE-002",
-   "lat": 57.1667,
-   "lng": -2.66667,
-   "title": "영국 가정 에너지 요금 급등",
-   "source": "milfordmercury.co.uk",
+   "lat": 55.3333,
+   "lng": 3.0,
+   "title": "베트남, 중국, 태국 등 아시아 지역의 지정학적 및 경제적 불안정성",
+   "source": "yorkpress.co.uk / wtvbam.com / livenews.co.nz / nakedcapitalism.com",
    "sources": [
     {
-     "url": "https://www.milfordmercury.co.uk/news/national/26760098.misery-households-energy-bills-jump-26-january/",
-     "domain": "milfordmercury.co.uk"
+     "url": "https://www.yorkpress.co.uk/news/national/26767549.labour-mps-warn-burnham-not-approve-rosebank-oil-field/",
+     "domain": "yorkpress.co.uk"
+    },
+    {
+     "url": "https://wtvbam.com/2026/11/26/the-search-for-vietnams-stolen-pets-at-wet-markets-and-slaughterhouses/",
+     "domain": "wtvbam.com"
+    },
+    {
+     "url": "https://livenews.co.nz/2026/11/27/rooted-in-the-source-markets-poetic-and-picturesque-zhejiang-makes-its-move-into-southeast-asia/",
+     "domain": "livenews.co.nz"
+    },
+    {
+     "url": "https://www.nakedcapitalism.com/2026/11/the-nvidia-affair-shows-that-the-ruling-oligarchy-controls-the-market.html",
+     "domain": "nakedcapitalism.com"
     }
    ],
-   "region": "영국",
-   "category": "oil_commodity",
-   "summary": "영국에서 가정의 에너지 요금이 급등하여 가계에 부담을 주고 있다.",
+   "region": "Asia",
+   "category": "fx_macro",
+   "summary": "베트남의 애완동물 시장 및 도축장 관련 이슈, 중국의 기술 기업 관련 규제, 태국의 지정학적 불안정성 등 아시아 지역 전반에 걸쳐 경제 및 지정학적 리스크가 부각되고 있습니다. 특히 중국의 기술 시장 규제는 글로벌 공급망에 영향을 미칠 수 있습니다.",
    "impact_industries": [
-    "consumer",
-    "energy"
+    "semiconductor"
    ],
+   "industry_scores": {
+    "semiconductor": 40,
+    "automotive": 20,
+    "consumer": 30,
+    "energy": 10,
+    "manufacturing": 30,
+    "chemical": 10
+   },
+   "risk_score": 40,
+   "risk_level": "medium",
+   "prev_score": 40,
+   "created_at": "2026-11-27T05:07:00.766866+00:00",
+   "insight": {
+    "why_it_matters": "아시아 지역의 지정학적 긴장 고조와 경제 정책 변화는 글로벌 공급망 및 투자 환경에 직접적인 영향을 미칩니다. 특히 중국의 기술 규제는 반도체 및 첨단 기술 분야에 큰 파장을 일으킬 수 있습니다.",
+    "business_impact": "아시아 지역 내 생산 및 판매 활동에 차질이 발생할 수 있으며, 원자재 조달 및 부품 공급망의 불안정성이 증가할 수 있습니다. 환율 변동성 또한 커질 수 있습니다.",
+    "recommended_actions": [
+     "아시아 지역 내 정치·경제 동향 및 규제 변화 주시",
+     "공급망 다변화 전략 검토 및 실행",
+     "주요 거래 국가의 환율 변동성 모니터링 강화"
+    ],
+    "confidence": 0.7
+   }
+  },
+  {
+   "id": "LIVE-006",
+   "lat": 29.0744,
+   "lng": 31.0978,
+   "title": "이집트 및 이라크 해상 물류 및 연료 밀수 관련 사건",
+   "source": "foxnews.com / maritime-executive.com",
+   "sources": [
+    {
+     "url": "https://www.foxnews.com/world/egypt-detains-driver-suspected-causing-cairo-fuel-tanker-crash-inferno-left-31-dead",
+     "domain": "foxnews.com"
+    },
+    {
+     "url": "https://maritime-executive.com/article/iraqi-navy-seizes-tugboats-suspected-of-fuel-smuggling",
+     "domain": "maritime-executive.com"
+    }
+   ],
+   "region": "Middle East",
+   "category": "maritime",
+   "summary": "이집트에서는 연료 유조선 충돌 사고로 다수의 사상자가 발생했으며, 이라크에서는 해군이 연료 밀수 혐의로 예인선을 나포했습니다. 이는 해상 운송 안전 및 불법 활동 단속의 중요성을 보여줍니다.",
+   "impact_industries": [],
    "industry_scores": {
     "semiconductor": 5,
     "automotive": 10,
-    "consumer": 60,
-    "energy": 40,
-    "manufacturing": 20,
+    "consumer": 15,
+    "energy": 30,
+    "manufacturing": 15,
     "chemical": 10
    },
-   "risk_score": 60,
-   "risk_level": "medium",
-   "prev_score": 60,
-   "created_at": "2026-11-26T05:10:21.004186+00:00",
+   "risk_score": 30,
+   "risk_level": "low",
+   "prev_score": 30,
+   "created_at": "2026-11-27T05:07:00.766866+00:00",
    "insight": {
-    "why_it_matters": "영국 내 에너지 비용 증가는 소비 심리 위축 및 전반적인 경제 활동 둔화로 이어질 수 있으며, 이는 한국 기업의 대영국 수출 및 현지 사업 운영에 간접적인 영향을 미칠 수 있다.",
-    "business_impact": "영국 시장 내 소비재 수요 감소 가능성, 현지 사업장 운영 비용 증가 압박.",
+    "why_it_matters": "해상 운송 사고 및 불법 활동은 물류망의 안정성을 저해하고, 에너지 자원의 불법 유통을 야기할 수 있습니다. 이는 관련 산업의 운영 효율성과 안전에 영향을 미칩니다.",
+    "business_impact": "해상 운송 지연 및 보험료 상승 가능성이 있으며, 연료 밀수는 에너지 시장의 왜곡을 초래할 수 있습니다. 안전 규정 미준수 시 사고 위험이 증가합니다.",
     "recommended_actions": [
-     "영국 시장 소비 동향 모니터링",
-     "현지 에너지 비용 상승에 따른 사업 계획 재검토",
-     "에너지 효율 개선 방안 모색",
-     "영국 내 사업장 에너지 사용량 분석"
+     "주요 해상 운송 경로의 안전 규정 및 최신 동향 파악",
+     "연료 및 원자재 공급망의 합법성 및 투명성 점검 강화",
+     "해상 운송 관련 보험 조건 및 보상 범위 확인"
     ],
     "confidence": 0.6
    }
   },
   {
-   "id": "LIVE-007",
-   "lat": 60.0,
-   "lng": 100.0,
-   "title": "러시아 선박 침몰, 러시아-우크라이나 전쟁의 전 세계적 확산 시사",
-   "source": "theconversation.com",
+   "id": "LIVE-001",
+   "lat": -25.0,
+   "lng": 135.0,
+   "title": "호주, 제재 감시 기구의 미흡한 집행력 비판",
+   "source": "theleader.com.au / redlandcitybulletin.com.au",
    "sources": [
     {
-     "url": "https://theconversation.com/recent-sinking-of-russian-vessels-abroad-shows-the-russia-ukraine-war-has-officially-gone-global-297352",
-     "domain": "theconversation.com"
+     "url": "https://www.theleader.com.au/story/9399213/not-good-enough-weak-enforcement-of-sanctions-lashed/",
+     "domain": "theleader.com.au"
+    },
+    {
+     "url": "https://www.redlandcitybulletin.com.au/story/9399213/scathing-report-slams-toothless-sanctions-watchdog/",
+     "domain": "redlandcitybulletin.com.au"
     }
    ],
-   "region": "러시아, 우크라이나, 국제 해역",
-   "category": "maritime",
-   "summary": "러시아 선박의 침몰 사건이 발생하며 러시아-우크라이나 전쟁이 전 세계적으로 확산되고 있음을 시사한다.",
-   "impact_industries": [
-    "semiconductor",
-    "automotive",
-    "consumer",
-    "energy",
-    "manufacturing",
-    "chemical"
-   ],
+   "region": "Australia",
+   "category": "sanctions",
+   "summary": "호주에서 제재 감시 기구의 집행력이 약하다는 비판이 제기되었습니다. 이는 제재의 효과성을 약화시킬 수 있다는 우려를 낳고 있습니다.",
+   "impact_industries": [],
    "industry_scores": {
-    "semiconductor": 40,
-    "automotive": 40,
-    "consumer": 40,
-    "energy": 60,
-    "manufacturing": 50,
-    "chemical": 50
+    "semiconductor": 10,
+    "automotive": 10,
+    "consumer": 15,
+    "energy": 10,
+    "manufacturing": 15,
+    "chemical": 10
    },
-   "risk_score": 60,
-   "risk_level": "medium",
-   "prev_score": 60,
-   "created_at": "2026-11-26T05:10:21.004186+00:00",
+   "risk_score": 15,
+   "risk_level": "low",
+   "prev_score": 15,
+   "created_at": "2026-11-27T05:07:00.766866+00:00",
    "insight": {
-    "why_it_matters": "러시아-우크라이나 전쟁의 해상 확전은 흑해 등 주요 해상 운송로의 위험을 증대시키고, 글로벌 해상 물류 시스템에 추가적인 부담을 줄 수 있다. 이는 국제 무역 및 공급망 안정성에 부정적인 영향을 미친다.",
-    "business_impact": "특정 해역 운송 지연 및 비용 증가, 해상 보험료 상승, 국제 정세 불안정성 증대에 따른 사업 불확실성 증가.",
+    "why_it_matters": "제재의 효과적인 집행은 국제 규범 준수 및 지정학적 안정 유지에 중요합니다. 집행력 약화는 제재 대상 국가의 규범 위반을 조장할 수 있습니다.",
+    "business_impact": "제재 회피 시도가 증가하여 기업의 컴플라이언스 부담이 늘어나고, 특정 시장 접근에 불확실성이 커질 수 있습니다.",
     "recommended_actions": [
-     "흑해 및 인근 해역의 해상 운송 위험도 평가",
-     "대체 운송 경로 및 비상 계획 수립",
-     "러시아 관련 제재 준수 여부 재확인",
-     "지정학적 리스크 모니터링 강화",
-     "선박 보험 약관 검토 및 필요시 보완"
+     "호주 및 관련 국가의 제재 관련 법규 및 집행 동향 모니터링 강화",
+     "제재 대상 기업과의 거래 위험도 재평가",
+     "공급망 내 제재 준수 여부 점검 강화"
     ],
-    "confidence": 0.75
+    "confidence": 0.6
    }
   }
  ]
